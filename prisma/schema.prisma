@@ -1,0 +1,148 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum Role {
+  ADMIN
+  MAHASISWA
+  PELAPOR
+}
+
+enum StatusLaporan {
+  DRAF
+  TERKIRIM
+  DIVALIDASI
+  DITOLAK
+}
+
+enum StatusAduan {
+  MENUNGGU
+  DIPROSES
+  SELESAI
+  DITOLAK
+}
+
+enum StatusBeasiswa {
+  AKTIF
+  NONAKTIF
+}
+
+// ─── Models ──────────────────────────────────────────────────────────────────
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  password      String
+  role          Role      @default(MAHASISWA)
+  isActive      Boolean   @default(true)  // Soft delete flag
+  deletedAt     DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  mahasiswa     Mahasiswa?
+  aduan         Aduan[]   // Pelapor membuat aduan
+
+  @@map("users")
+}
+
+model Beasiswa {
+  id            String         @id @default(cuid())
+  nama          String
+  penyelenggara String
+  kuota         Int
+  nominalPerSemester Decimal  @db.Decimal(15, 2)
+  status        StatusBeasiswa @default(AKTIF)
+  deskripsi     String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  mahasiswa     Mahasiswa[]
+
+  @@map("beasiswa")
+}
+
+model Mahasiswa {
+  id            String    @id @default(cuid())
+  nim           String    @unique
+  prodi         String
+  angkatan      Int
+  noHp          String?
+  alamat        String?
+
+  userId        String    @unique
+  user          User      @relation(fields: [userId], references: [id])
+
+  beasiswaId    String
+  beasiswa      Beasiswa  @relation(fields: [beasiswaId], references: [id])
+
+  laporan       LaporanPenggunaan[]
+
+  @@map("mahasiswa")
+}
+
+model LaporanPenggunaan {
+  id            String        @id @default(cuid())
+  semester      String        // e.g. "Gasal 2024/2025"
+  totalDana     Decimal       @db.Decimal(15, 2)
+  catatan       String?
+  status        StatusLaporan @default(DRAF)
+  catatanAdmin  String?       // Catatan dari admin saat validasi/penolakan
+  deletedAt     DateTime?     // Hard delete marker untuk draf
+
+  mahasiswaId   String
+  mahasiswa     Mahasiswa     @relation(fields: [mahasiswaId], references: [id])
+
+  items         ItemLaporan[]
+  aduan         Aduan[]
+
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@map("laporan_penggunaan")
+}
+
+model ItemLaporan {
+  id            String            @id @default(cuid())
+  deskripsi     String
+  nominal       Decimal           @db.Decimal(15, 2)
+  kategori      String            // e.g. "SPP", "Buku", "Kos", "Makan"
+
+  laporanId     String
+  laporan       LaporanPenggunaan @relation(fields: [laporanId], references: [id], onDelete: Cascade)
+
+  createdAt     DateTime          @default(now())
+
+  @@map("item_laporan")
+}
+
+model Aduan {
+  id            String      @id @default(cuid())
+  judul         String
+  deskripsi     String
+  buktiUrl      String?     // URL file bukti yang diupload
+  status        StatusAduan @default(MENUNGGU)
+  catatanAdmin  String?
+
+  // Pelapor (bisa anonymous jika userId null)
+  pelaporId     String?
+  pelapor       User?       @relation(fields: [pelaporId], references: [id])
+
+  // Laporan yang diadukan (optional - bisa aduan umum)
+  laporanId     String?
+  laporan       LaporanPenggunaan? @relation(fields: [laporanId], references: [id])
+
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@map("aduan")
+}
