@@ -3,8 +3,6 @@ import { prisma } from "@/lib/prisma";
 import BuatAduanForm from "@/components/pelapor/BuatAduanForm";
 
 export default async function BuatAduanPage() {
-  // Ambil semua laporan yang sudah TERKIRIM atau DIVALIDASI
-  // agar pelapor bisa merujuk laporan tertentu
   const laporanList = await prisma.laporanPenggunaan.findMany({
     where: {
       deletedAt: null,
@@ -21,9 +19,16 @@ export default async function BuatAduanPage() {
     orderBy: { createdAt: "desc" },
   });
 
-  const options = laporanList.map((l) => ({
-    id:       l.id,
-    label:    `${l.mahasiswa.user.name} — ${l.semester} (${l.mahasiswa.beasiswa.nama})`,
+  const seen = new Set<string>();
+  const unique = laporanList.filter((l) => {
+    if (seen.has(l.mahasiswaId)) return false;
+    seen.add(l.mahasiswaId);
+    return true;
+  });
+
+  const options = unique.map((l) => ({
+    id:    l.id,
+    label: `${l.mahasiswa.user.name} (${l.mahasiswa.beasiswa.nama})`,
   }));
 
   return <BuatAduanForm laporanOptions={options} />;
