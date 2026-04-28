@@ -94,11 +94,7 @@ export default function Sidebar({ role, name, email }: SidebarProps) {
           </p>
           {navItems.map((item) => {
             const Icon = item.icon;
-            const isActive =
-              item.href === "/dashboard/admin" ||
-              item.href === "/dashboard/mahasiswa"
-                ? pathname === item.href
-                : pathname.startsWith(item.href);
+            const isActive = pathname === item.href;
 
             return (
               <Link
