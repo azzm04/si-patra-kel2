@@ -34,11 +34,10 @@ export default function LoginPage() {
     }
   }
 
-  function fillDemo(role: "admin" | "mahasiswa" | "pelapor") {
+  function fillDemo(role: "admin" | "mahasiswa") {
     const demos = {
-      admin:      { email: "admin@sipatra.ac.id",       password: "admin123" },
-      mahasiswa:  { email: "budi@student.undip.ac.id",  password: "mahasiswa123" },
-      pelapor:    { email: "eko@gmail.com",              password: "pelapor123" },
+      admin:     { email: "admin@sipatra.ac.id",      password: "admin123" },
+      mahasiswa: { email: "budi@student.undip.ac.id", password: "mahasiswa123" },
     };
     setEmail(demos[role].email);
     setPassword(demos[role].password);
@@ -166,9 +165,6 @@ export default function LoginPage() {
               </button>
               <button onClick={() => fillDemo("mahasiswa")} className="btn-secondary btn-sm">
                 Mahasiswa
-              </button>
-              <button onClick={() => fillDemo("pelapor")} className="btn-secondary btn-sm">
-                Pelapor
               </button>
             </div>
           </div>

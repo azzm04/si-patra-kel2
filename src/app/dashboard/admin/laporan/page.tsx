@@ -24,10 +24,10 @@ export default async function AdminLaporanPage({
       ...(search
         ? {
             OR: [
-              { semester: { contains: search, mode: "insensitive" } },
-              { mahasiswa: { user: { name: { contains: search, mode: "insensitive" } } } },
-              { mahasiswa: { nim: { contains: search, mode: "insensitive" } } },
-              { mahasiswa: { beasiswa: { nama: { contains: search, mode: "insensitive" } } } },
+              { tahunAjaran: { contains: search, mode: "insensitive" as const } },
+              { mahasiswa: { user: { name: { contains: search, mode: "insensitive" as const } } } },
+              { mahasiswa: { nim: { contains: search, mode: "insensitive" as const } } },
+              { mahasiswa: { beasiswa: { nama: { contains: search, mode: "insensitive" as const } } } },
             ],
           }
         : {}),
