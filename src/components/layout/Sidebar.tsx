@@ -45,19 +45,6 @@ const navByRole: Record<string, NavItem[]> = {
       icon: PlusCircle,
     },
   ],
-  PELAPOR: [
-    { label: "Dashboard", href: "/dashboard/pelapor", icon: LayoutDashboard },
-    {
-      label: "Aduan Saya",
-      href: "/dashboard/pelapor/aduan",
-      icon: AlertTriangle,
-    },
-    {
-      label: "Kirim Aduan",
-      href: "/dashboard/pelapor/aduan/baru",
-      icon: PlusCircle,
-    },
-  ],
 };
 
 interface SidebarProps {
@@ -75,7 +62,6 @@ export default function Sidebar({ role, name, email }: SidebarProps) {
   const roleLabel: Record<string, string> = {
     ADMIN: "Administrator",
     MAHASISWA: "Penerima Beasiswa",
-    PELAPOR: "Pelapor",
   };
 
   async function handleLogout() {
@@ -110,8 +96,7 @@ export default function Sidebar({ role, name, email }: SidebarProps) {
             const Icon = item.icon;
             const isActive =
               item.href === "/dashboard/admin" ||
-              item.href === "/dashboard/mahasiswa" ||
-              item.href === "/dashboard/pelapor"
+              item.href === "/dashboard/mahasiswa"
                 ? pathname === item.href
                 : pathname.startsWith(item.href);
 

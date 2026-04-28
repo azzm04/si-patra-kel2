@@ -23,9 +23,6 @@ export default auth((req) => {
   if (pathname.startsWith("/dashboard/mahasiswa") && role !== "MAHASISWA") {
     return NextResponse.redirect(new URL("/dashboard", req.url));
   }
-  if (pathname.startsWith("/dashboard/pelapor") && role !== "PELAPOR") {
-    return NextResponse.redirect(new URL("/dashboard", req.url));
-  }
 
   return NextResponse.next();
 });

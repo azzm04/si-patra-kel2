@@ -1,5 +1,5 @@
 // prisma/seed.ts
-import { PrismaClient, Role } from "@prisma/client";
+import { PrismaClient, Role, Semester, KategoriItem } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
@@ -86,30 +86,23 @@ async function main() {
     include: { mahasiswa: true },
   });
 
-  // ── Pelapor ───────────────────────────────────────────────────────────────
-  await prisma.user.create({
-    data: {
-      name: "Eko Prasetyo",
-      email: "eko@gmail.com",
-      password: await bcrypt.hash("pelapor123", 10),
-      role: Role.PELAPOR,
-    },
-  });
+  // ── Pelapor dihapus — aduan sekarang dilakukan oleh mahasiswa ─────────────
 
   // ── Laporan Budi ─────────────────────────────────────────────────────────
   await prisma.laporanPenggunaan.create({
     data: {
-      semester: "Gasal 2024/2025",
+      semester: Semester.GASAL,
+      tahunAjaran: "2024/2025",
       totalDana: 4200000,
       catatan: "Penggunaan dana semester gasal untuk kebutuhan akademik",
       status: "DIVALIDASI",
       mahasiswaId: userBudi.mahasiswa!.id,
       items: {
         create: [
-          { deskripsi: "Pembayaran SPP", nominal: 2000000, kategori: "SPP" },
-          { deskripsi: "Buku teks Algoritma & Pemrograman", nominal: 350000, kategori: "Buku" },
-          { deskripsi: "Sewa kos bulan Juli-Desember", nominal: 1500000, kategori: "Kos" },
-          { deskripsi: "Transportasi kuliah", nominal: 350000, kategori: "Transportasi" },
+          { deskripsi: "Pembayaran SPP", nominal: 2000000, kategori: KategoriItem.SPP },
+          { deskripsi: "Buku teks Algoritma & Pemrograman", nominal: 350000, kategori: KategoriItem.BUKU },
+          { deskripsi: "Sewa kos bulan Juli-Desember", nominal: 1500000, kategori: KategoriItem.KOS },
+          { deskripsi: "Transportasi kuliah", nominal: 350000, kategori: KategoriItem.TRANSPORTASI },
         ],
       },
     },
@@ -117,15 +110,16 @@ async function main() {
 
   const laporanDrafBudi = await prisma.laporanPenggunaan.create({
     data: {
-      semester: "Genap 2024/2025",
+      semester: Semester.GENAP,
+      tahunAjaran: "2024/2025",
       totalDana: 4200000,
       catatan: "Draft laporan semester genap",
       status: "DRAF",
       mahasiswaId: userBudi.mahasiswa!.id,
       items: {
         create: [
-          { deskripsi: "Pembayaran SPP Genap", nominal: 2000000, kategori: "SPP" },
-          { deskripsi: "Praktikum Jaringan Komputer", nominal: 500000, kategori: "Praktikum" },
+          { deskripsi: "Pembayaran SPP Genap", nominal: 2000000, kategori: KategoriItem.SPP },
+          { deskripsi: "Praktikum Jaringan Komputer", nominal: 500000, kategori: KategoriItem.PRAKTIKUM },
         ],
       },
     },
@@ -134,16 +128,17 @@ async function main() {
   // ── Laporan Sari ─────────────────────────────────────────────────────────
   await prisma.laporanPenggunaan.create({
     data: {
-      semester: "Gasal 2024/2025",
+      semester: Semester.GASAL,
+      tahunAjaran: "2024/2025",
       totalDana: 3500000,
       catatan: "Laporan penggunaan dana beasiswa Bidikmisi",
       status: "TERKIRIM",
       mahasiswaId: userSari.mahasiswa!.id,
       items: {
         create: [
-          { deskripsi: "SPP Semester Gasal", nominal: 1800000, kategori: "SPP" },
-          { deskripsi: "Buku referensi", nominal: 400000, kategori: "Buku" },
-          { deskripsi: "Biaya hidup (kos + makan)", nominal: 1300000, kategori: "Biaya Hidup" },
+          { deskripsi: "SPP Semester Gasal", nominal: 1800000, kategori: KategoriItem.SPP },
+          { deskripsi: "Buku referensi", nominal: 400000, kategori: KategoriItem.BUKU },
+          { deskripsi: "Biaya hidup (kos + makan)", nominal: 1300000, kategori: KategoriItem.BIAYA_HIDUP },
         ],
       },
     },
@@ -156,6 +151,7 @@ async function main() {
       deskripsi:
         "Terdapat indikasi penerima beasiswa menggunakan dana untuk keperluan non-akademik berdasarkan informasi dari rekan mahasiswa.",
       status: "MENUNGGU",
+      pelaporId: userBudi.id,
       laporanId: laporanDrafBudi.id,
     },
   });
@@ -165,7 +161,6 @@ async function main() {
   console.log("  Admin     : admin@sipatra.ac.id     / admin123");
   console.log("  Mahasiswa : budi@student.undip.ac.id / mahasiswa123");
   console.log("  Mahasiswa : sari@student.undip.ac.id / mahasiswa123");
-  console.log("  Pelapor   : eko@gmail.com            / pelapor123");
 }
 
 main()

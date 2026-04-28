@@ -10,7 +10,6 @@ export default async function RootPage() {
   const role = session.user.role;
   if (role === "ADMIN") redirect("/dashboard/admin");
   if (role === "MAHASISWA") redirect("/dashboard/mahasiswa");
-  if (role === "PELAPOR") redirect("/dashboard/pelapor");
 
   redirect("/auth/login");
 }

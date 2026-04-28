@@ -13,29 +13,35 @@ interface ItemLaporan {
   kategori: string;
 }
 
-const KATEGORI = ["SPP", "Buku", "Kos", "Makan", "Transportasi", "Praktikum", "Alat Tulis", "Biaya Hidup", "Lainnya"];
-
-const SEMESTER_OPTIONS = [
-  "Gasal 2024/2025",
-  "Genap 2024/2025",
-  "Gasal 2025/2026",
-  "Genap 2025/2026",
+const KATEGORI: { value: string; label: string }[] = [
+  { value: "SPP", label: "SPP" },
+  { value: "BUKU", label: "Buku" },
+  { value: "KOS", label: "Kos" },
+  { value: "MAKAN", label: "Makan" },
+  { value: "TRANSPORTASI", label: "Transportasi" },
+  { value: "PRAKTIKUM", label: "Praktikum" },
+  { value: "ALAT_TULIS", label: "Alat Tulis" },
+  { value: "BIAYA_HIDUP", label: "Biaya Hidup" },
+  { value: "LAINNYA", label: "Lainnya" },
 ];
+
+const SEMESTER_OPTIONS = ["GASAL", "GENAP"];
+const TAHUN_AJARAN_OPTIONS = ["2023/2024", "2024/2025", "2025/2026", "2026/2027"];
 
 export default function BuatLaporanPage() {
   const router = useRouter();
   const [semester, setSemester] = useState("");
+  const [tahunAjaran, setTahunAjaran] = useState("");
   const [catatan, setCatatan] = useState("");
   const [items, setItems] = useState<ItemLaporan[]>([
-    { id: crypto.randomUUID(), deskripsi: "", nominal: "", kategori: "SPP" },
-  ]);
+    { id: crypto.randomUUID(), deskripsi: "", nominal: "", kategori: "SPP" },  ]);
   const [loading, setLoading] = useState<"draf" | "kirim" | null>(null);
   const [error, setError] = useState("");
 
   function addItem() {
     setItems((prev) => [
       ...prev,
-      { id: crypto.randomUUID(), deskripsi: "", nominal: "", kategori: "Lainnya" },
+      { id: crypto.randomUUID(), deskripsi: "", nominal: "", kategori: "LAINNYA" },
     ]);
   }
 
@@ -61,8 +67,8 @@ export default function BuatLaporanPage() {
   }
 
   async function handleSubmit(submitStatus: "DRAF" | "TERKIRIM") {
-    if (!semester) {
-      setError("Pilih semester terlebih dahulu.");
+    if (!semester || !tahunAjaran) {
+      setError("Pilih semester dan tahun ajaran terlebih dahulu.");
       return;
     }
     const invalidItems = items.filter(
@@ -77,6 +83,7 @@ export default function BuatLaporanPage() {
 
     const payload = {
       semester,
+      tahunAjaran,
       catatan,
       status: submitStatus,
       items: items.map((i) => ({
@@ -97,7 +104,7 @@ export default function BuatLaporanPage() {
       router.refresh();
     } else {
       const data = await res.json();
-      setError(data.error ?? "Terjadi kesalahan. Silakan coba lagi.");
+      setError(typeof data.error === "string" ? data.error : "Validasi gagal. Periksa kembali isian Anda.");
     }
     setLoading(null);
   }
@@ -127,17 +134,30 @@ export default function BuatLaporanPage() {
           <label className="block text-sm font-medium text-slate-700 mb-1.5">
             Semester <span className="text-red-500">*</span>
           </label>
-          <select
-            value={semester}
-            onChange={(e) => setSemester(e.target.value)}
-            className="input"
-            title="input-semester"
-          >
-            <option value="">-- Pilih Semester --</option>
-            {SEMESTER_OPTIONS.map((s) => (
-              <option key={s} value={s}>{s}</option>
-            ))}
-          </select>
+          <div className="grid grid-cols-2 gap-3">
+            <select
+              value={semester}
+              onChange={(e) => setSemester(e.target.value)}
+              className="input"
+              title="input-semester"
+            >
+              <option value="">-- Semester --</option>
+              {SEMESTER_OPTIONS.map((s) => (
+                <option key={s} value={s}>{s === "GASAL" ? "Gasal" : "Genap"}</option>
+              ))}
+            </select>
+            <select
+              value={tahunAjaran}
+              onChange={(e) => setTahunAjaran(e.target.value)}
+              className="input"
+              title="input-tahun-ajaran"
+            >
+              <option value="">-- Tahun Ajaran --</option>
+              {TAHUN_AJARAN_OPTIONS.map((t) => (
+                <option key={t} value={t}>{t}</option>
+              ))}
+            </select>
+          </div>
         </div>
 
         <div>
@@ -200,7 +220,7 @@ export default function BuatLaporanPage() {
                     title="input-kategori"
                   >
                     {KATEGORI.map((k) => (
-                      <option key={k} value={k}>{k}</option>
+                      <option key={k.value} value={k.value}>{k.label}</option>
                     ))}
                   </select>
                 </div>

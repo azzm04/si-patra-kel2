@@ -40,8 +40,7 @@ export async function POST(req: NextRequest) {
       deskripsi,
       buktiUrl:  buktiUrl || null,
       laporanId: laporanId || null,
-      // Jika isAnonim = true, pelaporId tidak disimpan → tampil "Anonim"
-      pelaporId: isAnonim ? null : session.user.id,
+      pelaporId: session.user.id,
     },
   });
 
@@ -69,9 +68,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(aduan);
   }
 
-  if (session.user.role === "PELAPOR") {
-    // Ambil aduan milik user ini PLUS aduan anonim dari session ini
-    // (anonim tidak bisa dilacak balik, hanya tampil di riwayat saat session aktif)
+  if (session.user.role === "MAHASISWA") {
     const aduan = await prisma.aduan.findMany({
       where: { pelaporId: session.user.id },
       include: {

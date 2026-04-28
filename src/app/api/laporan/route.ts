@@ -3,18 +3,20 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
+import { Semester, KategoriItem } from "@prisma/client";
 
 const itemSchema = z.object({
   deskripsi: z.string().min(1),
   nominal:   z.number().positive(),
-  kategori:  z.string().min(1),
+  kategori:  z.nativeEnum(KategoriItem),
 });
 
 const laporanSchema = z.object({
-  semester: z.string().min(1),
-  catatan:  z.string().optional(),
-  status:   z.enum(["DRAF", "TERKIRIM"]),
-  items:    z.array(itemSchema).min(1),
+  semester:    z.nativeEnum(Semester),
+  tahunAjaran: z.string().regex(/^\d{4}\/\d{4}$/, "Format tahun ajaran: 2024/2025"),
+  catatan:     z.string().optional(),
+  status:      z.enum(["DRAF", "TERKIRIM"]),
+  items:       z.array(itemSchema).min(1),
 });
 
 // POST: Buat laporan baru
@@ -27,7 +29,8 @@ export async function POST(req: NextRequest) {
   const body = await req.json();
   const parsed = laporanSchema.safeParse(body);
   if (!parsed.success) {
-    return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
+    const messages = Object.values(parsed.error.flatten().fieldErrors).flat();
+    return NextResponse.json({ error: messages[0] ?? "Validasi gagal" }, { status: 400 });
   }
 
   const mahasiswa = await prisma.mahasiswa.findUnique({
@@ -37,12 +40,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Data mahasiswa tidak ditemukan" }, { status: 404 });
   }
 
-  const { semester, catatan, status, items } = parsed.data;
+  const { semester, tahunAjaran, catatan, status, items } = parsed.data;
   const totalDana = items.reduce((sum, i) => sum + i.nominal, 0);
 
   const laporan = await prisma.laporanPenggunaan.create({
     data: {
       semester,
+      tahunAjaran,
       catatan,
       status,
       totalDana,
