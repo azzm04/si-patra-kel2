@@ -35,6 +35,11 @@ enum StatusBeasiswa {
   NONAKTIF
 }
 
+enum Semester {
+  GASAL
+  GENAP
+}
+
 // ─── Models ──────────────────────────────────────────────────────────────────
 
 model User {
@@ -58,10 +63,10 @@ model Beasiswa {
   id            String         @id @default(uuid())
   nama          String
   penyelenggara String
-  kuota         Int
+  kuota         Int           @db.SmallInt
   nominalPerSemester Decimal  @db.Decimal(15, 2)
   status        StatusBeasiswa @default(AKTIF)
-  deskripsi     String?
+  deskripsi     String?        @db.Text
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
 
@@ -72,9 +77,9 @@ model Beasiswa {
 
 model Mahasiswa {
   id            String    @id @default(uuid())
-  nim           String    @unique
+  nim           String    @unique @db.VarChar(20)
   prodi         String
-  angkatan      Int
+  angkatan      Int       @db.SmallInt
   noHp          String?
   alamat        String?
 
@@ -91,7 +96,8 @@ model Mahasiswa {
 
 model LaporanPenggunaan {
   id            String        @id @default(uuid())
-  semester      String        // e.g. "Gasal 2024/2025"
+  semester      Semester
+  tahunAjaran   String        @db.VarChar(9)
   totalDana     Decimal       @db.Decimal(15, 2)
   catatan       String?
   status        StatusLaporan @default(DRAF)
@@ -132,11 +138,9 @@ model Aduan {
   status        StatusAduan @default(MENUNGGU)
   catatanAdmin  String?
 
-  // Pelapor (bisa anonymous jika userId null)
-  pelaporId     String?
-  pelapor       User?       @relation(fields: [pelaporId], references: [id])
-
-  // Laporan yang diadukan (optional - bisa aduan umum)
+ 
+  pelaporId     String
+  pelapor       User       @relation(fields: [pelaporId], references: [id])
   laporanId     String?
   laporan       LaporanPenggunaan? @relation(fields: [laporanId], references: [id])
 
