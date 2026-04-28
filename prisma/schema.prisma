@@ -5,8 +5,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 // ─── Enums ───────────────────────────────────────────────────────────────────
@@ -28,6 +29,18 @@ enum StatusAduan {
   DIPROSES
   SELESAI
   DITOLAK
+}
+
+enum KategoriItem {
+  SPP
+  BUKU
+  KOS
+  MAKAN
+  TRANSPORTASI
+  PRAKTIKUM
+  ALAT_TULIS
+  BIAYA_HIDUP
+  LAINNYA
 }
 
 enum StatusBeasiswa {
@@ -78,9 +91,9 @@ model Beasiswa {
 model Mahasiswa {
   id            String    @id @default(uuid())
   nim           String    @unique @db.VarChar(20)
-  prodi         String
+  prodi         String    @db.VarChar(100)
   angkatan      Int       @db.SmallInt
-  noHp          String?
+  noHp          String?   @db.VarChar(13)
   alamat        String?
 
   userId        String    @unique
@@ -120,7 +133,7 @@ model ItemLaporan {
   id            String            @id @default(uuid())
   deskripsi     String
   nominal       Decimal           @db.Decimal(15, 2)
-  kategori      String            // e.g. "SPP", "Buku", "Kos", "Makan"
+  kategori      KategoriItem
 
   laporanId     String
   laporan       LaporanPenggunaan @relation(fields: [laporanId], references: [id], onDelete: Cascade)
