@@ -5,6 +5,7 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff, Lock, Mail, ShieldCheck } from "lucide-react";
+import Link from "next/link";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -36,9 +37,12 @@ export default function LoginPage() {
 
   function fillDemo(role: "admin" | "mahasiswa" | "pelapor") {
     const demos = {
-      admin:      { email: "admin@sipatra.ac.id",       password: "admin123" },
-      mahasiswa:  { email: "budi@student.undip.ac.id",  password: "mahasiswa123" },
-      pelapor:    { email: "eko@gmail.com",              password: "pelapor123" },
+      admin: { email: "admin@sipatra.ac.id", password: "admin123" },
+      mahasiswa: {
+        email: "budi@student.undip.ac.id",
+        password: "mahasiswa123",
+      },
+      pelapor: { email: "eko@gmail.com", password: "pelapor123" },
     };
     setEmail(demos[role].email);
     setPassword(demos[role].password);
@@ -53,7 +57,9 @@ export default function LoginPage() {
             <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
               <ShieldCheck className="w-5 h-5 text-white" />
             </div>
-            <span className="text-white font-semibold text-lg tracking-tight">SI-PATRA</span>
+            <span className="text-white font-semibold text-lg tracking-tight">
+              SI-PATRA
+            </span>
           </div>
 
           <h1 className="text-4xl font-bold text-white leading-tight mb-4">
@@ -71,7 +77,10 @@ export default function LoginPage() {
             { label: "Laporan Tervalidasi", value: "3.800+" },
             { label: "Aduan Terproses", value: "98%" },
           ].map((stat) => (
-            <div key={stat.label} className="bg-white/10 rounded-xl p-4 backdrop-blur-sm">
+            <div
+              key={stat.label}
+              className="bg-white/10 rounded-xl p-4 backdrop-blur-sm"
+            >
               <div className="text-2xl font-bold text-white">{stat.value}</div>
               <div className="text-primary-200 text-xs mt-1">{stat.label}</div>
             </div>
@@ -83,12 +92,18 @@ export default function LoginPage() {
         <div className="w-full max-w-md">
           <div className="flex items-center gap-2 mb-8 lg:hidden">
             <ShieldCheck className="w-6 h-6 text-primary-600" />
-            <span className="font-semibold text-lg text-primary-700">SI-PATRA</span>
+            <span className="font-semibold text-lg text-primary-700">
+              SI-PATRA
+            </span>
           </div>
 
           <div className="mb-8">
-            <h2 className="text-2xl font-bold text-slate-900">Selamat Datang</h2>
-            <p className="text-slate-500 mt-1 text-sm">Masuk ke akun Anda untuk melanjutkan</p>
+            <h2 className="text-2xl font-bold text-slate-900">
+              Selamat Datang
+            </h2>
+            <p className="text-slate-500 mt-1 text-sm">
+              Masuk ke akun Anda untuk melanjutkan
+            </p>
           </div>
 
           {error && (
@@ -134,7 +149,11 @@ export default function LoginPage() {
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
                 >
-                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  {showPassword ? (
+                    <EyeOff className="w-4 h-4" />
+                  ) : (
+                    <Eye className="w-4 h-4" />
+                  )}
                 </button>
               </div>
             </div>
@@ -146,9 +165,24 @@ export default function LoginPage() {
             >
               {loading ? (
                 <span className="flex items-center gap-2">
-                  <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                  <svg
+                    className="animate-spin w-4 h-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                    />
                   </svg>
                   Masuk...
                 </span>
@@ -159,15 +193,35 @@ export default function LoginPage() {
           </form>
 
           <div className="mt-8 p-4 rounded-xl bg-slate-50 border border-slate-200">
-            <p className="text-xs font-medium text-slate-500 mb-3">Akun Demo (klik untuk mengisi)</p>
+            <p className="text-center text-sm text-slate-500 mt-4">
+              Belum punya akun?{" "}
+              <Link
+                href="/auth/register"
+                className="text-primary-600 font-medium hover:underline"
+              >
+                Daftar di sini
+              </Link>
+            </p>
+            <p className="text-xs font-medium text-slate-500 mb-3">
+              Akun Demo (klik untuk mengisi)
+            </p>
             <div className="flex flex-wrap gap-2">
-              <button onClick={() => fillDemo("admin")} className="btn-secondary btn-sm">
+              <button
+                onClick={() => fillDemo("admin")}
+                className="btn-secondary btn-sm"
+              >
                 Admin
               </button>
-              <button onClick={() => fillDemo("mahasiswa")} className="btn-secondary btn-sm">
+              <button
+                onClick={() => fillDemo("mahasiswa")}
+                className="btn-secondary btn-sm"
+              >
                 Mahasiswa
               </button>
-              <button onClick={() => fillDemo("pelapor")} className="btn-secondary btn-sm">
+              <button
+                onClick={() => fillDemo("pelapor")}
+                className="btn-secondary btn-sm"
+              >
                 Pelapor
               </button>
             </div>

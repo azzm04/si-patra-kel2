@@ -67,6 +67,7 @@ model Beasiswa {
   updatedAt     DateTime       @updatedAt
 
   mahasiswa     Mahasiswa[]
+  emailWhitelist EmailWhitelist[]
 
   @@map("beasiswa")
 }
@@ -145,4 +146,26 @@ model Aduan {
   updatedAt     DateTime    @updatedAt
 
   @@map("aduan")
+}
+
+model EmailWhitelist {
+  id         String   @id @default(cuid())
+  email      String   @unique
+  beasiswaId String
+  beasiswa   Beasiswa @relation(fields: [beasiswaId], references: [id])
+  isUsed     Boolean  @default(false) // true setelah berhasil registrasi
+  createdAt  DateTime @default(now())
+
+  @@map("email_whitelist")
+}
+
+model OtpToken {
+  id        String   @id @default(cuid())
+  email     String
+  code      String   // bcrypt hashed
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([email])
+  @@map("otp_tokens")
 }

@@ -160,12 +160,40 @@ async function main() {
     },
   });
 
-  console.log("✅ Seed selesai!");
-  console.log("\nAkun yang tersedia:");
-  console.log("  Admin     : admin@sipatra.ac.id     / admin123");
-  console.log("  Mahasiswa : budi@student.undip.ac.id / mahasiswa123");
-  console.log("  Mahasiswa : sari@student.undip.ac.id / mahasiswa123");
-  console.log("  Pelapor   : eko@gmail.com            / pelapor123");
+  // ── Email Whitelist ───────────────────────────────────────────────
+await prisma.emailWhitelist.deleteMany();
+
+// Whitelist Bidikmisi
+const bidikmisiEmails = [
+  "farisrevan13@gmail.com",
+  "aisyahaprilia1515@gmail.com",
+  "handoyoboruto@gmail.com",
+  "hansendu99@gmail.com",
+];
+
+// Whitelist KIP-Kuliah
+const kipkEmails = [
+  "azzamsyaifull@gmail.com",
+  "mustofaahmadrusli@gmail.com",
+  "indonesia369@gmail.com",
+  "nanditoadi@gmail.com",
+];
+
+for (const email of bidikmisiEmails) {
+  await prisma.emailWhitelist.create({
+    data: { email: email.toLowerCase(), beasiswaId: bidikmisi.id },
+  });
+}
+
+for (const email of kipkEmails) {
+  await prisma.emailWhitelist.create({
+    data: { email: email.toLowerCase(), beasiswaId: kipK.id },
+  });
+}
+
+console.log("✅ Email whitelist ditambahkan:");
+console.log("  Bidikmisi:", bidikmisiEmails.length, "email");
+console.log("  KIP-K    :", kipkEmails.length, "email");
 }
 
 main()
