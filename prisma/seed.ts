@@ -99,10 +99,10 @@ async function main() {
       mahasiswaId: userBudi.mahasiswa!.id,
       items: {
         create: [
-          { deskripsi: "Pembayaran SPP", nominal: 2000000, kategori: KategoriItem.SPP },
-          { deskripsi: "Buku teks Algoritma & Pemrograman", nominal: 350000, kategori: KategoriItem.BUKU },
-          { deskripsi: "Sewa kos bulan Juli-Desember", nominal: 1500000, kategori: KategoriItem.KOS },
-          { deskripsi: "Transportasi kuliah", nominal: 350000, kategori: KategoriItem.TRANSPORTASI },
+          { deskripsi: "Pembayaran SPP", nominal: 2000000, kategori: "SPP" },
+          { deskripsi: "Buku teks Algoritma & Pemrograman", nominal: 350000, kategori: "BUKU" },
+          { deskripsi: "Sewa kos bulan Juli-Desember", nominal: 1500000, kategori: "KOS" },
+          { deskripsi: "Transportasi kuliah", nominal: 350000, kategori: "TRANSPORTASI"},
         ],
       },
     },
@@ -118,8 +118,8 @@ async function main() {
       mahasiswaId: userBudi.mahasiswa!.id,
       items: {
         create: [
-          { deskripsi: "Pembayaran SPP Genap", nominal: 2000000, kategori: KategoriItem.SPP },
-          { deskripsi: "Praktikum Jaringan Komputer", nominal: 500000, kategori: KategoriItem.PRAKTIKUM },
+          { deskripsi: "Pembayaran SPP Genap", nominal: 2000000, kategori: "SPP" },
+          { deskripsi: "Praktikum Jaringan Komputer", nominal: 500000, kategori: "PRAKTIKUM" },
         ],
       },
     },
@@ -136,9 +136,9 @@ async function main() {
       mahasiswaId: userSari.mahasiswa!.id,
       items: {
         create: [
-          { deskripsi: "SPP Semester Gasal", nominal: 1800000, kategori: KategoriItem.SPP },
-          { deskripsi: "Buku referensi", nominal: 400000, kategori: KategoriItem.BUKU },
-          { deskripsi: "Biaya hidup (kos + makan)", nominal: 1300000, kategori: KategoriItem.BIAYA_HIDUP },
+          { deskripsi: "SPP Semester Gasal", nominal: 1800000, kategori: "SPP" },
+          { deskripsi: "Buku referensi", nominal: 400000, kategori: "BUKU" },
+          { deskripsi: "Biaya hidup (kos + makan)", nominal: 1300000, kategori: "BIAYA_HIDUP" },
         ],
       },
     },

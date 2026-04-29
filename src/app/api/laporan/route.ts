@@ -3,12 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
-import { Semester, KategoriItem } from "@prisma/client";
+import { Semester } from "@prisma/client";
 
 const itemSchema = z.object({
   deskripsi: z.string().min(1),
   nominal:   z.number().positive(),
-  kategori:  z.nativeEnum(KategoriItem),
+  kategori:  z.string().min(1),
 });
 
 const laporanSchema = z.object({

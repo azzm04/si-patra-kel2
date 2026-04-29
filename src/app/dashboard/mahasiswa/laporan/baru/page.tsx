@@ -11,6 +11,7 @@ interface ItemLaporan {
   deskripsi: string;
   nominal: string;
   kategori: string;
+  kategoriLainnya?: string;
 }
 
 const KATEGORI: { value: string; label: string }[] = [
@@ -41,7 +42,7 @@ export default function BuatLaporanPage() {
   function addItem() {
     setItems((prev) => [
       ...prev,
-      { id: crypto.randomUUID(), deskripsi: "", nominal: "", kategori: "LAINNYA" },
+      { id: crypto.randomUUID(), deskripsi: "", nominal: "", kategori: "LAINNYA", kategoriLainnya: "" },
     ]);
   }
 
@@ -89,7 +90,7 @@ export default function BuatLaporanPage() {
       items: items.map((i) => ({
         deskripsi: i.deskripsi,
         nominal: parseFloat(i.nominal),
-        kategori: i.kategori,
+        kategori: i.kategori === "LAINNYA" ? i.kategoriLainnya : i.kategori,
       })),
     };
 
@@ -211,18 +212,32 @@ export default function BuatLaporanPage() {
                     placeholder="cth: Pembayaran SPP semester gasal"
                   />
                 </div>
-                <div>
+                <div className={item.kategori === "LAINNYA" ? "col-span-2" : ""}>
                   <label className="block text-xs font-medium text-slate-600 mb-1">Kategori</label>
-                  <select
-                    value={item.kategori}
-                    onChange={(e) => updateItem(item.id, "kategori", e.target.value)}
-                    className="input text-sm"
-                    title="input-kategori"
-                  >
-                    {KATEGORI.map((k) => (
-                      <option key={k.value} value={k.value}>{k.label}</option>
-                    ))}
-                  </select>
+                  <div className="flex flex-col gap-2">
+                    <select
+                      value={item.kategori}
+                      onChange={(e) => updateItem(item.id, "kategori", e.target.value)}
+                      className="input text-sm"
+                      title="input-kategori"
+                    >
+                      {KATEGORI.map((k) => (
+                        <option key={k.value} value={k.value}>{k.label}</option>
+                      ))}
+                    </select>
+
+                    {/* Input tambahan ini muncul hanya jika kategori yang dipilih adalah LAINNYA */}
+                    {item.kategori === "LAINNYA" && (
+                      <input
+                        type="text"
+                        value={item.kategoriLainnya || ""}
+                        onChange={(e) => updateItem(item.id, "kategoriLainnya", e.target.value)}
+                        className="input text-sm border-dashed border-blue-400 focus:border-solid animate-in fade-in slide-in-from-top-1"
+                        placeholder="Sebutkan kategori lainnya (misal: Lomba, Seminar, dll)..."
+                        required
+                      />
+                    )}
+                  </div>
                 </div>
                 <div>
                   <label className="block text-xs font-medium text-slate-600 mb-1">Nominal (Rp) *</label>
