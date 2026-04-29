@@ -6,8 +6,8 @@ import { z } from "zod";
 import { Semester, KategoriItem } from "@prisma/client";
 
 const itemSchema = z.object({
-  deskripsi: z.string().min(1),
-  nominal:   z.number().positive(),
+  deskripsi: z.string().min(1, "Deskripsi wajib diisi"),
+  nominal:   z.number().positive("Nominal harus lebih dari 0"),
   kategori:  z.nativeEnum(KategoriItem),
 });
 
@@ -16,10 +16,10 @@ const laporanUpdateSchema = z.object({
   tahunAjaran: z.string().regex(/^\d{4}\/\d{4}$/, "Format tahun ajaran: 2024/2025"),
   catatan:     z.string().optional(),
   status:      z.enum(["DRAF", "TERKIRIM"]),
-  items:       z.array(itemSchema).min(1),
+  items:       z.array(itemSchema).min(1, "Minimal harus ada 1 rincian dana"),
 });
 
-// PUT: Edit/Update Laporan
+// PUT: Edit/Update Laporan berdasarkan ID
 export async function PUT(
   req: NextRequest,
   { params }: { params: { id: string } }
@@ -60,32 +60,37 @@ export async function PUT(
   const totalDana = items.reduce((sum, i) => sum + i.nominal, 0);
 
   // Gunakan Transaction agar penghapusan item lama dan pembuatan item baru aman
-  const updatedLaporan = await prisma.$transaction(async (tx) => {
-    // 1. Hapus semua rincian dana yang lama
-    await tx.itemLaporan.deleteMany({
-      where: { laporanId: params.id },
-    });
+  try {
+    const updatedLaporan = await prisma.$transaction(async (tx) => {
+      // 1. Hapus semua rincian dana yang lama
+      await tx.itemLaporan.deleteMany({
+        where: { laporanId: params.id },
+      });
 
-    // 2. Update data laporan induk dan masukkan rincian dana yang baru
-    return await tx.laporanPenggunaan.update({
-      where: { id: params.id },
-      data: {
-        semester,
-        tahunAjaran,
-        catatan,
-        status, // Status bisa berubah (misal dari DITOLAK kembali jadi DRAF atau langsung TERKIRIM)
-        totalDana,
-        items: {
-          create: items.map((i) => ({
-            deskripsi: i.deskripsi,
-            nominal:   i.nominal,
-            kategori:  i.kategori,
-          })),
+      // 2. Update data laporan induk dan masukkan rincian dana yang baru
+      return await tx.laporanPenggunaan.update({
+        where: { id: params.id },
+        data: {
+          semester,
+          tahunAjaran,
+          catatan,
+          status, 
+          totalDana,
+          items: {
+            create: items.map((i) => ({
+              deskripsi: i.deskripsi,
+              nominal:   i.nominal,
+              kategori:  i.kategori,
+            })),
+          },
         },
-      },
-      include: { items: true },
+        include: { items: true },
+      });
     });
-  });
 
-  return NextResponse.json(updatedLaporan, { status: 200 });
+    return NextResponse.json(updatedLaporan, { status: 200 });
+  } catch (error) {
+    console.error("Gagal update laporan:", error);
+    return NextResponse.json({ error: "Terjadi kesalahan pada server" }, { status: 500 });
+  }
 }

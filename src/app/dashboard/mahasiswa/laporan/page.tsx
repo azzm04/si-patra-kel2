@@ -26,10 +26,10 @@ export default async function MahasiswaLaporanPage() {
   const laporan = mahasiswa?.laporan ?? [];
 
   const grouped = {
-    DRAF:       laporan.filter((l) => l.status === "DRAF"),
-    TERKIRIM:   laporan.filter((l) => l.status === "TERKIRIM"),
+    DRAF: laporan.filter((l) => l.status === "DRAF"),
+    TERKIRIM: laporan.filter((l) => l.status === "TERKIRIM"),
     DIVALIDASI: laporan.filter((l) => l.status === "DIVALIDASI"),
-    DITOLAK:    laporan.filter((l) => l.status === "DITOLAK"),
+    DITOLAK: laporan.filter((l) => l.status === "DITOLAK"),
   };
 
   return (
@@ -41,10 +41,23 @@ export default async function MahasiswaLaporanPage() {
             {laporan.length} laporan ditemukan
           </p>
         </div>
-        <Link href="/dashboard/mahasiswa/laporan/baru" className="btn-primary">
-          <PlusCircle className="w-4 h-4" />
-          Buat Laporan
-        </Link>
+
+        <div className="flex items-center gap-2">
+          <Link
+            href="/dashboard/mahasiswa/laporan/sampah"
+            className="btn-secondary"
+          >
+            <Trash2 className="w-4 h-4 text-slate-500" />
+            <span className="hidden sm:inline">Sampah</span>
+          </Link>
+          <Link
+            href="/dashboard/mahasiswa/laporan/baru"
+            className="btn-primary"
+          >
+            <PlusCircle className="w-4 h-4" />
+            Buat Laporan
+          </Link>
+        </div>
       </div>
 
       {laporan.length === 0 ? (
@@ -54,7 +67,10 @@ export default async function MahasiswaLaporanPage() {
           <p className="text-sm text-slate-400 mt-1">
             Mulai buat laporan penggunaan dana beasiswa Anda
           </p>
-          <Link href="/dashboard/mahasiswa/laporan/baru" className="btn-primary btn-sm mt-4 inline-flex">
+          <Link
+            href="/dashboard/mahasiswa/laporan/baru"
+            className="btn-primary btn-sm mt-4 inline-flex"
+          >
             Buat Laporan Pertama
           </Link>
         </div>
@@ -72,15 +88,20 @@ export default async function MahasiswaLaporanPage() {
                     className="card flex items-center gap-4 py-4 hover:shadow-card-hover transition-shadow"
                   >
                     <div className="flex-1 min-w-0">
-                      <p className="font-medium text-slate-900">{lap.semester}</p>
+                      <p className="font-medium text-slate-900">
+                        {lap.semester}
+                      </p>
                       <p className="text-xs text-slate-400 mt-0.5">
-                        {lap.items.length} item · Dibuat {formatDate(lap.createdAt)}
+                        {lap.items.length} item · Dibuat{" "}
+                        {formatDate(lap.createdAt)}
                       </p>
                     </div>
                     <p className="text-sm font-semibold text-slate-700 flex-shrink-0">
                       {formatRupiah(lap.totalDana.toString())}
                     </p>
-                    <span className={`badge flex-shrink-0 ${statusLaporanConfig.DRAF.color}`}>
+                    <span
+                      className={`badge flex-shrink-0 ${statusLaporanConfig.DRAF.color}`}
+                    >
                       Draf
                     </span>
                     <div className="flex items-center gap-1 flex-shrink-0">
@@ -91,7 +112,10 @@ export default async function MahasiswaLaporanPage() {
                         Detail
                         <ChevronRight className="w-3.5 h-3.5" />
                       </Link>
-                      <HardDeleteButton laporanId={lap.id} semester={lap.semester} />
+                      <HardDeleteButton
+                        laporanId={lap.id}
+                        semester={lap.semester}
+                      />
                     </div>
                   </div>
                 ))}
@@ -151,13 +175,14 @@ function LaporanRow({
   lap: any;
   highlight?: "red" | "green";
 }) {
-  const cfg = statusLaporanConfig[lap.status as keyof typeof statusLaporanConfig];
+  const cfg =
+    statusLaporanConfig[lap.status as keyof typeof statusLaporanConfig];
   const border =
     highlight === "red"
       ? "border-l-4 border-l-red-400"
       : highlight === "green"
-      ? "border-l-4 border-l-green-400"
-      : "";
+        ? "border-l-4 border-l-green-400"
+        : "";
 
   return (
     <Link

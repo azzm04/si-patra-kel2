@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
   return NextResponse.json(laporan, { status: 201 });
 }
 
-// GET: Ambil laporan milik mahasiswa yang login
+// GET: Ambil laporan milik mahasiswa yang login atau seluruh laporan jika Admin
 export async function GET(req: NextRequest) {
   const session = await auth();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -77,7 +77,7 @@ export async function GET(req: NextRequest) {
     if (!mahasiswa) return NextResponse.json([]);
 
     const laporan = await prisma.laporanPenggunaan.findMany({
-      where: { mahasiswaId: mahasiswa.id, deletedAt: null },
+      where: { mahasiswaId: mahasiswa.id, deletedAt: null, status: { not: "DRAF" } },
       include: { items: true },
       orderBy: { createdAt: "desc" },
     });
@@ -104,7 +104,7 @@ export async function GET(req: NextRequest) {
   return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 }
 
-// DELETE: Hard delete draf laporan
+// DELETE: Soft delete laporan (Berlaku untuk DRAF, TERKIRIM, DITOLAK)
 export async function DELETE(req: NextRequest) {
   const session = await auth();
   if (!session || session.user.role !== "MAHASISWA") {
@@ -120,18 +120,26 @@ export async function DELETE(req: NextRequest) {
   });
 
   const laporan = await prisma.laporanPenggunaan.findFirst({
-    where: { id: laporanId, mahasiswaId: mahasiswa?.id },
+    where: { id: laporanId, mahasiswaId: mahasiswa?.id, deletedAt: null },
   });
 
-  if (!laporan) return NextResponse.json({ error: "Laporan tidak ditemukan" }, { status: 404 });
-
-  // Hanya DRAF yang bisa di-hard delete
-  if (laporan.status !== "DRAF") {
-    return NextResponse.json({ error: "Hanya draf yang dapat dihapus" }, { status: 400 });
+  if (!laporan) {
+    return NextResponse.json({ error: "Laporan tidak ditemukan" }, { status: 404 });
   }
 
-  // Hard delete (beserta items via cascade)
-  await prisma.laporanPenggunaan.delete({ where: { id: laporanId } });
+  // UBAH DISINI: Blokir hanya jika laporan sudah divalidasi
+  if (laporan.status === "DIVALIDASI") {
+    return NextResponse.json(
+      { error: "Laporan yang sudah divalidasi tidak dapat dihapus." },
+      { status: 400 }
+    );
+  }
 
-  return NextResponse.json({ message: "Laporan berhasil dihapus" });
+  // SOFT DELETE — set deletedAt, data tetap ada di DB
+  await prisma.laporanPenggunaan.update({
+    where: { id: laporanId },
+    data:  { deletedAt: new Date() },
+  });
+
+  return NextResponse.json({ message: "Laporan dipindahkan ke sampah" });
 }

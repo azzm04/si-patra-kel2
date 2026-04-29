@@ -47,7 +47,7 @@ const navByRole: Record<string, NavItem[]> = {
     {
       label: "Aduan Saya",
       href: "/dashboard/mahasiswa/aduan",
-      icon: ShieldCheck, 
+      icon: ShieldCheck,
     },
   ],
 };
@@ -115,20 +115,6 @@ export default function Sidebar({ role, name, email }: SidebarProps) {
         </nav>
 
         <div className="p-4 border-t border-slate-100 space-y-3">
-          <div className="flex items-center gap-3 px-3 py-2">
-            <div className="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center flex-shrink-0">
-              <span className="text-primary-700 text-sm font-semibold">
-                {name.charAt(0).toUpperCase()}
-              </span>
-            </div>
-            <div className="min-w-0">
-              <p className="text-sm font-medium text-slate-900 truncate">
-                {name}
-              </p>
-              <p className="text-xs text-slate-400 truncate">{roleLabel[role]}</p>
-            </div>
-          </div>
-
           <button
             onClick={() => setShowLogoutModal(true)}
             className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:text-red-600 hover:bg-red-50 transition-colors font-medium"
@@ -147,7 +133,9 @@ export default function Sidebar({ role, name, email }: SidebarProps) {
                 <AlertTriangle className="w-5 h-5 text-red-600" />
               </div>
               <div>
-                <h3 className="font-semibold text-slate-900">Keluar dari Akun</h3>
+                <h3 className="font-semibold text-slate-900">
+                  Keluar dari Akun
+                </h3>
                 <p className="text-sm text-slate-500 mt-1">
                   Apakah Anda yakin ingin keluar dari sistem?
                 </p>
@@ -155,7 +143,8 @@ export default function Sidebar({ role, name, email }: SidebarProps) {
             </div>
 
             <p className="text-sm text-slate-600 mb-4 p-3 rounded-lg bg-slate-50 border border-slate-200">
-              Anda akan dikembalikan ke halaman login. Pastikan semua pekerjaan telah disimpan.
+              Anda akan dikembalikan ke halaman login. Pastikan semua pekerjaan
+              telah disimpan.
             </p>
 
             <div className="flex gap-2 justify-end">

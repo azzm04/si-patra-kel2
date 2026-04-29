@@ -31,6 +31,7 @@ export default async function AdminLaporanPage({
             ],
           }
         : {}),
+        status: { not: "DRAF" },
     },
     include: {
       mahasiswa: {

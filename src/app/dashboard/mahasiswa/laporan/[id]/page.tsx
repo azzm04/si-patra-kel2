@@ -16,8 +16,10 @@ import {
   XCircle,
   FileText,
   Send,
+  Edit,
 } from "lucide-react";
 import SubmitLaporanButton from "@/components/mahasiswa/SubmitLaporanButton";
+import SoftDeleteButton from "@/components/mahasiswa/SoftDeleteButton"; // 2. Import komponen tombol hapus milikmu
 
 export default async function DetailLaporanPage({
   params,
@@ -59,9 +61,9 @@ export default async function DetailLaporanPage({
   const statusTimeline = [
     {
       label: "Draf Dibuat",
-      date:  formatDateTime(laporan.createdAt),
-      done:  true,
-      icon:  FileText,
+      date: formatDateTime(laporan.createdAt),
+      done: true,
+      icon: FileText,
     },
     {
       label: "Dikirim ke Admin",
@@ -69,23 +71,18 @@ export default async function DetailLaporanPage({
         laporan.status !== "DRAF"
           ? formatDateTime(laporan.updatedAt)
           : "Belum dikirim",
-      done:  laporan.status !== "DRAF",
-      icon:  Send,
+      done: laporan.status !== "DRAF",
+      icon: Send,
     },
     {
       label:
-        laporan.status === "DITOLAK"
-          ? "Ditolak Admin"
-          : "Divalidasi Admin",
+        laporan.status === "DITOLAK" ? "Ditolak Admin" : "Divalidasi Admin",
       date:
         laporan.status === "DIVALIDASI" || laporan.status === "DITOLAK"
           ? formatDateTime(laporan.updatedAt)
           : "Menunggu",
-      done:  laporan.status === "DIVALIDASI" || laporan.status === "DITOLAK",
-      icon:
-        laporan.status === "DITOLAK"
-          ? XCircle
-          : CheckCircle,
+      done: laporan.status === "DIVALIDASI" || laporan.status === "DITOLAK",
+      icon: laporan.status === "DITOLAK" ? XCircle : CheckCircle,
       isReject: laporan.status === "DITOLAK",
     },
   ];
@@ -105,11 +102,29 @@ export default async function DetailLaporanPage({
             {laporan.mahasiswa.beasiswa.nama} · Dibuat {formatDate(laporan.createdAt)}
           </p>
         </div>
-        {laporan.status === "DRAF" && (
-          <SubmitLaporanButton laporanId={laporan.id} />
-        )}
-      </div>
+        
+        <div className="flex items-center gap-2">
+          {laporan.status !== "DIVALIDASI" && (
+            <>
+              <Link
+                href={`/dashboard/mahasiswa/laporan/${laporan.id}/edit`}
+                className="btn-secondary btn-sm flex items-center gap-1"
+              >
+                <Edit className="w-4 h-4" />
+                <span className="hidden sm:inline">Edit</span>
+              </Link>
+              <SoftDeleteButton laporanId={laporan.id} semester={laporan.semester} />
+            </>
+          )}
 
+          {/* Tombol Kirim hanya muncul jika statusnya masih DRAF */}
+          {laporan.status === "DRAF" && (
+            <SubmitLaporanButton laporanId={laporan.id} />
+          )}
+        </div>
+        {/* --- AKHIR BAGIAN ACTION BUTTONS --- */}
+        
+      </div>
 
       {laporan.status === "DITOLAK" && laporan.catatanAdmin && (
         <div className="p-4 rounded-xl bg-red-50 border border-red-200">
@@ -123,14 +138,34 @@ export default async function DetailLaporanPage({
         </div>
       )}
 
+      {laporan.status === "DITOLAK" && laporan.catatanAdmin && (
+        <div className="p-4 rounded-xl bg-red-50 border border-red-200">
+          <div className="flex gap-2 items-start">
+            <XCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+            <div>
+              <p className="text-sm font-semibold text-red-800">
+                Laporan Ditolak
+              </p>
+              <p className="text-sm text-red-700 mt-1">
+                {laporan.catatanAdmin}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {laporan.status === "DIVALIDASI" && (
         <div className="p-4 rounded-xl bg-green-50 border border-green-200">
           <div className="flex gap-2 items-start">
             <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
             <div>
-              <p className="text-sm font-semibold text-green-800">Laporan Divalidasi</p>
+              <p className="text-sm font-semibold text-green-800">
+                Laporan Divalidasi
+              </p>
               {laporan.catatanAdmin ? (
-                <p className="text-sm text-green-700 mt-1">{laporan.catatanAdmin}</p>
+                <p className="text-sm text-green-700 mt-1">
+                  {laporan.catatanAdmin}
+                </p>
               ) : (
                 <p className="text-sm text-green-600 mt-1">
                   Laporan Anda telah diverifikasi oleh admin.
@@ -145,7 +180,9 @@ export default async function DetailLaporanPage({
         <div className="lg:col-span-2 space-y-4">
           <div className="card">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="font-semibold text-slate-900">Rincian Penggunaan Dana</h2>
+              <h2 className="font-semibold text-slate-900">
+                Rincian Penggunaan Dana
+              </h2>
               <p className="text-sm font-bold text-primary-700">
                 {formatRupiah(laporan.totalDana.toString())}
               </p>
@@ -164,7 +201,9 @@ export default async function DetailLaporanPage({
                         <span className="text-xs font-medium text-slate-400 tabular-nums w-5 flex-shrink-0">
                           {idx + 1}.
                         </span>
-                        <span className="text-slate-800 truncate">{item.deskripsi}</span>
+                        <span className="text-slate-800 truncate">
+                          {item.deskripsi}
+                        </span>
                         <span className="badge bg-slate-100 text-slate-500 text-[10px] flex-shrink-0">
                           {item.kategori}
                         </span>
@@ -179,7 +218,9 @@ export default async function DetailLaporanPage({
                         style={{ width: `${pct}%` }}
                       />
                     </div>
-                    <p className="ml-7 text-[10px] text-slate-400 mt-0.5">{pct}% dari total</p>
+                    <p className="ml-7 text-[10px] text-slate-400 mt-0.5">
+                      {pct}% dari total
+                    </p>
                   </div>
                 );
               })}
@@ -196,14 +237,18 @@ export default async function DetailLaporanPage({
           {laporan.catatan && (
             <div className="card">
               <h2 className="font-semibold text-slate-900 mb-2">Catatan</h2>
-              <p className="text-sm text-slate-600 leading-relaxed">{laporan.catatan}</p>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                {laporan.catatan}
+              </p>
             </div>
           )}
         </div>
 
         <div className="space-y-4">
           <div className="card">
-            <h2 className="font-semibold text-slate-900 mb-3">Distribusi Kategori</h2>
+            <h2 className="font-semibold text-slate-900 mb-3">
+              Distribusi Kategori
+            </h2>
             <div className="space-y-2.5">
               {Object.entries(byKategori)
                 .sort(([, a], [, b]) => b - a)
@@ -212,8 +257,12 @@ export default async function DetailLaporanPage({
                   return (
                     <div key={kat}>
                       <div className="flex items-center justify-between text-xs mb-1">
-                        <span className="text-slate-600 font-medium">{kat}</span>
-                        <span className="text-slate-400">{pct.toFixed(0)}%</span>
+                        <span className="text-slate-600 font-medium">
+                          {kat}
+                        </span>
+                        <span className="text-slate-400">
+                          {pct.toFixed(0)}%
+                        </span>
                       </div>
                       <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
                         <div
@@ -231,7 +280,9 @@ export default async function DetailLaporanPage({
           </div>
 
           <div className="card">
-            <h2 className="font-semibold text-slate-900 mb-4">Timeline Status</h2>
+            <h2 className="font-semibold text-slate-900 mb-4">
+              Timeline Status
+            </h2>
             <div className="space-y-4">
               {statusTimeline.map((step, idx) => {
                 const Icon = step.icon;
@@ -270,7 +321,9 @@ export default async function DetailLaporanPage({
                       >
                         {step.label}
                       </p>
-                      <p className="text-xs text-slate-400 mt-0.5">{step.date}</p>
+                      <p className="text-xs text-slate-400 mt-0.5">
+                        {step.date}
+                      </p>
                     </div>
                   </div>
                 );
