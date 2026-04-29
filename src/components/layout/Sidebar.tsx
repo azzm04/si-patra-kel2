@@ -44,6 +44,11 @@ const navByRole: Record<string, NavItem[]> = {
       href: "/dashboard/mahasiswa/laporan/baru",
       icon: PlusCircle,
     },
+    {
+      label: "Aduan Saya",
+      href: "/dashboard/mahasiswa/aduan",
+      icon: ShieldCheck, 
+    },
   ],
 };
 

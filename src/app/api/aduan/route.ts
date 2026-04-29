@@ -41,6 +41,7 @@ export async function POST(req: NextRequest) {
       buktiUrl:  buktiUrl || null,
       laporanId: laporanId || null,
       pelaporId: session.user.id,
+      isAnonim:  isAnonim || false,
     },
   });
 

@@ -1,6 +1,6 @@
 // src/app/dashboard/pelapor/aduan/baru/page.tsx
 import { prisma } from "@/lib/prisma";
-import BuatAduanForm from "@/components/pelapor/BuatAduanForm";
+import BuatAduanForm from "@/components/mahasiswa/BuatAduanForm";
 
 export default async function BuatAduanPage() {
   const laporanList = await prisma.laporanPenggunaan.findMany({

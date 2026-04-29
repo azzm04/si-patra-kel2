@@ -150,6 +150,7 @@ model Aduan {
   buktiUrl      String?     // URL file bukti yang diupload
   status        StatusAduan @default(MENUNGGU)
   catatanAdmin  String?
+  isAnonim      Boolean     @default(false)
 
  
   pelaporId     String

@@ -1,4 +1,4 @@
-// src/app/dashboard/pelapor/aduan/page.tsx
+// src/app/dashboard/mahasiswa/aduan/page.tsx
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { formatDateTime, statusAduanConfig } from "@/lib/utils";
@@ -57,7 +57,7 @@ export default async function PelaporAduanPage() {
             Riwayat semua aduan yang telah Anda kirimkan
           </p>
         </div>
-        <Link href="/dashboard/pelapor/aduan/baru" className="btn-primary">
+        <Link href="/dashboard/mahasiswa/aduan/baru" className="btn-primary">
           <PlusCircle className="w-4 h-4" />
           Kirim Aduan Baru
         </Link>
@@ -97,7 +97,7 @@ export default async function PelaporAduanPage() {
             segera laporkan.
           </p>
           <Link
-            href="/dashboard/pelapor/aduan/baru"
+            href="/dashboard/mahasiswa/aduan/baru"
             className="btn-primary btn-sm mt-4 inline-flex"
           >
             <PlusCircle className="w-4 h-4" />

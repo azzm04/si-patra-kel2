@@ -1,4 +1,4 @@
-// src/components/pelapor/BuatAduanForm.tsx
+// src/components/mahasiswa/BuatAduanForm.tsx
 "use client";
 
 import { useState } from "react";
@@ -59,7 +59,7 @@ export default function BuatAduanForm({ laporanOptions }: Props) {
     });
 
     if (res.ok) {
-      router.push("/dashboard/pelapor/aduan");
+      router.push("/dashboard/mahasiswa/aduan");
       router.refresh();
     } else {
       const data = await res.json();
@@ -71,7 +71,7 @@ export default function BuatAduanForm({ laporanOptions }: Props) {
   return (
     <div className="max-w-xl space-y-5">
       <div className="flex items-center gap-3">
-        <Link href="/dashboard/pelapor/aduan" className="btn-secondary btn-sm">
+        <Link href="/dashboard/mahasiswa/aduan" className="btn-secondary btn-sm">
           <ArrowLeft className="w-4 h-4" />
         </Link>
         <div>
@@ -214,7 +214,7 @@ export default function BuatAduanForm({ laporanOptions }: Props) {
         </div>
 
         <div className="flex gap-3 pt-2">
-          <Link href="/dashboard/pelapor/aduan" className="btn-secondary flex-1 justify-center">
+          <Link href="/dashboard/mahasiswa/aduan" className="btn-secondary flex-1 justify-center">
             Batal
           </Link>
           <button type="submit" disabled={loading} className="btn-primary flex-1">
