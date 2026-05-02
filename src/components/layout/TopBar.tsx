@@ -1,8 +1,6 @@
 // src/components/layout/TopBar.tsx
 "use client";
 
-import { Bell, ChevronDown } from "lucide-react";
-
 interface TopBarProps {
   user: {
     name?: string | null;
@@ -12,7 +10,6 @@ interface TopBarProps {
 }
 
 export default function TopBar({ user }: TopBarProps) {
-  // Dapatkan inisial nama untuk avatar otomatis (misal: "Budi Santoso" -> "BS")
   const initials =
     user.name
       ?.split(" ")
@@ -21,7 +18,6 @@ export default function TopBar({ user }: TopBarProps) {
       .substring(0, 2)
       .toUpperCase() || "U";
 
-  // Dapatkan tanggal hari ini dengan format rapi
   const today = new Intl.DateTimeFormat("id-ID", {
     weekday: "long",
     day: "numeric",
@@ -30,21 +26,19 @@ export default function TopBar({ user }: TopBarProps) {
   }).format(new Date());
 
   return (
-    <header className="h-16 bg-white/80 backdrop-blur-md border-b border-slate-200 flex items-center justify-between px-6 flex-shrink-0 sticky top-0 z-30">
-      {/* Bagian Kiri: Sapaan & Tanggal */}
-      <div className="flex flex-col justify-center">
-        <p className="text-sm font-semibold text-slate-800">
+    <header className="h-16 bg-white/80 backdrop-blur-md border-b border-slate-200 flex items-center justify-between pl-6 pr-16 lg:pr-6 flex-shrink-0 sticky top-0 z-30">
+      <div className="flex flex-col justify-center min-w-0 pr-4">
+        <p className="text-sm font-semibold text-slate-800 truncate">
           Selamat datang kembali, {user.name}!
         </p>
         <p className="text-xs text-slate-500 mt-0.5">{today}</p>
       </div>
 
-      {/* Bagian Kanan: Aksi & Profil */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 flex-shrink-0">
         <div className="w-px h-6 bg-slate-200 hidden sm:block"></div>
 
         <button className="flex items-center gap-3 hover:bg-slate-50 p-1.5 pr-2 rounded-full transition-colors text-left group focus:outline-none focus:ring-2 focus:ring-primary-100">
-          <div className="w-8 h-8 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center text-xs font-bold ring-2 ring-white shadow-sm">
+          <div className="w-8 h-8 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center text-xs font-bold ring-2 ring-white shadow-sm flex-shrink-0">
             {initials}
           </div>
 
