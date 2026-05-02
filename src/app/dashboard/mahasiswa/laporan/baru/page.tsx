@@ -27,7 +27,12 @@ const KATEGORI: { value: string; label: string }[] = [
 ];
 
 const SEMESTER_OPTIONS = ["GASAL", "GENAP"];
-const TAHUN_AJARAN_OPTIONS = ["2023/2024", "2024/2025", "2025/2026", "2026/2027"];
+const TAHUN_AJARAN_OPTIONS = [
+  "2023/2024",
+  "2024/2025",
+  "2025/2026",
+  "2026/2027",
+];
 
 export default function BuatLaporanPage() {
   const router = useRouter();
@@ -35,14 +40,21 @@ export default function BuatLaporanPage() {
   const [tahunAjaran, setTahunAjaran] = useState("");
   const [catatan, setCatatan] = useState("");
   const [items, setItems] = useState<ItemLaporan[]>([
-    { id: crypto.randomUUID(), deskripsi: "", nominal: "", kategori: "SPP" },  ]);
+    { id: crypto.randomUUID(), deskripsi: "", nominal: "", kategori: "SPP" },
+  ]);
   const [loading, setLoading] = useState<"draf" | "kirim" | null>(null);
   const [error, setError] = useState("");
 
   function addItem() {
     setItems((prev) => [
       ...prev,
-      { id: crypto.randomUUID(), deskripsi: "", nominal: "", kategori: "LAINNYA", kategoriLainnya: "" },
+      {
+        id: crypto.randomUUID(),
+        deskripsi: "",
+        nominal: "",
+        kategori: "LAINNYA",
+        kategoriLainnya: "",
+      },
     ]);
   }
 
@@ -53,13 +65,13 @@ export default function BuatLaporanPage() {
 
   function updateItem(id: string, field: keyof ItemLaporan, value: string) {
     setItems((prev) =>
-      prev.map((i) => (i.id === id ? { ...i, [field]: value } : i))
+      prev.map((i) => (i.id === id ? { ...i, [field]: value } : i)),
     );
   }
 
   const totalDana = items.reduce(
     (sum, item) => sum + (parseFloat(item.nominal) || 0),
-    0
+    0,
   );
 
   function formatRupiahInput(value: string) {
@@ -73,10 +85,17 @@ export default function BuatLaporanPage() {
       return;
     }
     const invalidItems = items.filter(
-      (i) => !i.deskripsi.trim() || !i.nominal || parseFloat(i.nominal) <= 0
+      (i) =>
+        !i.deskripsi.trim() ||
+        !i.nominal ||
+        parseFloat(i.nominal) <= 0 ||
+        (i.kategori === "LAINNYA" &&
+          (!i.kategoriLainnya || !i.kategoriLainnya.trim())),
     );
     if (invalidItems.length > 0) {
-      setError("Lengkapi semua item laporan (deskripsi dan nominal wajib diisi).");
+      setError(
+        "Lengkapi semua item laporan (deskripsi dan nominal wajib diisi).",
+      );
       return;
     }
     setError("");
@@ -88,9 +107,12 @@ export default function BuatLaporanPage() {
       catatan,
       status: submitStatus,
       items: items.map((i) => ({
-        deskripsi: i.deskripsi,
+        deskripsi:
+          i.kategori === "LAINNYA"
+            ? `[${i.kategoriLainnya}] ${i.deskripsi}`
+            : i.deskripsi,
         nominal: parseFloat(i.nominal),
-        kategori: i.kategori === "LAINNYA" ? i.kategoriLainnya : i.kategori,
+        kategori: i.kategori,
       })),
     };
 
@@ -105,7 +127,11 @@ export default function BuatLaporanPage() {
       router.refresh();
     } else {
       const data = await res.json();
-      setError(typeof data.error === "string" ? data.error : "Validasi gagal. Periksa kembali isian Anda.");
+      setError(
+        typeof data.error === "string"
+          ? data.error
+          : "Validasi gagal. Periksa kembali isian Anda.",
+      );
     }
     setLoading(null);
   }
@@ -113,12 +139,19 @@ export default function BuatLaporanPage() {
   return (
     <div className="max-w-2xl space-y-5">
       <div className="flex items-center gap-3">
-        <Link href="/dashboard/mahasiswa/laporan" className="btn-secondary btn-sm">
+        <Link
+          href="/dashboard/mahasiswa/laporan"
+          className="btn-secondary btn-sm"
+        >
           <ArrowLeft className="w-4 h-4" />
         </Link>
         <div>
-          <h1 className="text-xl font-bold text-slate-900">Buat Laporan Baru</h1>
-          <p className="text-sm text-slate-500">Isi rincian penggunaan dana beasiswa Anda</p>
+          <h1 className="text-xl font-bold text-slate-900">
+            Buat Laporan Baru
+          </h1>
+          <p className="text-sm text-slate-500">
+            Isi rincian penggunaan dana beasiswa Anda
+          </p>
         </div>
       </div>
 
@@ -144,7 +177,9 @@ export default function BuatLaporanPage() {
             >
               <option value="">-- Semester --</option>
               {SEMESTER_OPTIONS.map((s) => (
-                <option key={s} value={s}>{s === "GASAL" ? "Gasal" : "Genap"}</option>
+                <option key={s} value={s}>
+                  {s === "GASAL" ? "Gasal" : "Genap"}
+                </option>
               ))}
             </select>
             <select
@@ -155,7 +190,9 @@ export default function BuatLaporanPage() {
             >
               <option value="">-- Tahun Ajaran --</option>
               {TAHUN_AJARAN_OPTIONS.map((t) => (
-                <option key={t} value={t}>{t}</option>
+                <option key={t} value={t}>
+                  {t}
+                </option>
               ))}
             </select>
           </div>
@@ -176,7 +213,9 @@ export default function BuatLaporanPage() {
 
       <div className="card space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="font-semibold text-slate-800">Rincian Penggunaan Dana</h2>
+          <h2 className="font-semibold text-slate-800">
+            Rincian Penggunaan Dana
+          </h2>
           <button onClick={addItem} className="btn-secondary btn-sm">
             <PlusCircle className="w-4 h-4" />
             Tambah Item
@@ -190,7 +229,9 @@ export default function BuatLaporanPage() {
               className="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-3"
             >
               <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-medium text-slate-500">Item #{idx + 1}</span>
+                <span className="text-xs font-medium text-slate-500">
+                  Item #{idx + 1}
+                </span>
                 <button
                   onClick={() => removeItem(item.id)}
                   disabled={items.length === 1}
@@ -203,26 +244,38 @@ export default function BuatLaporanPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="col-span-2">
-                  <label className="block text-xs font-medium text-slate-600 mb-1">Deskripsi *</label>
+                  <label className="block text-xs font-medium text-slate-600 mb-1">
+                    Deskripsi *
+                  </label>
                   <input
                     type="text"
                     value={item.deskripsi}
-                    onChange={(e) => updateItem(item.id, "deskripsi", e.target.value)}
+                    onChange={(e) =>
+                      updateItem(item.id, "deskripsi", e.target.value)
+                    }
                     className="input text-sm"
                     placeholder="cth: Pembayaran SPP semester gasal"
                   />
                 </div>
-                <div className={item.kategori === "LAINNYA" ? "col-span-2" : ""}>
-                  <label className="block text-xs font-medium text-slate-600 mb-1">Kategori</label>
+                <div
+                  className={item.kategori === "LAINNYA" ? "col-span-2" : ""}
+                >
+                  <label className="block text-xs font-medium text-slate-600 mb-1">
+                    Kategori
+                  </label>
                   <div className="flex flex-col gap-2">
                     <select
                       value={item.kategori}
-                      onChange={(e) => updateItem(item.id, "kategori", e.target.value)}
+                      onChange={(e) =>
+                        updateItem(item.id, "kategori", e.target.value)
+                      }
                       className="input text-sm"
                       title="input-kategori"
                     >
                       {KATEGORI.map((k) => (
-                        <option key={k.value} value={k.value}>{k.label}</option>
+                        <option key={k.value} value={k.value}>
+                          {k.label}
+                        </option>
                       ))}
                     </select>
 
@@ -231,7 +284,9 @@ export default function BuatLaporanPage() {
                       <input
                         type="text"
                         value={item.kategoriLainnya || ""}
-                        onChange={(e) => updateItem(item.id, "kategoriLainnya", e.target.value)}
+                        onChange={(e) =>
+                          updateItem(item.id, "kategoriLainnya", e.target.value)
+                        }
                         className="input text-sm border-dashed border-blue-400 focus:border-solid animate-in fade-in slide-in-from-top-1"
                         placeholder="Sebutkan kategori lainnya (misal: Lomba, Seminar, dll)..."
                         required
@@ -240,11 +295,15 @@ export default function BuatLaporanPage() {
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-slate-600 mb-1">Nominal (Rp) *</label>
+                  <label className="block text-xs font-medium text-slate-600 mb-1">
+                    Nominal (Rp) *
+                  </label>
                   <input
                     type="number"
                     value={item.nominal}
-                    onChange={(e) => updateItem(item.id, "nominal", e.target.value)}
+                    onChange={(e) =>
+                      updateItem(item.id, "nominal", e.target.value)
+                    }
                     className="input text-sm font-mono"
                     placeholder="0"
                     min="0"
@@ -255,11 +314,16 @@ export default function BuatLaporanPage() {
           ))}
         </div>
 
-
         <div className="flex items-center justify-between pt-3 border-t border-slate-200">
-          <span className="text-sm font-semibold text-slate-700">Total Dana</span>
+          <span className="text-sm font-semibold text-slate-700">
+            Total Dana
+          </span>
           <span className="text-lg font-bold text-primary-700">
-            {new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 }).format(totalDana)}
+            {new Intl.NumberFormat("id-ID", {
+              style: "currency",
+              currency: "IDR",
+              minimumFractionDigits: 0,
+            }).format(totalDana)}
           </span>
         </div>
       </div>
