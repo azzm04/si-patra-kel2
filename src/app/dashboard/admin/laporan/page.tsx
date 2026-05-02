@@ -1,8 +1,10 @@
 // src/app/dashboard/admin/laporan/page.tsx
 import { prisma } from "@/lib/prisma";
-import { formatRupiah, formatDate, statusLaporanConfig } from "@/lib/utils";
-import AdminLaporanActions from "@/components/admin/AdminLaporanActions";
+import { formatRupiah, statusLaporanConfig } from "@/lib/utils";
 import { Search } from "lucide-react";
+
+// 1. Impor komponen LaporanRowAdmin yang baru kita buat
+import LaporanRowAdmin from "@/components/admin/LaporanRowAdmin";
 
 interface SearchParams {
   search?: string;
@@ -16,18 +18,36 @@ export default async function AdminLaporanPage({
 }) {
   const { search, status } = searchParams;
 
-  // JOIN kompleks: LaporanPenggunaan + Mahasiswa + User + Beasiswa + ItemLaporan
   const laporan = await prisma.laporanPenggunaan.findMany({
     where: {
       deletedAt: null,
-      ...(status ? { status: status as any } : {}),
+      // 2. Pastikan filter status "DRAF" di-exclude dari tabel Admin
+      status: status ? (status as any) : { not: "DRAF" },
       ...(search
         ? {
             OR: [
-              { tahunAjaran: { contains: search, mode: "insensitive" as const } },
-              { mahasiswa: { user: { name: { contains: search, mode: "insensitive" as const } } } },
-              { mahasiswa: { nim: { contains: search, mode: "insensitive" as const } } },
-              { mahasiswa: { beasiswa: { nama: { contains: search, mode: "insensitive" as const } } } },
+              {
+                tahunAjaran: { contains: search, mode: "insensitive" as const },
+              },
+              {
+                mahasiswa: {
+                  user: {
+                    name: { contains: search, mode: "insensitive" as const },
+                  },
+                },
+              },
+              {
+                mahasiswa: {
+                  nim: { contains: search, mode: "insensitive" as const },
+                },
+              },
+              {
+                mahasiswa: {
+                  beasiswa: {
+                    nama: { contains: search, mode: "insensitive" as const },
+                  },
+                },
+              },
             ],
           }
         : {}),
@@ -51,7 +71,6 @@ export default async function AdminLaporanPage({
     { value: "TERKIRIM", label: "Terkirim" },
     { value: "DIVALIDASI", label: "Divalidasi" },
     { value: "DITOLAK", label: "Ditolak" },
-    { value: "DRAF", label: "Draf" },
   ];
 
   return (
@@ -97,16 +116,32 @@ export default async function AdminLaporanPage({
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-slate-100 bg-slate-50">
-                <th className="text-left font-medium text-slate-500 px-4 py-3">Mahasiswa</th>
-                <th className="text-left font-medium text-slate-500 px-4 py-3">Beasiswa</th>
-                <th className="text-left font-medium text-slate-500 px-4 py-3">Semester</th>
-                <th className="text-right font-medium text-slate-500 px-4 py-3">Total Dana</th>
-                <th className="text-left font-medium text-slate-500 px-4 py-3">Item</th>
-                <th className="text-left font-medium text-slate-500 px-4 py-3">Status</th>
-                <th className="text-left font-medium text-slate-500 px-4 py-3">Aduan</th>
-                <th className="px-4 py-3"></th>
+                <th className="text-left font-medium text-slate-500 px-4 py-3">
+                  Mahasiswa
+                </th>
+                <th className="text-left font-medium text-slate-500 px-4 py-3">
+                  Beasiswa
+                </th>
+                <th className="text-left font-medium text-slate-500 px-4 py-3">
+                  Semester
+                </th>
+                <th className="text-right font-medium text-slate-500 px-4 py-3">
+                  Total Dana
+                </th>
+                <th className="text-left font-medium text-slate-500 px-4 py-3">
+                  Item
+                </th>
+                <th className="text-left font-medium text-slate-500 px-4 py-3">
+                  Status
+                </th>
+                <th className="text-left font-medium text-slate-500 px-4 py-3">
+                  Aduan
+                </th>
+                <th className="px-4 py-3 w-28">Aksi</th>
               </tr>
             </thead>
+
+            {/* 3. Render Table Body */}
             <tbody className="divide-y divide-slate-50">
               {laporan.length === 0 ? (
                 <tr>
@@ -116,43 +151,11 @@ export default async function AdminLaporanPage({
                 </tr>
               ) : (
                 laporan.map((lap) => {
-                  const cfg = statusLaporanConfig[lap.status];
-                  return (
-                    <tr key={lap.id} className="hover:bg-slate-50 transition-colors">
-                      <td className="px-4 py-3">
-                        <div>
-                          <p className="font-medium text-slate-900">{lap.mahasiswa.user.name}</p>
-                          <p className="text-xs text-slate-400 font-mono mt-0.5">
-                            {lap.mahasiswa.nim}
-                          </p>
-                        </div>
-                      </td>
-                      <td className="px-4 py-3 text-slate-700">{lap.mahasiswa.beasiswa.nama}</td>
-                      <td className="px-4 py-3 text-slate-700">{lap.semester}</td>
-                      <td className="px-4 py-3 text-right font-semibold text-slate-800">
-                        {formatRupiah(lap.totalDana.toString())}
-                      </td>
-                      <td className="px-4 py-3 text-slate-500">{lap.items.length} item</td>
-                      <td className="px-4 py-3">
-                        <span className={`badge ${cfg.color}`}>{cfg.label}</span>
-                      </td>
-                      <td className="px-4 py-3">
-                        {lap._count.aduan > 0 ? (
-                          <span className="badge bg-red-100 text-red-700">
-                            {lap._count.aduan} aduan
-                          </span>
-                        ) : (
-                          <span className="text-slate-300">—</span>
-                        )}
-                      </td>
-                      <td className="px-4 py-3">
-                        <AdminLaporanActions
-                          laporanId={lap.id}
-                          currentStatus={lap.status}
-                        />
-                      </td>
-                    </tr>
-                  );
+                  // Serialize data karena akan dilempar ke Client Component (LaporanRowAdmin)
+                  // Mencegah error "Decimal objects are not supported"
+                  const serializedLap = JSON.parse(JSON.stringify(lap));
+
+                  return <LaporanRowAdmin key={lap.id} lap={serializedLap} />;
                 })
               )}
             </tbody>
