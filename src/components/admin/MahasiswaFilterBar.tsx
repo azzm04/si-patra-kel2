@@ -22,16 +22,15 @@ export default function MahasiswaFilterBar() {
         router.replace(`${pathname}?${params.toString()}`);
       });
     },
-    [router, pathname, searchParams]
+    [router, pathname, searchParams],
   );
 
   return (
     <div className="card p-4">
       <div className="flex flex-wrap gap-3">
-        {/* Search Input — langsung filter saat mengetik */}
         <div className="relative flex-1 min-w-48">
           {isPending ? (
-            <Loader2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 animate-spin" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           ) : (
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           )}
@@ -43,7 +42,6 @@ export default function MahasiswaFilterBar() {
           />
         </div>
 
-        {/* Status Select — langsung filter saat berubah */}
         <select
           defaultValue={searchParams.get("status") ?? ""}
           onChange={(e) => updateParams("status", e.target.value)}
