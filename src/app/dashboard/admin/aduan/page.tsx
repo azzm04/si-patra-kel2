@@ -116,7 +116,7 @@ export default async function AdminAduanPage({
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <h3 className="font-semibold text-slate-900">{a.judul}</h3>
+                      <h3 className="font-semibold text-slate-900 break-words line-clamp-2">{a.judul}</h3>
                       <span className={`badge ${cfg.color}`}>{cfg.label}</span>
                     </div>
                     <p className="text-xs text-slate-400 mt-1">
@@ -130,7 +130,7 @@ export default async function AdminAduanPage({
                   <AdminAduanActions aduanId={a.id} currentStatus={a.status} />
                 </div>
 
-                <p className="text-sm text-slate-700 leading-relaxed">{a.deskripsi}</p>
+                <p className="text-sm text-slate-700 leading-relaxed break-words whitespace-pre-wrap">{a.deskripsi}</p>
 
                 {a.buktiUrl && (
                   <a

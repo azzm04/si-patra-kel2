@@ -1,7 +1,8 @@
 // src/components/admin/AdminAduanActions.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { CheckCircle, XCircle, Loader, ChevronDown } from "lucide-react";
 
 interface Props {
@@ -26,6 +27,11 @@ export default function AdminAduanActions({ aduanId, currentStatus }: Props) {
   const [loading,   setLoading]   = useState(false);
   const [catatan,   setCatatan]   = useState("");
   const [showModal, setShowModal] = useState<TargetStatus | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const actions = actionMap[currentStatus] ?? [];
   if (actions.length === 0) return <span className="text-xs text-slate-300">—</span>;
@@ -78,8 +84,8 @@ export default function AdminAduanActions({ aduanId, currentStatus }: Props) {
         ))}
       </div>
 
-      {showModal && (
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      {showModal && mounted && createPortal(
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[9999] flex items-center justify-center p-4">
           <div className="bg-white rounded-xl shadow-xl max-w-sm w-full p-6">
             <h3 className="font-semibold text-slate-900 mb-1">
               {modalLabels[showModal].title}
@@ -104,7 +110,8 @@ export default function AdminAduanActions({ aduanId, currentStatus }: Props) {
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
