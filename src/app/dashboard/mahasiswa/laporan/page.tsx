@@ -34,7 +34,7 @@ export default async function MahasiswaLaporanPage() {
 
   return (
     <div className="space-y-5">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between animate-fade-in-up" style={{ animationFillMode: "both" }}>
         <div>
           <h1 className="text-xl font-bold text-slate-900">Laporan Saya</h1>
           <p className="text-sm text-slate-500 mt-0.5">
@@ -61,7 +61,7 @@ export default async function MahasiswaLaporanPage() {
       </div>
 
       {laporan.length === 0 ? (
-        <div className="card text-center py-14">
+        <div className="card text-center py-14 animate-fade-in-up" style={{ animationDelay: "100ms", animationFillMode: "both" }}>
           <FileText className="w-12 h-12 text-slate-200 mx-auto mb-3" />
           <p className="font-medium text-slate-600">Belum ada laporan</p>
           <p className="text-sm text-slate-400 mt-1">
@@ -82,10 +82,11 @@ export default async function MahasiswaLaporanPage() {
                 Draf ({grouped.DRAF.length})
               </h2>
               <div className="space-y-2">
-                {grouped.DRAF.map((lap) => (
+                {grouped.DRAF.map((lap, idx) => (
                   <div
                     key={lap.id}
-                    className="card flex items-center gap-4 py-4 hover:shadow-card-hover transition-shadow"
+                    className="card flex items-center gap-4 py-4 hover:shadow-card-hover transition-shadow animate-fade-in-up"
+                    style={{ animationDelay: `${100 + idx * 50}ms`, animationFillMode: "both" }}
                   >
                     <div className="flex-1 min-w-0">
                       <p className="font-medium text-slate-900">
@@ -129,8 +130,8 @@ export default async function MahasiswaLaporanPage() {
                 Menunggu Validasi ({grouped.TERKIRIM.length})
               </h2>
               <div className="space-y-2">
-                {grouped.TERKIRIM.map((lap) => (
-                  <LaporanRow key={lap.id} lap={lap} />
+                {grouped.TERKIRIM.map((lap, idx) => (
+                  <LaporanRow key={lap.id} lap={lap} delay={`${100 + idx * 50}ms`} />
                 ))}
               </div>
             </section>
@@ -142,8 +143,8 @@ export default async function MahasiswaLaporanPage() {
                 Ditolak – Perlu Revisi ({grouped.DITOLAK.length})
               </h2>
               <div className="space-y-2">
-                {grouped.DITOLAK.map((lap) => (
-                  <LaporanRow key={lap.id} lap={lap} highlight="red" />
+                {grouped.DITOLAK.map((lap, idx) => (
+                  <LaporanRow key={lap.id} lap={lap} highlight="red" delay={`${100 + idx * 50}ms`} />
                 ))}
               </div>
             </section>
@@ -155,8 +156,8 @@ export default async function MahasiswaLaporanPage() {
                 Tervalidasi ({grouped.DIVALIDASI.length})
               </h2>
               <div className="space-y-2">
-                {grouped.DIVALIDASI.map((lap) => (
-                  <LaporanRow key={lap.id} lap={lap} highlight="green" />
+                {grouped.DIVALIDASI.map((lap, idx) => (
+                  <LaporanRow key={lap.id} lap={lap} highlight="green" delay={`${100 + idx * 50}ms`} />
                 ))}
               </div>
             </section>
@@ -171,9 +172,11 @@ export default async function MahasiswaLaporanPage() {
 function LaporanRow({
   lap,
   highlight,
+  delay = "100ms",
 }: {
   lap: any;
   highlight?: "red" | "green";
+  delay?: string;
 }) {
   const cfg =
     statusLaporanConfig[lap.status as keyof typeof statusLaporanConfig];
@@ -187,7 +190,8 @@ function LaporanRow({
   return (
     <Link
       href={`/dashboard/mahasiswa/laporan/${lap.id}`}
-      className={`card flex items-center gap-4 py-4 hover:shadow-card-hover transition-shadow group ${border}`}
+      className={`card flex items-center gap-4 py-4 hover:shadow-card-hover transition-shadow group ${border} animate-fade-in-up`}
+      style={{ animationDelay: delay, animationFillMode: "both" }}
     >
       <div className="flex-1 min-w-0">
         <p className="font-medium text-slate-900 group-hover:text-primary-700 transition-colors">

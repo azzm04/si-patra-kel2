@@ -35,6 +35,8 @@ export default async function EditLaporanPage({
 
   return (
     // Lempar data yang sudah diserialisasi
-    <EditLaporanForm initialData={serializedLaporan} />
+    <div className="animate-fade-in-up" style={{ animationFillMode: "both" }}>
+      <EditLaporanForm initialData={serializedLaporan} />
+    </div>
   );
 }

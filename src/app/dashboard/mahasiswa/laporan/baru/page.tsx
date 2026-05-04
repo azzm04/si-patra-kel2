@@ -138,7 +138,7 @@ export default function BuatLaporanPage() {
 
   return (
     <div className="max-w-2xl space-y-5">
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 animate-fade-in-up" style={{ animationFillMode: "both" }}>
         <Link
           href="/dashboard/mahasiswa/laporan"
           className="btn-secondary btn-sm"
@@ -161,7 +161,7 @@ export default function BuatLaporanPage() {
         </div>
       )}
 
-      <div className="card space-y-4">
+      <div className="card space-y-4 animate-fade-in-up" style={{ animationDelay: "100ms", animationFillMode: "both" }}>
         <h2 className="font-semibold text-slate-800">Informasi Laporan</h2>
 
         <div>
@@ -211,7 +211,7 @@ export default function BuatLaporanPage() {
         </div>
       </div>
 
-      <div className="card space-y-4">
+      <div className="card space-y-4 animate-fade-in-up" style={{ animationDelay: "200ms", animationFillMode: "both" }}>
         <div className="flex items-center justify-between">
           <h2 className="font-semibold text-slate-800">
             Rincian Penggunaan Dana
@@ -328,7 +328,7 @@ export default function BuatLaporanPage() {
         </div>
       </div>
 
-      <div className="flex gap-3">
+      <div className="flex gap-3 animate-fade-in-up" style={{ animationDelay: "300ms", animationFillMode: "both" }}>
         <button
           onClick={() => handleSubmit("DRAF")}
           disabled={!!loading}

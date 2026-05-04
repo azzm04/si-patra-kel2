@@ -31,5 +31,9 @@ export default async function BuatAduanPage() {
     label: `${l.mahasiswa.user.name} (${l.mahasiswa.beasiswa.nama})`,
   }));
 
-  return <BuatAduanForm laporanOptions={options} />;
+  return (
+    <div className="animate-fade-in-up" style={{ animationFillMode: "both" }}>
+      <BuatAduanForm laporanOptions={options} />
+    </div>
+  );
 }

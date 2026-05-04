@@ -89,7 +89,7 @@ export default async function DetailLaporanPage({
 
   return (
     <div className="max-w-3xl space-y-5">
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 animate-fade-in-up" style={{ animationFillMode: "both" }}>
         <Link href="/dashboard/mahasiswa/laporan" className="btn-secondary btn-sm">
           <ArrowLeft className="w-4 h-4" />
         </Link>
@@ -177,7 +177,7 @@ export default async function DetailLaporanPage({
       )}
 
       <div className="grid lg:grid-cols-3 gap-5">
-        <div className="lg:col-span-2 space-y-4">
+        <div className="lg:col-span-2 space-y-4 animate-fade-in-up" style={{ animationDelay: "100ms", animationFillMode: "both" }}>
           <div className="card">
             <div className="flex items-center justify-between mb-4">
               <h2 className="font-semibold text-slate-900">
@@ -244,7 +244,7 @@ export default async function DetailLaporanPage({
           )}
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-4 animate-fade-in-up" style={{ animationDelay: "200ms", animationFillMode: "both" }}>
           <div className="card">
             <h2 className="font-semibold text-slate-900 mb-3">
               Distribusi Kategori

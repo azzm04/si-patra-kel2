@@ -33,7 +33,7 @@ export default async function AdminBeasiswaPage() {
 
   return (
     <div className="space-y-5">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between animate-fade-in-up" style={{ animationFillMode: "both" }}>
         <div>
           <h1 className="text-xl font-bold text-slate-900">Manajemen Beasiswa</h1>
           <p className="text-sm text-slate-500 mt-0.5">
@@ -50,8 +50,12 @@ export default async function AdminBeasiswaPage() {
             <p className="text-sm text-slate-400">Belum ada data beasiswa</p>
           </div>
         ) : (
-          beasiswaWithStats.map((b) => (
-            <div key={b.id} className="card space-y-4 hover:shadow-card-hover transition-shadow">
+          beasiswaWithStats.map((b, idx) => (
+            <div 
+              key={b.id} 
+              className="card space-y-4 hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 animate-fade-in-up group"
+              style={{ animationDelay: `${100 + idx * 75}ms`, animationFillMode: "both" }}
+            >
               <div className="flex items-start justify-between">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
@@ -99,7 +103,7 @@ export default async function AdminBeasiswaPage() {
                   return (
                     <div
                       key={s.label}
-                      className="p-2 rounded-lg bg-slate-50 border border-slate-100"
+                      className="p-2 rounded-lg bg-slate-50 border border-slate-100 transition-colors group-hover:bg-white group-hover:border-slate-200"
                     >
                       <Icon className="w-3.5 h-3.5 text-slate-400 mx-auto mb-1" />
                       <p className="text-lg font-bold text-slate-800">{s.value}</p>

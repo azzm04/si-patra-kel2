@@ -64,22 +64,22 @@ export default async function AdminDashboard() {
 
   return (
     <div className="space-y-6">
-      <div>
+      <div className="animate-fade-in-up" style={{ animationFillMode: "both" }}>
         <h1 className="text-xl font-bold text-slate-900">Dashboard Admin</h1>
         <p className="text-sm text-slate-500 mt-0.5">Ringkasan pengawasan dana beasiswa</p>
       </div>
 
       {(laporanPending > 0 || aduanPending > 0) && (
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-3 animate-fade-in-up" style={{ animationDelay: "100ms", animationFillMode: "both" }}>
           {laporanPending > 0 && (
-            <div className="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-lg px-4 py-2.5 text-sm text-amber-800">
-              <Clock className="w-4 h-4" />
+            <div className="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-lg px-4 py-2.5 text-sm text-amber-800 shadow-sm transition-transform hover:scale-[1.02]">
+              <Clock className="w-4 h-4 animate-pulse" />
               <span><strong>{laporanPending}</strong> laporan menunggu validasi</span>
             </div>
           )}
           {aduanPending > 0 && (
-            <div className="flex items-center gap-2 bg-red-50 border border-red-200 rounded-lg px-4 py-2.5 text-sm text-red-800">
-              <AlertTriangle className="w-4 h-4" />
+            <div className="flex items-center gap-2 bg-red-50 border border-red-200 rounded-lg px-4 py-2.5 text-sm text-red-800 shadow-sm transition-transform hover:scale-[1.02]">
+              <AlertTriangle className="w-4 h-4 animate-pulse" />
               <span><strong>{aduanPending}</strong> aduan baru perlu ditinjau</span>
             </div>
           )}
@@ -87,16 +87,20 @@ export default async function AdminDashboard() {
       )}
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {stats.map((stat) => {
+        {stats.map((stat, idx) => {
           const Icon = stat.icon;
           return (
-            <div key={stat.label} className="card">
+            <div 
+              key={stat.label} 
+              className="card animate-fade-in-up transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover cursor-default group"
+              style={{ animationDelay: `${150 + idx * 75}ms`, animationFillMode: "both" }}
+            >
               <div className="flex items-start justify-between">
                 <div>
-                  <p className="text-sm text-slate-500">{stat.label}</p>
+                  <p className="text-sm text-slate-500 group-hover:text-slate-600 transition-colors">{stat.label}</p>
                   <p className="text-3xl font-bold text-slate-900 mt-1">{stat.value}</p>
                 </div>
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${stat.color}`}>
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 ${stat.color}`}>
                   <Icon className="w-5 h-5" />
                 </div>
               </div>
@@ -106,10 +110,10 @@ export default async function AdminDashboard() {
       </div>
 
       <div className="grid lg:grid-cols-2 gap-6">
-        <div className="card">
+        <div className="card animate-fade-in-up" style={{ animationDelay: "450ms", animationFillMode: "both" }}>
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-semibold text-slate-900">Laporan Terbaru</h2>
-            <a href="/dashboard/admin/laporan" className="text-xs text-primary-600 hover:underline">
+            <a href="/dashboard/admin/laporan" className="text-xs text-primary-600 hover:underline hover:text-primary-700 transition-colors">
               Lihat semua
             </a>
           </div>
@@ -117,15 +121,18 @@ export default async function AdminDashboard() {
             {recentLaporan.length === 0 ? (
               <p className="text-sm text-slate-400 py-4 text-center">Belum ada laporan</p>
             ) : (
-              recentLaporan.map((lap) => {
+              recentLaporan.map((lap, idx) => {
                 const cfg = statusLaporanConfig[lap.status];
                 return (
-                  <div key={lap.id} className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-50 transition-colors">
+                  <div 
+                    key={lap.id} 
+                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-50 transition-all duration-200 hover:translate-x-1 group cursor-pointer border border-transparent hover:border-slate-100"
+                  >
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-slate-900 truncate">
+                      <p className="text-sm font-medium text-slate-900 truncate group-hover:text-primary-700 transition-colors">
                         {lap.mahasiswa.user.name}
                       </p>
-                      <p className="text-xs text-slate-400 mt-0.5">
+                      <p className="text-xs text-slate-400 mt-0.5 transition-colors group-hover:text-slate-500">
                         {lap.semester} · {lap.mahasiswa.beasiswa.nama}
                       </p>
                     </div>
@@ -142,10 +149,10 @@ export default async function AdminDashboard() {
           </div>
         </div>
 
-        <div className="card">
+        <div className="card animate-fade-in-up" style={{ animationDelay: "550ms", animationFillMode: "both" }}>
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-semibold text-slate-900">Aduan Terbaru</h2>
-            <a href="/dashboard/admin/aduan" className="text-xs text-primary-600 hover:underline">
+            <a href="/dashboard/admin/aduan" className="text-xs text-primary-600 hover:underline hover:text-primary-700 transition-colors">
               Lihat semua
             </a>
           </div>
@@ -156,10 +163,13 @@ export default async function AdminDashboard() {
               recentAduan.map((aduan) => {
                 const cfg = statusAduanConfig[aduan.status];
                 return (
-                  <div key={aduan.id} className="flex items-start gap-3 p-3 rounded-lg hover:bg-slate-50 transition-colors">
+                  <div 
+                    key={aduan.id} 
+                    className="flex items-start gap-3 p-3 rounded-lg hover:bg-slate-50 transition-all duration-200 hover:translate-x-1 group cursor-pointer border border-transparent hover:border-slate-100"
+                  >
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-slate-900 truncate">{aduan.judul}</p>
-                      <p className="text-xs text-slate-400 mt-0.5">
+                      <p className="text-sm font-medium text-slate-900 truncate group-hover:text-primary-700 transition-colors">{aduan.judul}</p>
+                      <p className="text-xs text-slate-400 mt-0.5 transition-colors group-hover:text-slate-500">
                         {aduan.pelapor?.name ?? "Anonim"} · {formatDateTime(aduan.createdAt)}
                       </p>
                     </div>

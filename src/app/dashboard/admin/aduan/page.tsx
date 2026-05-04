@@ -1,7 +1,7 @@
 // src/app/dashboard/admin/aduan/page.tsx
 import { prisma } from "@/lib/prisma";
 import { formatDateTime, statusAduanConfig } from "@/lib/utils";
-import { AlertTriangle, ExternalLink } from "lucide-react";
+import { AlertTriangle, ExternalLink, Clock, RefreshCw, CheckCircle, XCircle } from "lucide-react";
 import AdminAduanActions from "@/components/admin/AdminAduanActions";
 
 interface SearchParams { status?: string }
@@ -50,7 +50,7 @@ export default async function AdminAduanPage({
 
   return (
     <div className="space-y-5">
-      <div>
+      <div className="animate-fade-in-up" style={{ animationFillMode: "both" }}>
         <h1 className="text-xl font-bold text-slate-900">Manajemen Aduan</h1>
         <p className="text-sm text-slate-500 mt-0.5">
           Tinjau dan proses laporan indikasi penyalahgunaan dana
@@ -59,20 +59,30 @@ export default async function AdminAduanPage({
 
       <div className="grid grid-cols-4 gap-3">
         {[
-          { label: "Menunggu", value: counts.menunggu, color: "bg-yellow-50 text-yellow-700 border-yellow-200" },
-          { label: "Diproses", value: counts.diproses, color: "bg-blue-50 text-blue-700 border-blue-200" },
-          { label: "Selesai",  value: counts.selesai,  color: "bg-green-50 text-green-700 border-green-200" },
-          { label: "Ditolak",  value: counts.ditolak,  color: "bg-red-50 text-red-700 border-red-200" },
-        ].map((s) => (
-          <div key={s.label} className={`card py-3 text-center border ${s.color}`}>
-            <p className="text-2xl font-bold">{s.value}</p>
-            <p className="text-xs mt-0.5">{s.label}</p>
-          </div>
-        ))}
+          { label: "Menunggu", value: counts.menunggu, icon: Clock, color: "bg-yellow-50 text-yellow-700 border-yellow-200" },
+          { label: "Diproses", value: counts.diproses, icon: RefreshCw, color: "bg-blue-50 text-blue-700 border-blue-200" },
+          { label: "Selesai",  value: counts.selesai,  icon: CheckCircle, color: "bg-green-50 text-green-700 border-green-200" },
+          { label: "Ditolak",  value: counts.ditolak,  icon: XCircle, color: "bg-red-50 text-red-700 border-red-200" },
+        ].map((s, idx) => {
+          const Icon = s.icon;
+          return (
+            <div 
+              key={s.label} 
+              className={`card py-3 flex flex-col items-center justify-center border ${s.color} animate-fade-in-up transition-transform duration-300 hover:-translate-y-1 hover:shadow-card-hover cursor-default group`}
+              style={{ animationDelay: `${100 + idx * 50}ms`, animationFillMode: "both" }}
+            >
+              <div className="flex items-center gap-2">
+                <Icon className="w-5 h-5 opacity-70 group-hover:scale-110 group-hover:opacity-100 transition-all duration-300" />
+                <p className="text-2xl font-bold">{s.value}</p>
+              </div>
+              <p className="text-xs font-medium mt-1">{s.label}</p>
+            </div>
+          );
+        })}
       </div>
 
 
-      <div className="flex gap-1 bg-slate-100 p-1 rounded-lg w-fit">
+      <div className="flex gap-1 bg-slate-100 p-1 rounded-lg w-fit animate-fade-in-up" style={{ animationDelay: "300ms", animationFillMode: "both" }}>
         {statusOptions.map((opt) => (
           <a
             key={opt.value}
@@ -95,10 +105,14 @@ export default async function AdminAduanPage({
             <p className="text-sm text-slate-400">Tidak ada aduan ditemukan</p>
           </div>
         ) : (
-          aduan.map((a) => {
+          aduan.map((a, idx) => {
             const cfg = statusAduanConfig[a.status];
             return (
-              <div key={a.id} className="card space-y-3">
+              <div 
+                key={a.id} 
+                className="card space-y-3 animate-fade-in-up transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover border border-transparent hover:border-slate-200"
+                style={{ animationDelay: `${400 + idx * 50}ms`, animationFillMode: "both" }}
+              >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">

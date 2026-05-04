@@ -50,7 +50,7 @@ export default async function PelaporAduanPage() {
 
   return (
     <div className="space-y-5">
-      <div className="flex items-start justify-between">
+      <div className="flex items-start justify-between animate-fade-in-up" style={{ animationFillMode: "both" }}>
         <div>
           <h1 className="text-xl font-bold text-slate-900">Aduan Saya</h1>
           <p className="text-sm text-slate-500 mt-0.5">
@@ -69,15 +69,15 @@ export default async function PelaporAduanPage() {
           { label: "Menunggu", value: counts.menunggu, color: "bg-yellow-50 text-yellow-700 border-yellow-200" },
           { label: "Diproses", value: counts.diproses, color: "bg-blue-50   text-blue-700   border-blue-200"   },
           { label: "Selesai",  value: counts.selesai,  color: "bg-green-50  text-green-700  border-green-200"  },
-        ].map((s) => (
-          <div key={s.label} className={`rounded-xl border p-4 text-center ${s.color}`}>
+        ].map((s, idx) => (
+          <div key={s.label} className={`rounded-xl border p-4 text-center ${s.color} animate-fade-in-up`} style={{ animationDelay: `${100 + idx * 50}ms`, animationFillMode: "both" }}>
             <p className="text-2xl font-bold">{s.value}</p>
             <p className="text-xs mt-0.5">{s.label}</p>
           </div>
         ))}
       </div>
 
-      <div className="flex gap-3 p-4 rounded-xl bg-amber-50 border border-amber-200">
+      <div className="flex gap-3 p-4 rounded-xl bg-amber-50 border border-amber-200 animate-fade-in-up" style={{ animationDelay: "300ms", animationFillMode: "both" }}>
         <AlertTriangle className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
         <div className="text-sm text-amber-700">
           <p className="font-semibold">Kerahasiaan Identitas</p>
@@ -89,7 +89,7 @@ export default async function PelaporAduanPage() {
       </div>
 
       {aduan.length === 0 ? (
-        <div className="card text-center py-14">
+        <div className="card text-center py-14 animate-fade-in-up" style={{ animationDelay: "400ms", animationFillMode: "both" }}>
           <AlertTriangle className="w-12 h-12 text-slate-200 mx-auto mb-3" />
           <p className="font-medium text-slate-600">Belum ada aduan</p>
           <p className="text-sm text-slate-400 mt-1">
@@ -113,7 +113,8 @@ export default async function PelaporAduanPage() {
             return (
               <div
                 key={a.id}
-                className="card hover:shadow-card-hover transition-shadow space-y-3"
+                className="card hover:shadow-card-hover transition-shadow space-y-3 animate-fade-in-up"
+                style={{ animationDelay: "400ms", animationFillMode: "both" }}
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-start gap-3 flex-1 min-w-0">
