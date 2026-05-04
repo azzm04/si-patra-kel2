@@ -1,7 +1,8 @@
 // src/components/admin/BeasiswaForm.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { PlusCircle, Pencil, X } from "lucide-react";
 
 type Mode = "create" | "edit";
@@ -34,6 +35,12 @@ export default function BeasiswaForm({ mode, beasiswa }: Props) {
   const [open,    setOpen]    = useState(false);
   const [loading, setLoading] = useState(false);
   const [error,   setError]   = useState("");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const [form, setForm] = useState(
     mode === "edit" && beasiswa
       ? {
@@ -107,8 +114,8 @@ export default function BeasiswaForm({ mode, beasiswa }: Props) {
         </button>
       )}
 
-      {open && (
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      {open && mounted && createPortal(
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[9999] flex items-center justify-center p-4">
           <div className="bg-white rounded-xl shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between p-6 border-b border-slate-100">
               <h3 className="font-semibold text-slate-900">
@@ -236,7 +243,8 @@ export default function BeasiswaForm({ mode, beasiswa }: Props) {
               </div>
             </form>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
