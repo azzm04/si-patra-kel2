@@ -10,7 +10,7 @@ export default auth((req) => {
   if (pathname.startsWith("/auth")) return NextResponse.next();
 
   // Not logged in
-  if (!session) {
+  if (!session || !session.user) {
     return NextResponse.redirect(new URL("/auth/login", req.url));
   }
 

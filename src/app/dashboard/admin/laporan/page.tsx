@@ -51,7 +51,6 @@ export default async function AdminLaporanPage({
             ],
           }
         : {}),
-        status: { not: "DRAF" },
     },
     include: {
       mahasiswa: {
@@ -75,14 +74,14 @@ export default async function AdminLaporanPage({
 
   return (
     <div className="space-y-5">
-      <div>
+      <div className="animate-fade-in-up" style={{ animationFillMode: "both" }}>
         <h1 className="text-xl font-bold text-slate-900">Manajemen Laporan</h1>
         <p className="text-sm text-slate-500 mt-0.5">
           Validasi laporan penggunaan dana beasiswa ({laporan.length} laporan)
         </p>
       </div>
 
-      <div className="card p-4">
+      <div className="card p-4 animate-fade-in-up" style={{ animationDelay: "100ms", animationFillMode: "both" }}>
         <form className="flex flex-wrap gap-3">
           <div className="relative flex-1 min-w-48">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -111,7 +110,7 @@ export default async function AdminLaporanPage({
         </form>
       </div>
 
-      <div className="card p-0 overflow-hidden">
+      <div className="card p-0 overflow-hidden animate-fade-in-up" style={{ animationDelay: "200ms", animationFillMode: "both" }}>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>

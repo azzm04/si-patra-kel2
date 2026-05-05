@@ -133,7 +133,7 @@ model ItemLaporan {
   id            String            @id @default(uuid())
   deskripsi     String
   nominal       Decimal           @db.Decimal(15, 2)
-  kategori      String
+  kategori      KategoriItem
 
   laporanId     String
   laporan       LaporanPenggunaan @relation(fields: [laporanId], references: [id], onDelete: Cascade)

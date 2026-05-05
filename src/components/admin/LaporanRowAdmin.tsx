@@ -1,7 +1,8 @@
 // src/components/admin/LaporanRowAdmin.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
 import { formatRupiah } from "@/lib/utils";
 import { CheckCircle, XCircle, Eye, X } from "lucide-react";
@@ -10,7 +11,12 @@ export default function LaporanRowAdmin({ lap }: { lap: any }) {
   const router = useRouter();
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const totalNum = Number(lap.totalDana);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Fungsi untuk memanggil API
   async function handleAction(action: "validasi" | "tolak", catatan?: string) {
@@ -116,9 +122,9 @@ export default function LaporanRowAdmin({ lap }: { lap: any }) {
       </tr>
 
       {/* MODAL (Hanya muncul jika showDetailModal bernilai true) */}
-      {showDetailModal && (
+      {showDetailModal && mounted && createPortal(
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm"
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm"
           onClick={() => setShowDetailModal(false)}
         >
           <div
@@ -219,7 +225,8 @@ export default function LaporanRowAdmin({ lap }: { lap: any }) {
               </div>
             )}
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );

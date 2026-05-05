@@ -46,7 +46,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex">
-      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-navy-950 via-primary-900 to-primary-800 flex-col justify-between p-12">
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-navy-950 via-primary-900 to-primary-800 flex-col justify-between p-12 animate-fade-in-up" style={{ animationFillMode: "both" }}>
         <div>
           <div className="flex items-center gap-3 mb-16">
             <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
@@ -78,7 +78,7 @@ export default function LoginPage() {
         </div>
       </div>
 
-      <div className="flex-1 flex items-center justify-center p-8">
+      <div className="flex-1 flex items-center justify-center p-8 animate-fade-in-up" style={{ animationDelay: "200ms", animationFillMode: "both" }}>
         <div className="w-full max-w-md">
           <div className="flex items-center gap-2 mb-8 lg:hidden">
             <ShieldCheck className="w-6 h-6 text-primary-600" />

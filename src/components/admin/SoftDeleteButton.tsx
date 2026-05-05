@@ -1,7 +1,8 @@
 // src/components/admin/SoftDeleteButton.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { UserX, UserCheck, AlertTriangle } from "lucide-react";
 
 interface Props {
@@ -11,8 +12,12 @@ interface Props {
 }
 
 export default function SoftDeleteButton({ userId, isActive, userName }: Props) {
-  const [loading,    setLoading]    = useState(false);
-  const [showModal,  setShowModal]  = useState(false);
+  const [loading,   setLoading]   = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [mounted,   setMounted]   = useState(false);
+
+  // Perlu mounted agar createPortal hanya berjalan di client-side
+  useEffect(() => { setMounted(true); }, []);
 
   async function handleAction() {
     setLoading(true);
@@ -29,6 +34,67 @@ export default function SoftDeleteButton({ userId, isActive, userName }: Props) 
     window.location.reload();
   }
 
+  // Modal di-render via Portal langsung ke document.body
+  // agar tidak terclip oleh overflow:hidden di dalam tabel
+  const modal = showModal && mounted && createPortal(
+    <div
+      className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9999] flex items-center justify-center p-4"
+      onClick={(e) => { if (e.target === e.currentTarget) setShowModal(false); }}
+    >
+      <div className="bg-white rounded-xl shadow-2xl max-w-sm w-full p-6 animate-fade-in-up">
+        <div className="flex items-start gap-3 mb-4">
+          <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${isActive ? "bg-red-100" : "bg-green-100"}`}>
+            <AlertTriangle className={`w-5 h-5 ${isActive ? "text-red-600" : "text-green-600"}`} />
+          </div>
+          <div>
+            <h3 className="font-semibold text-slate-900">
+              {isActive ? "Nonaktifkan Akun" : "Aktifkan Akun"}
+            </h3>
+            <p className="text-sm text-slate-500 mt-1">
+              {isActive
+                ? `Akun ${userName} akan dinonaktifkan (soft delete). Mahasiswa tidak bisa login, namun data tetap tersimpan.`
+                : `Akun ${userName} akan diaktifkan kembali dan dapat login kembali.`}
+            </p>
+          </div>
+        </div>
+
+        {isActive && (
+          <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 mb-4">
+            <p className="text-xs text-amber-700">
+              Pastikan ada alasan yang valid sebelum menonaktifkan akun penerima beasiswa.
+            </p>
+          </div>
+        )}
+
+        <div className="flex gap-2 justify-end">
+          <button
+            onClick={() => setShowModal(false)}
+            className="btn-secondary btn-sm"
+            disabled={loading}
+          >
+            Batal
+          </button>
+          <button
+            onClick={handleAction}
+            disabled={loading}
+            className={
+              isActive
+                ? "btn-danger btn-sm"
+                : "btn btn-sm bg-green-600 text-white hover:bg-green-700 focus:ring-green-500 px-3 py-1.5 text-xs"
+            }
+          >
+            {loading
+              ? "Memproses..."
+              : isActive
+              ? "Ya, Nonaktifkan"
+              : "Ya, Aktifkan"}
+          </button>
+        </div>
+      </div>
+    </div>,
+    document.body
+  );
+
   return (
     <>
       <button
@@ -43,59 +109,7 @@ export default function SoftDeleteButton({ userId, isActive, userName }: Props) 
         {isActive ? <UserX className="w-3.5 h-3.5" /> : <UserCheck className="w-3.5 h-3.5" />}
       </button>
 
-      {showModal && (
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl shadow-xl max-w-sm w-full p-6">
-            <div className="flex items-start gap-3 mb-4">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${isActive ? "bg-red-100" : "bg-green-100"}`}>
-                <AlertTriangle className={`w-5 h-5 ${isActive ? "text-red-600" : "text-green-600"}`} />
-              </div>
-              <div>
-                <h3 className="font-semibold text-slate-900">
-                  {isActive ? "Nonaktifkan Akun" : "Aktifkan Akun"}
-                </h3>
-                <p className="text-sm text-slate-500 mt-1">
-                  {isActive
-                    ? `Akun ${userName} akan dinonaktifkan (soft delete). Mahasiswa tidak bisa login, namun data tetap tersimpan.`
-                    : `Akun ${userName} akan diaktifkan kembali dan dapat login kembali.`}
-                </p>
-              </div>
-            </div>
-
-            {isActive && (
-              <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 mb-4">
-                <p className="text-xs text-amber-700">
-                  Pastikan ada alasan yang valid sebelum menonaktifkan akun penerima beasiswa.
-                </p>
-              </div>
-            )}
-
-            <div className="flex gap-2 justify-end">
-              <button
-                onClick={() => setShowModal(false)}
-                className="btn-secondary btn-sm"
-              >
-                Batal
-              </button>
-              <button
-                onClick={handleAction}
-                disabled={loading}
-                className={
-                  isActive
-                    ? "btn-danger btn-sm"
-                    : "btn btn-sm bg-green-600 text-white hover:bg-green-700 focus:ring-green-500 px-3 py-1.5 text-xs"
-                }
-              >
-                {loading
-                  ? "Memproses..."
-                  : isActive
-                  ? "Ya, Nonaktifkan"
-                  : "Ya, Aktifkan"}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {modal}
     </>
   );
 }

@@ -38,7 +38,7 @@ export default async function MahasiswaDashboard() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-start justify-between">
+      <div className="flex items-start justify-between animate-fade-in-up" style={{ animationFillMode: "both" }}>
         <div>
           <h1 className="text-xl font-bold text-slate-900">Dashboard Mahasiswa</h1>
           <p className="text-sm text-slate-500 mt-0.5">Pantau laporan penggunaan dana beasiswa Anda</p>
@@ -49,7 +49,7 @@ export default async function MahasiswaDashboard() {
         </Link>
       </div>
 
-      <div className="card bg-gradient-to-br from-primary-600 to-primary-800 text-white border-0">
+      <div className="card bg-gradient-to-br from-primary-600 to-primary-800 text-white border-0 animate-fade-in-up" style={{ animationDelay: "100ms", animationFillMode: "both" }}>
         <div className="flex items-start justify-between">
           <div>
             <p className="text-primary-200 text-xs font-medium uppercase tracking-widest">Program Beasiswa</p>
@@ -76,10 +76,10 @@ export default async function MahasiswaDashboard() {
           { label: "Tervalidasi",     value: laporanValidasi, icon: CheckCircle,  color: "bg-green-50 text-green-600" },
           { label: "Menunggu",        value: laporanPending,  icon: Clock,        color: "bg-amber-50 text-amber-600" },
           { label: "Total Dicairkan", value: formatRupiah(totalDicairkan), icon: AlertCircle, color: "bg-blue-50 text-blue-600", isRupiah: true },
-        ].map((s) => {
+        ].map((s, idx) => {
           const Icon = s.icon;
           return (
-            <div key={s.label} className="card">
+            <div key={s.label} className="card animate-fade-in-up" style={{ animationDelay: `${200 + idx * 50}ms`, animationFillMode: "both" }}>
               <div className={`w-8 h-8 rounded-lg flex items-center justify-center mb-2 ${s.color}`}>
                 <Icon className="w-4 h-4" />
               </div>
@@ -90,7 +90,7 @@ export default async function MahasiswaDashboard() {
         })}
       </div>
 
-      <div className="card">
+      <div className="card animate-fade-in-up" style={{ animationDelay: "400ms", animationFillMode: "both" }}>
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-semibold text-slate-900">Laporan Saya</h2>
           <Link href="/dashboard/mahasiswa/laporan" className="text-xs text-primary-600 hover:underline">

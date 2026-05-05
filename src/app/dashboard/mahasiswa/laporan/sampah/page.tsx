@@ -27,7 +27,7 @@ export default async function SampahPage() {
   return (
     <div className="space-y-5">
       {/* Header */}
-      <div>
+      <div className="animate-fade-in-up" style={{ animationFillMode: "both" }}>
         <h1 className="text-xl font-bold text-slate-900 flex items-center gap-2">
           <Link
           href={`/dashboard/mahasiswa/laporan`}
@@ -44,7 +44,7 @@ export default async function SampahPage() {
       </div>
 
       {/* Info banner */}
-      <div className="flex gap-3 p-4 rounded-xl bg-amber-50 border border-amber-200">
+      <div className="flex gap-3 p-4 rounded-xl bg-amber-50 border border-amber-200 animate-fade-in-up" style={{ animationDelay: "100ms", animationFillMode: "both" }}>
         <AlertTriangle className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
         <div className="text-sm text-amber-800">
           <p className="font-semibold">Laporan di sini belum terhapus permanen</p>
@@ -67,10 +67,11 @@ export default async function SampahPage() {
         </div>
       ) : (
         <div className="space-y-3">
-          {laporan.map((lap) => (
+          {laporan.map((lap, idx) => (
             <div
               key={lap.id}
-              className="card border-dashed border-slate-300 opacity-80 hover:opacity-100 transition-opacity"
+              className="card border-dashed border-slate-300 opacity-80 hover:opacity-100 transition-opacity animate-fade-in-up"
+              style={{ animationDelay: `${200 + idx * 50}ms`, animationFillMode: "both" }}
             >
               <div className="flex items-start justify-between gap-4">
                 {/* Info laporan */}
