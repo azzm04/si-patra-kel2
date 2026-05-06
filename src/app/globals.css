@@ -59,7 +59,7 @@
 
   /* Card */
   .card {
-    @apply bg-white rounded-xl border border-slate-100 shadow-card p-6;
+    @apply bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-card p-6;
   }
 
   /* Badge */
@@ -70,12 +70,12 @@
   /* Sidebar nav link */
   .nav-link {
     @apply flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium
-           text-slate-600 hover:bg-slate-100 hover:text-slate-900
+           text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-slate-100
            transition-colors duration-150;
   }
 
   .nav-link-active {
-    @apply nav-link bg-primary-50 text-primary-700 hover:bg-primary-50 hover:text-primary-700;
+    @apply nav-link bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:text-primary-700 dark:hover:text-primary-400;
   }
 }
 

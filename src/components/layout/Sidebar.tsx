@@ -108,20 +108,20 @@ export default function Sidebar({ role, name, email }: SidebarProps) {
 
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 w-70 bg-white border-r border-slate-100 flex flex-col z-50 transform transition-transform duration-300 ease-in-out lg:translate-x-0",
+          "fixed inset-y-0 left-0 w-70 bg-white dark:bg-slate-800 border-r border-slate-100 dark:border-slate-700 flex flex-col z-50 transform transition-transform duration-300 ease-in-out lg:translate-x-0",
           isMobileMenuOpen ? "translate-x-0 shadow-2xl" : "-translate-x-full",
         )}
       >
-        <div className="p-6 border-b border-slate-100 flex items-center justify-between">
+        <div className="p-6 border-b border-slate-100 dark:border-slate-700 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl bg-primary-600 flex items-center justify-center flex-shrink-0 shadow-sm">
               <ShieldCheck className="w-5 h-5 text-white" />
             </div>
             <div>
-              <div className="font-bold text-slate-900 text-sm leading-tight">
+              <div className="font-bold text-slate-900 dark:text-slate-100 text-sm leading-tight">
                 SI-PATRA
               </div>
-              <div className="text-[10px] text-slate-500 leading-tight font-medium mt-0.5">
+              <div className="text-[10px] text-slate-500 dark:text-slate-400 leading-tight font-medium mt-0.5">
                 Transparansi Beasiswa
               </div>
             </div>
@@ -136,7 +136,7 @@ export default function Sidebar({ role, name, email }: SidebarProps) {
         </div>
 
         <nav className="flex-1 p-4 space-y-1.5 overflow-y-auto">
-          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-3 mt-2">
+          <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest px-3 mb-3 mt-2">
             Menu Utama
           </p>
           {navItems.map((item) => {
@@ -162,13 +162,13 @@ export default function Sidebar({ role, name, email }: SidebarProps) {
           })}
         </nav>
 
-        <div className="p-4 border-t border-slate-100 space-y-3 bg-slate-50/50">
+        <div className="p-4 border-t border-slate-100 dark:border-slate-700 space-y-3 bg-slate-50/50 dark:bg-slate-900/30">
           <button
             onClick={() => {
               setIsMobileMenuOpen(false);
               setShowLogoutModal(true);
             }}
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-slate-600 hover:text-red-600 hover:bg-red-50 transition-all font-medium"
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-slate-600 dark:text-slate-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all font-medium"
           >
             <LogOut className="w-4 h-4 text-slate-400" />
             Keluar
