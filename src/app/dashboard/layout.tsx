@@ -13,11 +13,7 @@ export default async function DashboardLayout({
   if (!session) redirect("/auth/login");
 
   return (
-<<<<<<< HEAD
-    <div className="min-h-screen flex bg-slate-50 dark:bg-slate-900">
-=======
     <div className="min-h-screen flex bg-slate-50 dark:bg-slate-950/50">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
       <Sidebar role={session.user.role} name={session.user.name ?? ""} email={session.user.email ?? ""} />
       <div className="flex-1 flex flex-col min-w-0 lg:ml-64">
         <TopBar user={session.user} />
@@ -28,3 +24,4 @@ export default async function DashboardLayout({
     </div>
   );
 }
+

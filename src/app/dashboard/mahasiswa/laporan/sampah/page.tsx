@@ -28,28 +28,17 @@ export default async function SampahPage() {
     <div className="space-y-5">
       {/* Header */}
       <div className="animate-fade-in-up" style={{ animationFillMode: "both" }}>
-<<<<<<< HEAD
-        <h1 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-=======
         <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
           <Link
           href={`/dashboard/mahasiswa/laporan`}
           className="btn-secondary btn-sm"
         >
           <ArrowLeft className="w-4 h-4" />
         </Link>
-<<<<<<< HEAD
-          <Trash2 className="w-5 h-5 text-slate-500" />
-          Sampah
-        </h1>
-        <p className="text-sm text-slate-700 mt-0.5">
-=======
           <Trash2 className="w-5 h-5 text-slate-500 dark:text-slate-400" />
           Sampah
         </h1>
         <p className="text-sm text-slate-700 dark:text-slate-300 mt-0.5">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
           {laporan.length} laporan di sampah
         </p>
       </div>
@@ -71,11 +60,7 @@ export default async function SampahPage() {
       {laporan.length === 0 ? (
         <div className="card text-center py-14">
           <Trash2 className="w-12 h-12 text-slate-200 mx-auto mb-3" />
-<<<<<<< HEAD
-          <p className="font-medium text-slate-600">Sampah kosong</p>
-=======
           <p className="font-medium text-slate-600 dark:text-slate-400">Sampah kosong</p>
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
           <p className="text-sm text-slate-400 mt-1">
             Laporan yang dihapus akan muncul di sini
           </p>
@@ -85,33 +70,21 @@ export default async function SampahPage() {
           {laporan.map((lap, idx) => (
             <div
               key={lap.id}
-<<<<<<< HEAD
-              className="card border-dashed border-slate-300 opacity-80 hover:opacity-100 transition-opacity animate-fade-in-up"
-=======
               className="card border-dashed border-slate-300 dark:border-slate-700 opacity-80 hover:opacity-100 transition-opacity animate-fade-in-up"
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
               style={{ animationDelay: `${200 + idx * 50}ms`, animationFillMode: "both" }}
             >
               <div className="flex items-start justify-between gap-4">
                 {/* Info laporan */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
-<<<<<<< HEAD
-                    <p className="font-semibold text-slate-700">
-=======
                     <p className="font-semibold text-slate-700 dark:text-slate-300">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                       {lap.semester} {(lap as any).tahunAjaran ?? ""}
                     </p>
                     <span className="badge bg-red-100 text-red-600 text-[10px]">
                       Dihapus
                     </span>
                   </div>
-<<<<<<< HEAD
-                  <p className="text-sm font-semibold text-slate-800 mt-1">
-=======
                   <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 mt-1">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                     {formatRupiah(lap.totalDana.toString())}
                   </p>
                   <p className="text-xs text-slate-400 mt-0.5">
@@ -124,11 +97,7 @@ export default async function SampahPage() {
                     {lap.items.slice(0, 3).map((item) => (
                       <span
                         key={item.id}
-<<<<<<< HEAD
-                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-100 text-xs text-slate-600"
-=======
                         className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-xs text-slate-600 dark:text-slate-400"
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                       >
                         {item.deskripsi}
                         <span className="text-slate-400">

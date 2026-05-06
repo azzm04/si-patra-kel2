@@ -36,13 +36,8 @@ export default async function MahasiswaLaporanPage() {
     <div className="space-y-5">
       <div className="flex items-center justify-between animate-fade-in-up" style={{ animationFillMode: "both" }}>
         <div>
-<<<<<<< HEAD
-          <h1 className="text-xl font-bold text-slate-900">Laporan Saya</h1>
-          <p className="text-sm text-slate-500 mt-0.5">
-=======
           <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">Laporan Saya</h1>
           <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             {laporan.length} laporan ditemukan
           </p>
         </div>
@@ -52,11 +47,7 @@ export default async function MahasiswaLaporanPage() {
             href="/dashboard/mahasiswa/laporan/sampah"
             className="btn-secondary"
           >
-<<<<<<< HEAD
-            <Trash2 className="w-4 h-4 text-slate-500" />
-=======
             <Trash2 className="w-4 h-4 text-slate-500 dark:text-slate-400" />
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             <span className="hidden sm:inline">Sampah</span>
           </Link>
           <Link
@@ -72,11 +63,7 @@ export default async function MahasiswaLaporanPage() {
       {laporan.length === 0 ? (
         <div className="card text-center py-14 animate-fade-in-up" style={{ animationDelay: "100ms", animationFillMode: "both" }}>
           <FileText className="w-12 h-12 text-slate-200 mx-auto mb-3" />
-<<<<<<< HEAD
-          <p className="font-medium text-slate-600">Belum ada laporan</p>
-=======
           <p className="font-medium text-slate-600 dark:text-slate-400">Belum ada laporan</p>
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
           <p className="text-sm text-slate-400 mt-1">
             Mulai buat laporan penggunaan dana beasiswa Anda
           </p>
@@ -102,11 +89,7 @@ export default async function MahasiswaLaporanPage() {
                     style={{ animationDelay: `${100 + idx * 50}ms`, animationFillMode: "both" }}
                   >
                     <div className="flex-1 min-w-0">
-<<<<<<< HEAD
-                      <p className="font-medium text-slate-900">
-=======
                       <p className="font-medium text-slate-900 dark:text-slate-100">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                         {lap.semester}
                       </p>
                       <p className="text-xs text-slate-400 mt-0.5">
@@ -114,11 +97,7 @@ export default async function MahasiswaLaporanPage() {
                         {formatDate(lap.createdAt)}
                       </p>
                     </div>
-<<<<<<< HEAD
-                    <p className="text-sm font-semibold text-slate-700 flex-shrink-0">
-=======
                     <p className="text-sm font-semibold text-slate-700 dark:text-slate-300 flex-shrink-0">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                       {formatRupiah(lap.totalDana.toString())}
                     </p>
                     <span
@@ -215,11 +194,7 @@ function LaporanRow({
       style={{ animationDelay: delay, animationFillMode: "both" }}
     >
       <div className="flex-1 min-w-0">
-<<<<<<< HEAD
-        <p className="font-medium text-slate-900 group-hover:text-primary-700 transition-colors">
-=======
         <p className="font-medium text-slate-900 dark:text-slate-100 group-hover:text-primary-700 transition-colors">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
           {lap.semester}
         </p>
         <p className="text-xs text-slate-400 mt-0.5">
@@ -231,19 +206,11 @@ function LaporanRow({
           )}
         </p>
       </div>
-<<<<<<< HEAD
-      <p className="text-sm font-semibold text-slate-700 flex-shrink-0">
-        {formatRupiah(lap.totalDana.toString())}
-      </p>
-      <span className={`badge flex-shrink-0 ${cfg.color}`}>{cfg.label}</span>
-      <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-slate-500 flex-shrink-0 transition-colors" />
-=======
       <p className="text-sm font-semibold text-slate-700 dark:text-slate-300 flex-shrink-0">
         {formatRupiah(lap.totalDana.toString())}
       </p>
       <span className={`badge flex-shrink-0 ${cfg.color}`}>{cfg.label}</span>
       <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-slate-500 dark:text-slate-400 flex-shrink-0 transition-colors" />
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
     </Link>
   );
 }

@@ -44,11 +44,7 @@ export default function SubmitLaporanButton({ laporanId }: Props) {
           onClick={() => setShow(false)}
         >
           <div
-<<<<<<< HEAD
-            className="bg-white rounded-xl shadow-xl max-w-sm w-full p-6"
-=======
             className="bg-white dark:bg-slate-900 rounded-xl shadow-xl max-w-sm w-full p-6"
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-start gap-3 mb-4">
@@ -56,13 +52,8 @@ export default function SubmitLaporanButton({ laporanId }: Props) {
                 <CheckCircle className="w-5 h-5 text-primary-600" />
               </div>
               <div>
-<<<<<<< HEAD
-                <h3 className="font-semibold text-slate-900">Kirim Laporan?</h3>
-                <p className="text-sm text-slate-500 mt-1">
-=======
                 <h3 className="font-semibold text-slate-900 dark:text-slate-100">Kirim Laporan?</h3>
                 <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                   Setelah dikirim, laporan tidak dapat diedit dan akan menunggu
                   validasi dari admin.
                 </p>

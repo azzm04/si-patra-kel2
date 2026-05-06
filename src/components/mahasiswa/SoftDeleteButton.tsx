@@ -61,11 +61,7 @@ export default function SoftDeleteButton({ laporanId, semester }: { laporanId: s
         >
           {/* Kotak Modal */}
           <div
-<<<<<<< HEAD
-            className="bg-white rounded-2xl shadow-xl max-w-sm w-full p-6 animate-in fade-in zoom-in-95 duration-200"
-=======
             className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl max-w-sm w-full p-6 animate-in fade-in zoom-in-95 duration-200"
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             onClick={(e) => e.stopPropagation()} // Mencegah klik di dalam modal menutup modal
           >
             <div className="flex items-start gap-4 mb-4">
@@ -73,13 +69,8 @@ export default function SoftDeleteButton({ laporanId, semester }: { laporanId: s
                 <Trash2 className="w-5 h-5 text-amber-600" />
               </div>
               <div>
-<<<<<<< HEAD
-                <h3 className="text-lg font-semibold text-slate-900">Hapus Laporan?</h3>
-                <p className="text-sm text-slate-500 mt-1">
-=======
                 <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Hapus Laporan?</h3>
                 <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                   Laporan <strong>"{semester}"</strong> akan dipindahkan ke <strong>Sampah</strong>.
                 </p>
               </div>
@@ -103,11 +94,7 @@ export default function SoftDeleteButton({ laporanId, semester }: { laporanId: s
               <button
                 onClick={() => setShowModal(false)}
                 disabled={loading}
-<<<<<<< HEAD
-                className="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 disabled:opacity-50 transition-colors"
-=======
                 className="px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:bg-slate-950/50 disabled:opacity-50 transition-colors"
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
               >
                 Batal
               </button>

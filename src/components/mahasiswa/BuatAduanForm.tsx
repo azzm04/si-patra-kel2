@@ -75,13 +75,8 @@ export default function BuatAduanForm({ laporanOptions }: Props) {
           <ArrowLeft className="w-4 h-4" />
         </Link>
         <div>
-<<<<<<< HEAD
-          <h1 className="text-xl font-bold text-slate-900">Kirim Aduan</h1>
-          <p className="text-sm text-slate-500">
-=======
           <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">Kirim Aduan</h1>
           <p className="text-sm text-slate-500 dark:text-slate-400">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             Laporkan indikasi penyalahgunaan dana beasiswa
           </p>
         </div>
@@ -105,16 +100,6 @@ export default function BuatAduanForm({ laporanOptions }: Props) {
 
       <form onSubmit={handleSubmit} className="card space-y-4">
 
-<<<<<<< HEAD
-        <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200">
-          <div className="flex items-center gap-2">
-            {form.isAnonim
-              ? <EyeOff className="w-4 h-4 text-slate-500" />
-              : <Eye    className="w-4 h-4 text-slate-500" />
-            }
-            <div>
-              <p className="text-sm font-medium text-slate-700">
-=======
         <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800">
           <div className="flex items-center gap-2">
             {form.isAnonim
@@ -123,7 +108,6 @@ export default function BuatAduanForm({ laporanOptions }: Props) {
             }
             <div>
               <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                 {form.isAnonim ? "Identitas Disembunyikan" : "Tampilkan Identitas Saya"}
               </p>
               <p className="text-xs text-slate-400">
@@ -143,11 +127,7 @@ export default function BuatAduanForm({ laporanOptions }: Props) {
             }`}
           >
             <span
-<<<<<<< HEAD
-              className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform duration-200 ${
-=======
               className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white dark:bg-slate-900 rounded-full shadow transition-transform duration-200 ${
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                 form.isAnonim ? "translate-x-5" : "translate-x-0"
               }`}
             />
@@ -155,11 +135,7 @@ export default function BuatAduanForm({ laporanOptions }: Props) {
         </div>
 
         <div>
-<<<<<<< HEAD
-          <label className="block text-sm font-medium text-slate-700 mb-1.5">
-=======
           <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             Laporan yang Diadukan
             <span className="text-slate-400 font-normal ml-1">(opsional)</span>
           </label>
@@ -183,11 +159,7 @@ export default function BuatAduanForm({ laporanOptions }: Props) {
         </div>
 
         <div>
-<<<<<<< HEAD
-          <label className="block text-sm font-medium text-slate-700 mb-1.5">
-=======
           <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             Judul Aduan <span className="text-red-500">*</span>
           </label>
           <input
@@ -202,11 +174,7 @@ export default function BuatAduanForm({ laporanOptions }: Props) {
         </div>
 
         <div>
-<<<<<<< HEAD
-          <label className="block text-sm font-medium text-slate-700 mb-1.5">
-=======
           <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             Deskripsi Aduan <span className="text-red-500">*</span>
           </label>
           <textarea
@@ -222,11 +190,7 @@ export default function BuatAduanForm({ laporanOptions }: Props) {
         </div>
 
         <div>
-<<<<<<< HEAD
-          <label className="block text-sm font-medium text-slate-700 mb-1.5">
-=======
           <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             URL Bukti <span className="text-slate-400 font-normal">(opsional)</span>
           </label>
           <input
@@ -242,15 +206,9 @@ export default function BuatAduanForm({ laporanOptions }: Props) {
           </p>
         </div>
 
-<<<<<<< HEAD
-        <div className="p-3 rounded-xl bg-slate-50 border border-dashed border-slate-300 text-sm text-slate-500">
-          Aduan ini akan tercatat sebagai:{" "}
-          <span className="font-semibold text-slate-700">
-=======
         <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-dashed border-slate-300 dark:border-slate-700 text-sm text-slate-500 dark:text-slate-400">
           Aduan ini akan tercatat sebagai:{" "}
           <span className="font-semibold text-slate-700 dark:text-slate-300">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             {form.isAnonim ? "Anonim" : "Atas nama Anda (hanya terlihat admin)"}
           </span>
         </div>

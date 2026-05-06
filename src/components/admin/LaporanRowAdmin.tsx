@@ -18,7 +18,6 @@ export default function LaporanRowAdmin({ lap }: { lap: any }) {
     setMounted(true);
   }, []);
 
-  // Fungsi untuk memanggil API
   async function handleAction(action: "validasi" | "tolak", catatan?: string) {
     if (action === "tolak" && !confirm("Yakin ingin menolak laporan ini?"))
       return;
@@ -37,7 +36,7 @@ export default function LaporanRowAdmin({ lap }: { lap: any }) {
 
       if (res.ok) {
         setShowDetailModal(false);
-        router.refresh(); // Refresh halaman agar status terbaru muncul
+        router.refresh();
       } else {
         alert("Gagal memproses laporan");
       }
@@ -50,22 +49,6 @@ export default function LaporanRowAdmin({ lap }: { lap: any }) {
 
   return (
     <>
-<<<<<<< HEAD
-      <tr className="border-b border-slate-100 hover:bg-slate-50 transition-colors">
-        <td className="py-4 px-4">
-          <p className="font-semibold text-slate-900">
-            {lap.mahasiswa.user.name}
-          </p>
-          <p className="text-xs text-slate-500 font-mono mt-0.5">
-            {lap.mahasiswa.nim || "NIM Tidak ada"}
-          </p>
-        </td>
-        <td className="py-4 px-4 text-sm text-slate-700">
-          {lap.mahasiswa.beasiswa.nama}
-        </td>
-        <td className="py-4 px-4 text-sm text-slate-700">{lap.semester}</td>
-        <td className="py-4 px-4 text-right font-semibold text-slate-900">
-=======
       <tr className="border-b border-slate-100 dark:border-slate-800/50 hover:bg-slate-50 dark:bg-slate-950/50 transition-colors">
         <td className="py-4 px-4">
           <p className="font-semibold text-slate-900 dark:text-slate-100">
@@ -80,7 +63,6 @@ export default function LaporanRowAdmin({ lap }: { lap: any }) {
         </td>
         <td className="py-4 px-4 text-sm text-slate-700 dark:text-slate-300">{lap.semester}</td>
         <td className="py-4 px-4 text-right font-semibold text-slate-900 dark:text-slate-100">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
           {formatRupiah(lap.totalDana.toString())}
         </td>
         <td className="py-4 px-4">
@@ -138,24 +120,12 @@ export default function LaporanRowAdmin({ lap }: { lap: any }) {
         </td>
       </tr>
 
-      {/* MODAL (Hanya muncul jika showDetailModal bernilai true) */}
       {showDetailModal && mounted && createPortal(
         <div
           className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm"
           onClick={() => setShowDetailModal(false)}
         >
           <div
-<<<<<<< HEAD
-            className="bg-white rounded-2xl shadow-xl max-w-lg w-full max-h-[90vh] flex flex-col"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between p-5 border-b border-slate-100">
-              <div>
-                <h3 className="font-bold text-slate-900 text-lg">
-                  Detail Laporan Mahasiswa
-                </h3>
-                <p className="text-sm text-slate-500 mt-0.5">
-=======
             className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl max-w-lg w-full max-h-[90vh] flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
@@ -165,17 +135,12 @@ export default function LaporanRowAdmin({ lap }: { lap: any }) {
                   Detail Laporan Mahasiswa
                 </h3>
                 <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                   {lap.mahasiswa.user.name} • {lap.semester}
                 </p>
               </div>
               <button
                 onClick={() => setShowDetailModal(false)}
-<<<<<<< HEAD
-                className="p-2 text-slate-400 hover:bg-slate-100 rounded-full"
-=======
                 className="p-2 text-slate-400 hover:bg-slate-100 dark:bg-slate-800 rounded-full"
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
               >
                 <X className="w-5 h-5" />
               </button>
@@ -183,11 +148,7 @@ export default function LaporanRowAdmin({ lap }: { lap: any }) {
 
             <div className="p-6 overflow-y-auto space-y-4">
               <div className="flex items-center justify-between mb-4">
-<<<<<<< HEAD
-                <h4 className="font-semibold text-slate-900">
-=======
                 <h4 className="font-semibold text-slate-900 dark:text-slate-100">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                   Rincian Penggunaan Dana
                 </h4>
                 <p className="text-sm font-bold text-primary-700">
@@ -208,20 +169,6 @@ export default function LaporanRowAdmin({ lap }: { lap: any }) {
                           <span className="text-xs font-medium text-slate-400 tabular-nums w-4 flex-shrink-0">
                             {idx + 1}.
                           </span>
-<<<<<<< HEAD
-                          <span className="text-slate-800 truncate font-medium">
-                            {item.deskripsi}
-                          </span>
-                          <span className="badge bg-slate-100 text-slate-500 text-[10px] flex-shrink-0 uppercase">
-                            {item.kategori}
-                          </span>
-                        </div>
-                        <span className="font-semibold text-slate-700 flex-shrink-0 ml-2">
-                          {formatRupiah(item.nominal.toString())}
-                        </span>
-                      </div>
-                      <div className="ml-6 h-1.5 bg-slate-100 rounded-full overflow-hidden">
-=======
                           <span className="text-slate-800 dark:text-slate-200 truncate font-medium">
                             {item.deskripsi}
                           </span>
@@ -234,7 +181,6 @@ export default function LaporanRowAdmin({ lap }: { lap: any }) {
                         </span>
                       </div>
                       <div className="ml-6 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                         <div
                           className="h-full bg-primary-400 rounded-full transition-all"
                           style={{ width: `${pct}%` }}
@@ -248,36 +194,22 @@ export default function LaporanRowAdmin({ lap }: { lap: any }) {
                 })}
               </div>
 
-<<<<<<< HEAD
-              <div className="flex items-center justify-between pt-4 mt-6 border-t border-slate-100">
-                <span className="text-sm font-bold text-slate-700">TOTAL</span>
-                <span className="text-lg font-bold text-slate-900">
-=======
               <div className="flex items-center justify-between pt-4 mt-6 border-t border-slate-100 dark:border-slate-800/50">
                 <span className="text-sm font-bold text-slate-700 dark:text-slate-300">TOTAL</span>
                 <span className="text-lg font-bold text-slate-900 dark:text-slate-100">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                   {formatRupiah(lap.totalDana.toString())}
                 </span>
               </div>
             </div>
 
             {lap.status === "TERKIRIM" && (
-<<<<<<< HEAD
-              <div className="p-5 border-t border-slate-100 flex gap-3 justify-end bg-slate-50 rounded-b-2xl">
-=======
               <div className="p-5 border-t border-slate-100 dark:border-slate-800/50 flex gap-3 justify-end bg-slate-50 dark:bg-slate-950/50 rounded-b-2xl">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                 <button
                   onClick={() =>
                     handleAction("tolak", "Laporan ditolak oleh admin.")
                   }
                   disabled={isLoading}
-<<<<<<< HEAD
-                  className="btn border border-red-200 text-red-600 bg-white px-4 py-2 text-sm rounded-lg flex items-center gap-2"
-=======
                   className="btn border border-red-200 text-red-600 bg-white dark:bg-slate-900 px-4 py-2 text-sm rounded-lg flex items-center gap-2"
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                 >
                   <XCircle className="w-4 h-4" /> Tolak & Revisi
                 </button>

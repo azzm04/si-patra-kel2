@@ -65,13 +65,8 @@ export default async function AdminDashboard() {
   return (
     <div className="space-y-6">
       <div className="animate-fade-in-up" style={{ animationFillMode: "both" }}>
-<<<<<<< HEAD
-        <h1 className="text-xl font-bold text-slate-900">Dashboard Admin</h1>
-        <p className="text-sm text-slate-500 mt-0.5">Ringkasan pengawasan dana beasiswa</p>
-=======
         <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">Dashboard Admin</h1>
         <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">Ringkasan pengawasan dana beasiswa</p>
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
       </div>
 
       {(laporanPending > 0 || aduanPending > 0) && (
@@ -102,13 +97,8 @@ export default async function AdminDashboard() {
             >
               <div className="flex items-start justify-between">
                 <div>
-<<<<<<< HEAD
-                  <p className="text-sm text-slate-500 group-hover:text-slate-600 transition-colors">{stat.label}</p>
-                  <p className="text-3xl font-bold text-slate-900 mt-1">{stat.value}</p>
-=======
                   <p className="text-sm text-slate-500 dark:text-slate-400 group-hover:text-slate-600 dark:text-slate-400 transition-colors">{stat.label}</p>
                   <p className="text-3xl font-bold text-slate-900 dark:text-slate-100 mt-1">{stat.value}</p>
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                 </div>
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 ${stat.color}`}>
                   <Icon className="w-5 h-5" />
@@ -122,11 +112,7 @@ export default async function AdminDashboard() {
       <div className="grid lg:grid-cols-2 gap-6">
         <div className="card animate-fade-in-up" style={{ animationDelay: "450ms", animationFillMode: "both" }}>
           <div className="flex items-center justify-between mb-4">
-<<<<<<< HEAD
-            <h2 className="font-semibold text-slate-900">Laporan Terbaru</h2>
-=======
             <h2 className="font-semibold text-slate-900 dark:text-slate-100">Laporan Terbaru</h2>
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             <a href="/dashboard/admin/laporan" className="text-xs text-primary-600 hover:underline hover:text-primary-700 transition-colors">
               Lihat semua
             </a>
@@ -140,15 +126,6 @@ export default async function AdminDashboard() {
                 return (
                   <div 
                     key={lap.id} 
-<<<<<<< HEAD
-                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-50 transition-all duration-200 hover:translate-x-1 group cursor-pointer border border-transparent hover:border-slate-100"
-                  >
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-slate-900 truncate group-hover:text-primary-700 transition-colors">
-                        {lap.mahasiswa.user.name}
-                      </p>
-                      <p className="text-xs text-slate-400 mt-0.5 transition-colors group-hover:text-slate-500">
-=======
                     className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-50 dark:bg-slate-950/50 transition-all duration-200 hover:translate-x-1 group cursor-pointer border border-transparent hover:border-slate-100 dark:border-slate-800/50"
                   >
                     <div className="flex-1 min-w-0">
@@ -156,16 +133,11 @@ export default async function AdminDashboard() {
                         {lap.mahasiswa.user.name}
                       </p>
                       <p className="text-xs text-slate-400 mt-0.5 transition-colors group-hover:text-slate-500 dark:text-slate-400">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                         {lap.semester} · {lap.mahasiswa.beasiswa.nama}
                       </p>
                     </div>
                     <div className="text-right flex-shrink-0">
-<<<<<<< HEAD
-                      <p className="text-sm font-semibold text-slate-800">
-=======
                       <p className="text-sm font-semibold text-slate-800 dark:text-slate-200">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                         {formatRupiah(lap.totalDana.toString())}
                       </p>
                       <span className={`badge text-[10px] mt-0.5 ${cfg.color}`}>{cfg.label}</span>
@@ -179,11 +151,7 @@ export default async function AdminDashboard() {
 
         <div className="card animate-fade-in-up" style={{ animationDelay: "550ms", animationFillMode: "both" }}>
           <div className="flex items-center justify-between mb-4">
-<<<<<<< HEAD
-            <h2 className="font-semibold text-slate-900">Aduan Terbaru</h2>
-=======
             <h2 className="font-semibold text-slate-900 dark:text-slate-100">Aduan Terbaru</h2>
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             <a href="/dashboard/admin/aduan" className="text-xs text-primary-600 hover:underline hover:text-primary-700 transition-colors">
               Lihat semua
             </a>
@@ -197,19 +165,11 @@ export default async function AdminDashboard() {
                 return (
                   <div 
                     key={aduan.id} 
-<<<<<<< HEAD
-                    className="flex items-start gap-3 p-3 rounded-lg hover:bg-slate-50 transition-all duration-200 hover:translate-x-1 group cursor-pointer border border-transparent hover:border-slate-100"
-                  >
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-slate-900 truncate group-hover:text-primary-700 transition-colors">{aduan.judul}</p>
-                      <p className="text-xs text-slate-400 mt-0.5 transition-colors group-hover:text-slate-500">
-=======
                     className="flex items-start gap-3 p-3 rounded-lg hover:bg-slate-50 dark:bg-slate-950/50 transition-all duration-200 hover:translate-x-1 group cursor-pointer border border-transparent hover:border-slate-100 dark:border-slate-800/50"
                   >
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-slate-900 dark:text-slate-100 truncate group-hover:text-primary-700 transition-colors">{aduan.judul}</p>
                       <p className="text-xs text-slate-400 mt-0.5 transition-colors group-hover:text-slate-500 dark:text-slate-400">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                         {aduan.pelapor?.name ?? "Anonim"} · {formatDateTime(aduan.createdAt)}
                       </p>
                     </div>

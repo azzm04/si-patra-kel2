@@ -16,7 +16,6 @@ export default function SoftDeleteButton({ userId, isActive, userName }: Props) 
   const [showModal, setShowModal] = useState(false);
   const [mounted,   setMounted]   = useState(false);
 
-  // Perlu mounted agar createPortal hanya berjalan di client-side
   useEffect(() => { setMounted(true); }, []);
 
   async function handleAction() {
@@ -34,34 +33,21 @@ export default function SoftDeleteButton({ userId, isActive, userName }: Props) 
     window.location.reload();
   }
 
-  // Modal di-render via Portal langsung ke document.body
-  // agar tidak terclip oleh overflow:hidden di dalam tabel
   const modal = showModal && mounted && createPortal(
     <div
       className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9999] flex items-center justify-center p-4"
       onClick={(e) => { if (e.target === e.currentTarget) setShowModal(false); }}
     >
-<<<<<<< HEAD
-      <div className="bg-white rounded-xl shadow-2xl max-w-sm w-full p-6 animate-fade-in-up">
-=======
       <div className="bg-white dark:bg-slate-900 rounded-xl shadow-2xl max-w-sm w-full p-6 animate-fade-in-up">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
         <div className="flex items-start gap-3 mb-4">
           <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${isActive ? "bg-red-100" : "bg-green-100"}`}>
             <AlertTriangle className={`w-5 h-5 ${isActive ? "text-red-600" : "text-green-600"}`} />
           </div>
           <div>
-<<<<<<< HEAD
-            <h3 className="font-semibold text-slate-900">
-              {isActive ? "Nonaktifkan Akun" : "Aktifkan Akun"}
-            </h3>
-            <p className="text-sm text-slate-500 mt-1">
-=======
             <h3 className="font-semibold text-slate-900 dark:text-slate-100">
               {isActive ? "Nonaktifkan Akun" : "Aktifkan Akun"}
             </h3>
             <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
               {isActive
                 ? `Akun ${userName} akan dinonaktifkan (soft delete). Mahasiswa tidak bisa login, namun data tetap tersimpan.`
                 : `Akun ${userName} akan diaktifkan kembali dan dapat login kembali.`}

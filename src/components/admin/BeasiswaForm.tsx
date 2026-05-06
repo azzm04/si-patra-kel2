@@ -107,11 +107,7 @@ export default function BeasiswaForm({ mode, beasiswa }: Props) {
       ) : (
         <button
           onClick={() => setOpen(true)}
-<<<<<<< HEAD
-          className="btn btn-sm bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200"
-=======
           className="btn btn-sm bg-slate-50 dark:bg-slate-950/50 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-800"
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
           title="edit-beasiswa"
         >
           <Pencil className="w-3.5 h-3.5" />
@@ -120,24 +116,14 @@ export default function BeasiswaForm({ mode, beasiswa }: Props) {
 
       {open && mounted && createPortal(
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[9999] flex items-center justify-center p-4">
-<<<<<<< HEAD
-          <div className="bg-white rounded-xl shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between p-6 border-b border-slate-100">
-              <h3 className="font-semibold text-slate-900">
-=======
           <div className="bg-white dark:bg-slate-900 rounded-xl shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between p-6 border-b border-slate-100 dark:border-slate-800/50">
               <h3 className="font-semibold text-slate-900 dark:text-slate-100">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                 {mode === "create" ? "Tambah Program Beasiswa" : "Edit Program Beasiswa"}
               </h3>
               <button
                 onClick={() => setOpen(false)}
-<<<<<<< HEAD
-                className="text-slate-400 hover:text-slate-600 transition-colors"
-=======
                 className="text-slate-400 hover:text-slate-600 dark:text-slate-400 transition-colors"
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                 title="tombol"
               >
                 <X className="w-5 h-5" />
@@ -152,11 +138,7 @@ export default function BeasiswaForm({ mode, beasiswa }: Props) {
               )}
 
               <div>
-<<<<<<< HEAD
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">
-=======
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                   Nama Program <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -169,11 +151,7 @@ export default function BeasiswaForm({ mode, beasiswa }: Props) {
               </div>
 
               <div>
-<<<<<<< HEAD
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">
-=======
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                   Penyelenggara <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -187,11 +165,7 @@ export default function BeasiswaForm({ mode, beasiswa }: Props) {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-<<<<<<< HEAD
-                  <label className="block text-sm font-medium text-slate-700 mb-1.5">
-=======
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                     Kuota <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -205,11 +179,7 @@ export default function BeasiswaForm({ mode, beasiswa }: Props) {
                   />
                 </div>
                 <div>
-<<<<<<< HEAD
-                  <label className="block text-sm font-medium text-slate-700 mb-1.5">
-=======
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                     Dana/Semester (Rp) <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -226,11 +196,7 @@ export default function BeasiswaForm({ mode, beasiswa }: Props) {
 
               {mode === "edit" && (
                 <div>
-<<<<<<< HEAD
-                  <label className="block text-sm font-medium text-slate-700 mb-1.5">
-=======
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                     Status
                   </label>
                   <select
@@ -247,11 +213,7 @@ export default function BeasiswaForm({ mode, beasiswa }: Props) {
               )}
 
               <div>
-<<<<<<< HEAD
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">
-=======
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                   Deskripsi
                 </label>
                 <textarea

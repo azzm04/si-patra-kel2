@@ -140,13 +140,8 @@ export default function EditLaporanForm({ initialData }: { initialData: any }) {
           <ArrowLeft className="w-4 h-4" />
         </Link>
         <div>
-<<<<<<< HEAD
-          <h1 className="text-xl font-bold text-slate-900">Edit Laporan</h1>
-          <p className="text-sm text-slate-500">
-=======
           <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">Edit Laporan</h1>
           <p className="text-sm text-slate-500 dark:text-slate-400">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             Perbarui rincian penggunaan dana beasiswa Anda
           </p>
         </div>
@@ -159,17 +154,10 @@ export default function EditLaporanForm({ initialData }: { initialData: any }) {
       )}
 
       <div className="card space-y-4">
-<<<<<<< HEAD
-        <h2 className="font-semibold text-slate-800">Informasi Laporan</h2>
-
-        <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1.5">
-=======
         <h2 className="font-semibold text-slate-800 dark:text-slate-200">Informasi Laporan</h2>
 
         <div>
           <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             Semester <span className="text-red-500">*</span>
           </label>
           <div className="grid grid-cols-2 gap-3">
@@ -203,11 +191,7 @@ export default function EditLaporanForm({ initialData }: { initialData: any }) {
         </div>
 
         <div>
-<<<<<<< HEAD
-          <label className="block text-sm font-medium text-slate-700 mb-1.5">
-=======
           <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             Catatan (opsional)
           </label>
           <textarea
@@ -221,11 +205,7 @@ export default function EditLaporanForm({ initialData }: { initialData: any }) {
 
       <div className="card space-y-4">
         <div className="flex items-center justify-between">
-<<<<<<< HEAD
-          <h2 className="font-semibold text-slate-800">
-=======
           <h2 className="font-semibold text-slate-800 dark:text-slate-200">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             Rincian Penggunaan Dana
           </h2>
           <button onClick={addItem} className="btn-secondary btn-sm">
@@ -238,17 +218,10 @@ export default function EditLaporanForm({ initialData }: { initialData: any }) {
           {items.map((item, idx) => (
             <div
               key={idx}
-<<<<<<< HEAD
-              className="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-3"
-            >
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-medium text-slate-500">
-=======
               className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50 space-y-3"
             >
               <div className="flex items-center justify-between mb-1">
                 <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                   Item #{idx + 1}
                 </span>
                 <button
@@ -263,11 +236,7 @@ export default function EditLaporanForm({ initialData }: { initialData: any }) {
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="col-span-2">
-<<<<<<< HEAD
-                  <label className="block text-xs font-medium text-slate-600 mb-1">
-=======
                   <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                     Deskripsi *
                   </label>
                   <input
@@ -281,11 +250,7 @@ export default function EditLaporanForm({ initialData }: { initialData: any }) {
                   />
                 </div>
                 <div>
-<<<<<<< HEAD
-                  <label className="block text-xs font-medium text-slate-600 mb-1">
-=======
                   <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                     Kategori
                   </label>
                   <select
@@ -304,11 +269,7 @@ export default function EditLaporanForm({ initialData }: { initialData: any }) {
                   </select>
                 </div>
                 <div>
-<<<<<<< HEAD
-                  <label className="block text-xs font-medium text-slate-600 mb-1">
-=======
                   <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                     Nominal (Rp) *
                   </label>
                   <input
@@ -325,13 +286,8 @@ export default function EditLaporanForm({ initialData }: { initialData: any }) {
           ))}
         </div>
 
-<<<<<<< HEAD
-        <div className="flex items-center justify-between pt-3 border-t border-slate-200">
-          <span className="text-sm font-semibold text-slate-700">
-=======
         <div className="flex items-center justify-between pt-3 border-t border-slate-200 dark:border-slate-800">
           <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             Total Dana
           </span>
           <span className="text-lg font-bold text-primary-700">

@@ -3,7 +3,6 @@ import { prisma } from "@/lib/prisma";
 import { formatRupiah, statusLaporanConfig } from "@/lib/utils";
 import { Search } from "lucide-react";
 
-// 1. Impor komponen LaporanRowAdmin yang baru kita buat
 import LaporanRowAdmin from "@/components/admin/LaporanRowAdmin";
 
 interface SearchParams {
@@ -21,7 +20,6 @@ export default async function AdminLaporanPage({
   const laporan = await prisma.laporanPenggunaan.findMany({
     where: {
       deletedAt: null,
-      // 2. Pastikan filter status "DRAF" di-exclude dari tabel Admin
       status: status ? (status as any) : { not: "DRAF" },
       ...(search
         ? {
@@ -75,13 +73,8 @@ export default async function AdminLaporanPage({
   return (
     <div className="space-y-5">
       <div className="animate-fade-in-up" style={{ animationFillMode: "both" }}>
-<<<<<<< HEAD
-        <h1 className="text-xl font-bold text-slate-900">Manajemen Laporan</h1>
-        <p className="text-sm text-slate-500 mt-0.5">
-=======
         <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">Manajemen Laporan</h1>
         <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
           Validasi laporan penggunaan dana beasiswa ({laporan.length} laporan)
         </p>
       </div>
@@ -119,28 +112,6 @@ export default async function AdminLaporanPage({
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-<<<<<<< HEAD
-              <tr className="border-b border-slate-100 bg-slate-50">
-                <th className="text-left font-medium text-slate-500 px-4 py-3">
-                  Mahasiswa
-                </th>
-                <th className="text-left font-medium text-slate-500 px-4 py-3">
-                  Beasiswa
-                </th>
-                <th className="text-left font-medium text-slate-500 px-4 py-3">
-                  Semester
-                </th>
-                <th className="text-right font-medium text-slate-500 px-4 py-3">
-                  Total Dana
-                </th>
-                <th className="text-left font-medium text-slate-500 px-4 py-3">
-                  Item
-                </th>
-                <th className="text-left font-medium text-slate-500 px-4 py-3">
-                  Status
-                </th>
-                <th className="text-left font-medium text-slate-500 px-4 py-3">
-=======
               <tr className="border-b border-slate-100 dark:border-slate-800/50 bg-slate-50 dark:bg-slate-950/50">
                 <th className="text-left font-medium text-slate-500 dark:text-slate-400 px-4 py-3">
                   Mahasiswa
@@ -161,14 +132,12 @@ export default async function AdminLaporanPage({
                   Status
                 </th>
                 <th className="text-left font-medium text-slate-500 dark:text-slate-400 px-4 py-3">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                   Aduan
                 </th>
                 <th className="px-4 py-3 w-28">Aksi</th>
               </tr>
             </thead>
 
-            {/* 3. Render Table Body */}
             <tbody className="divide-y divide-slate-50">
               {laporan.length === 0 ? (
                 <tr>
@@ -178,10 +147,7 @@ export default async function AdminLaporanPage({
                 </tr>
               ) : (
                 laporan.map((lap) => {
-                  // Serialize data karena akan dilempar ke Client Component (LaporanRowAdmin)
-                  // Mencegah error "Decimal objects are not supported"
                   const serializedLap = JSON.parse(JSON.stringify(lap));
-
                   return <LaporanRowAdmin key={lap.id} lap={serializedLap} />;
                 })
               )}

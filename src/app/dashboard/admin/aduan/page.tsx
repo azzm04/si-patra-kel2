@@ -13,7 +13,6 @@ export default async function AdminAduanPage({
 }) {
   const { status } = searchParams;
 
-  // JOIN kompleks: Aduan + Pelapor + Laporan + Mahasiswa + User
   const aduan = await prisma.aduan.findMany({
     where: status ? { status: status as any } : {},
     include: {
@@ -51,13 +50,8 @@ export default async function AdminAduanPage({
   return (
     <div className="space-y-5">
       <div className="animate-fade-in-up" style={{ animationFillMode: "both" }}>
-<<<<<<< HEAD
-        <h1 className="text-xl font-bold text-slate-900">Manajemen Aduan</h1>
-        <p className="text-sm text-slate-500 mt-0.5">
-=======
         <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">Manajemen Aduan</h1>
         <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
           Tinjau dan proses laporan indikasi penyalahgunaan dana
         </p>
       </div>
@@ -86,25 +80,15 @@ export default async function AdminAduanPage({
         })}
       </div>
 
-
-<<<<<<< HEAD
-      <div className="flex gap-1 bg-slate-100 p-1 rounded-lg w-fit animate-fade-in-up" style={{ animationDelay: "300ms", animationFillMode: "both" }}>
-=======
       <div className="flex gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-lg w-fit animate-fade-in-up" style={{ animationDelay: "300ms", animationFillMode: "both" }}>
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
         {statusOptions.map((opt) => (
           <a
             key={opt.value}
             href={opt.value ? `?status=${opt.value}` : "?"}
             className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
               (status ?? "") === opt.value
-<<<<<<< HEAD
-                ? "bg-white text-slate-900 shadow-sm"
-                : "text-slate-500 hover:text-slate-700"
-=======
                 ? "bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-sm"
                 : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:text-slate-300"
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             }`}
           >
             {opt.label}
@@ -124,30 +108,18 @@ export default async function AdminAduanPage({
             return (
               <div 
                 key={a.id} 
-<<<<<<< HEAD
-                className="card space-y-3 animate-fade-in-up transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover border border-transparent hover:border-slate-200"
-=======
                 className="card space-y-3 animate-fade-in-up transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover border border-transparent hover:border-slate-200 dark:border-slate-800"
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                 style={{ animationDelay: `${400 + idx * 50}ms`, animationFillMode: "both" }}
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
-<<<<<<< HEAD
-                      <h3 className="font-semibold text-slate-900 break-words line-clamp-2">{a.judul}</h3>
-=======
                       <h3 className="font-semibold text-slate-900 dark:text-slate-100 break-words line-clamp-2">{a.judul}</h3>
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                       <span className={`badge ${cfg.color}`}>{cfg.label}</span>
                     </div>
                     <p className="text-xs text-slate-400 mt-1">
                       Dilaporkan oleh{" "}
-<<<<<<< HEAD
-                      <span className="font-medium text-slate-600">
-=======
                       <span className="font-medium text-slate-600 dark:text-slate-400">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                         {a.pelapor?.name ?? "Anonim"}
                       </span>{" "}
                       · {formatDateTime(a.createdAt)}
@@ -156,11 +128,7 @@ export default async function AdminAduanPage({
                   <AdminAduanActions aduanId={a.id} currentStatus={a.status} />
                 </div>
 
-<<<<<<< HEAD
-                <p className="text-sm text-slate-700 leading-relaxed break-words whitespace-pre-wrap">{a.deskripsi}</p>
-=======
                 <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed break-words whitespace-pre-wrap">{a.deskripsi}</p>
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
 
                 {a.buktiUrl && (
                   <a
@@ -175,18 +143,6 @@ export default async function AdminAduanPage({
                 )}
 
                 {a.laporan && (
-<<<<<<< HEAD
-                  <div className="p-3 rounded-lg bg-slate-50 border border-slate-200 text-sm">
-                    <p className="text-xs font-medium text-slate-500 mb-1">Laporan yang Diadukan</p>
-                    <div className="flex items-center gap-3 flex-wrap">
-                      <span className="text-slate-700 font-medium">
-                        {a.laporan.mahasiswa.user.name}
-                      </span>
-                      <span className="text-slate-400">·</span>
-                      <span className="text-slate-600">{a.laporan.semester}</span>
-                      <span className="text-slate-400">·</span>
-                      <span className="text-slate-600">{a.laporan.mahasiswa.beasiswa.nama}</span>
-=======
                   <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 text-sm">
                     <p className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">Laporan yang Diadukan</p>
                     <div className="flex items-center gap-3 flex-wrap">
@@ -197,7 +153,6 @@ export default async function AdminAduanPage({
                       <span className="text-slate-600 dark:text-slate-400">{a.laporan.semester}</span>
                       <span className="text-slate-400">·</span>
                       <span className="text-slate-600 dark:text-slate-400">{a.laporan.mahasiswa.beasiswa.nama}</span>
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                     </div>
                   </div>
                 )}

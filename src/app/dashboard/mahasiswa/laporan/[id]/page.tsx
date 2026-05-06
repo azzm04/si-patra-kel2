@@ -19,7 +19,7 @@ import {
   Edit,
 } from "lucide-react";
 import SubmitLaporanButton from "@/components/mahasiswa/SubmitLaporanButton";
-import SoftDeleteButton from "@/components/mahasiswa/SoftDeleteButton"; // 2. Import komponen tombol hapus milikmu
+import SoftDeleteButton from "@/components/mahasiswa/SoftDeleteButton";
 
 export default async function DetailLaporanPage({
   params,
@@ -95,17 +95,10 @@ export default async function DetailLaporanPage({
         </Link>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-<<<<<<< HEAD
-            <h1 className="text-xl font-bold text-slate-900">{laporan.semester}</h1>
-            <span className={`badge ${cfg.color}`}>{cfg.label}</span>
-          </div>
-          <p className="text-sm text-slate-500 mt-0.5">
-=======
             <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">{laporan.semester}</h1>
             <span className={`badge ${cfg.color}`}>{cfg.label}</span>
           </div>
           <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             {laporan.mahasiswa.beasiswa.nama} · Dibuat {formatDate(laporan.createdAt)}
           </p>
         </div>
@@ -124,13 +117,10 @@ export default async function DetailLaporanPage({
             </>
           )}
 
-          {/* Tombol Kirim hanya muncul jika statusnya masih DRAF */}
           {laporan.status === "DRAF" && (
             <SubmitLaporanButton laporanId={laporan.id} />
           )}
         </div>
-        {/* --- AKHIR BAGIAN ACTION BUTTONS --- */}
-        
       </div>
 
       {laporan.status === "DITOLAK" && laporan.catatanAdmin && (
@@ -140,22 +130,6 @@ export default async function DetailLaporanPage({
             <div>
               <p className="text-sm font-semibold text-red-800">Laporan Ditolak</p>
               <p className="text-sm text-red-700 mt-1">{laporan.catatanAdmin}</p>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {laporan.status === "DITOLAK" && laporan.catatanAdmin && (
-        <div className="p-4 rounded-xl bg-red-50 border border-red-200">
-          <div className="flex gap-2 items-start">
-            <XCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
-            <div>
-              <p className="text-sm font-semibold text-red-800">
-                Laporan Ditolak
-              </p>
-              <p className="text-sm text-red-700 mt-1">
-                {laporan.catatanAdmin}
-              </p>
             </div>
           </div>
         </div>
@@ -187,11 +161,7 @@ export default async function DetailLaporanPage({
         <div className="lg:col-span-2 space-y-4 animate-fade-in-up" style={{ animationDelay: "100ms", animationFillMode: "both" }}>
           <div className="card">
             <div className="flex items-center justify-between mb-4">
-<<<<<<< HEAD
-              <h2 className="font-semibold text-slate-900">
-=======
               <h2 className="font-semibold text-slate-900 dark:text-slate-100">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                 Rincian Penggunaan Dana
               </h2>
               <p className="text-sm font-bold text-primary-700">
@@ -212,20 +182,6 @@ export default async function DetailLaporanPage({
                         <span className="text-xs font-medium text-slate-400 tabular-nums w-5 flex-shrink-0">
                           {idx + 1}.
                         </span>
-<<<<<<< HEAD
-                        <span className="text-slate-800 truncate">
-                          {item.deskripsi}
-                        </span>
-                        <span className="badge bg-slate-100 text-slate-500 text-[10px] flex-shrink-0">
-                          {item.kategori}
-                        </span>
-                      </div>
-                      <span className="font-semibold text-slate-700 flex-shrink-0 ml-2">
-                        {formatRupiah(item.nominal.toString())}
-                      </span>
-                    </div>
-                    <div className="ml-7 h-1.5 bg-slate-100 rounded-full overflow-hidden">
-=======
                         <span className="text-slate-800 dark:text-slate-200 truncate">
                           {item.deskripsi}
                         </span>
@@ -238,7 +194,6 @@ export default async function DetailLaporanPage({
                       </span>
                     </div>
                     <div className="ml-7 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                       <div
                         className="h-full bg-primary-400 rounded-full transition-all"
                         style={{ width: `${pct}%` }}
@@ -252,15 +207,9 @@ export default async function DetailLaporanPage({
               })}
             </div>
 
-<<<<<<< HEAD
-            <div className="flex items-center justify-between pt-4 mt-4 border-t border-slate-100">
-              <span className="text-sm font-bold text-slate-700">TOTAL</span>
-              <span className="text-lg font-bold text-slate-900">
-=======
             <div className="flex items-center justify-between pt-4 mt-4 border-t border-slate-100 dark:border-slate-800/50">
               <span className="text-sm font-bold text-slate-700 dark:text-slate-300">TOTAL</span>
               <span className="text-lg font-bold text-slate-900 dark:text-slate-100">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                 {formatRupiah(laporan.totalDana.toString())}
               </span>
             </div>
@@ -268,13 +217,8 @@ export default async function DetailLaporanPage({
 
           {laporan.catatan && (
             <div className="card">
-<<<<<<< HEAD
-              <h2 className="font-semibold text-slate-900 mb-2">Catatan</h2>
-              <p className="text-sm text-slate-600 leading-relaxed">
-=======
               <h2 className="font-semibold text-slate-900 dark:text-slate-100 mb-2">Catatan</h2>
               <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                 {laporan.catatan}
               </p>
             </div>
@@ -283,11 +227,7 @@ export default async function DetailLaporanPage({
 
         <div className="space-y-4 animate-fade-in-up" style={{ animationDelay: "200ms", animationFillMode: "both" }}>
           <div className="card">
-<<<<<<< HEAD
-            <h2 className="font-semibold text-slate-900 mb-3">
-=======
             <h2 className="font-semibold text-slate-900 dark:text-slate-100 mb-3">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
               Distribusi Kategori
             </h2>
             <div className="space-y-2.5">
@@ -298,22 +238,14 @@ export default async function DetailLaporanPage({
                   return (
                     <div key={kat}>
                       <div className="flex items-center justify-between text-xs mb-1">
-<<<<<<< HEAD
-                        <span className="text-slate-600 font-medium">
-=======
                         <span className="text-slate-600 dark:text-slate-400 font-medium">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                           {kat}
                         </span>
                         <span className="text-slate-400">
                           {pct.toFixed(0)}%
                         </span>
                       </div>
-<<<<<<< HEAD
-                      <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
-=======
                       <div className="h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                         <div
                           className="h-full bg-gradient-to-r from-primary-400 to-primary-600 rounded-full"
                           style={{ width: `${pct}%` }}
@@ -329,11 +261,7 @@ export default async function DetailLaporanPage({
           </div>
 
           <div className="card">
-<<<<<<< HEAD
-            <h2 className="font-semibold text-slate-900 mb-4">
-=======
             <h2 className="font-semibold text-slate-900 dark:text-slate-100 mb-4">
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
               Timeline Status
             </h2>
             <div className="space-y-4">
@@ -348,11 +276,7 @@ export default async function DetailLaporanPage({
                             ? step.isReject
                               ? "bg-red-100 text-red-500"
                               : "bg-green-100 text-green-600"
-<<<<<<< HEAD
-                            : "bg-slate-100 text-slate-400"
-=======
                             : "bg-slate-100 dark:bg-slate-800 text-slate-400"
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                         }`}
                       >
                         <Icon className="w-3.5 h-3.5" />
@@ -360,11 +284,7 @@ export default async function DetailLaporanPage({
                       {idx < statusTimeline.length - 1 && (
                         <div
                           className={`w-px flex-1 mt-1 ${
-<<<<<<< HEAD
-                            step.done ? "bg-green-200" : "bg-slate-100"
-=======
                             step.done ? "bg-green-200" : "bg-slate-100 dark:bg-slate-800"
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                           }`}
                           style={{ minHeight: "20px" }}
                         />
@@ -376,11 +296,7 @@ export default async function DetailLaporanPage({
                           step.done
                             ? step.isReject
                               ? "text-red-700"
-<<<<<<< HEAD
-                              : "text-slate-900"
-=======
                               : "text-slate-900 dark:text-slate-100"
->>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                             : "text-slate-400"
                         }`}
                       >
