@@ -1,0 +1,165 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum Role {
+  ADMIN
+  MAHASISWA
+}
+
+enum StatusLaporan {
+  DRAF
+  TERKIRIM
+  DIVALIDASI
+  DITOLAK
+}
+
+enum StatusAduan {
+  MENUNGGU
+  DIPROSES
+  SELESAI
+  DITOLAK
+}
+
+enum KategoriItem {
+  SPP
+  BUKU
+  KOS
+  MAKAN
+  TRANSPORTASI
+  PRAKTIKUM
+  ALAT_TULIS
+  BIAYA_HIDUP
+  LAINNYA
+}
+
+enum StatusBeasiswa {
+  AKTIF
+  NONAKTIF
+}
+
+enum Semester {
+  GASAL
+  GENAP
+}
+
+// ─── Models ──────────────────────────────────────────────────────────────────
+
+model User {
+  id            String    @id @default(uuid())
+  name          String
+  email         String    @unique
+  password      String
+  role          Role      @default(MAHASISWA)
+  isActive      Boolean   @default(true)  // Soft delete flag
+  deletedAt     DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  mahasiswa     Mahasiswa?
+  aduan         Aduan[]   // Pelapor membuat aduan
+
+  @@map("users")
+}
+
+model Beasiswa {
+  id            String         @id @default(uuid())
+  nama          String
+  penyelenggara String
+  kuota         Int           @db.SmallInt
+  nominalPerSemester Decimal  @db.Decimal(15, 2)
+  status        StatusBeasiswa @default(AKTIF)
+  deskripsi     String?        @db.Text
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  mahasiswa     Mahasiswa[]
+
+  @@map("beasiswa")
+}
+
+model Mahasiswa {
+  id            String    @id @default(uuid())
+  nim           String    @unique @db.VarChar(20)
+  prodi         String    @db.VarChar(100)
+  angkatan      Int       @db.SmallInt
+  noHp          String?   @db.VarChar(13)
+  alamat        String?
+
+  userId        String    @unique
+  user          User      @relation(fields: [userId], references: [id])
+
+  beasiswaId    String
+  beasiswa      Beasiswa  @relation(fields: [beasiswaId], references: [id])
+
+  laporan       LaporanPenggunaan[]
+
+  @@map("mahasiswa")
+}
+
+model LaporanPenggunaan {
+  id            String        @id @default(uuid())
+  semester      Semester
+  tahunAjaran   String        @db.VarChar(9)
+  totalDana     Decimal       @db.Decimal(15, 2)
+  catatan       String?
+  status        StatusLaporan @default(DRAF)
+  catatanAdmin  String?       // Catatan dari admin saat validasi/penolakan
+  deletedAt     DateTime?     // Hard delete marker untuk draf
+
+  mahasiswaId   String
+  mahasiswa     Mahasiswa     @relation(fields: [mahasiswaId], references: [id])
+
+  items         ItemLaporan[]
+  aduan         Aduan[]
+
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@map("laporan_penggunaan")
+}
+
+model ItemLaporan {
+  id            String            @id @default(uuid())
+  deskripsi     String
+  nominal       Decimal           @db.Decimal(15, 2)
+  kategori      KategoriItem
+
+  laporanId     String
+  laporan       LaporanPenggunaan @relation(fields: [laporanId], references: [id], onDelete: Cascade)
+
+  createdAt     DateTime          @default(now())
+
+  @@map("item_laporan")
+}
+
+model Aduan {
+  id            String      @id @default(uuid())
+  judul         String
+  deskripsi     String
+  buktiUrl      String?     // URL file bukti yang diupload
+  status        StatusAduan @default(MENUNGGU)
+  catatanAdmin  String?
+  isAnonim      Boolean     @default(false)
+
+ 
+  pelaporId     String
+  pelapor       User       @relation(fields: [pelaporId], references: [id])
+  laporanId     String?
+  laporan       LaporanPenggunaan? @relation(fields: [laporanId], references: [id])
+
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@map("aduan")
+}
