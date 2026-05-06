@@ -63,10 +63,17 @@ export default async function AdminMahasiswaPage({
   return (
     <div className="space-y-5">
       <div className="animate-fade-in-up" style={{ animationFillMode: "both" }}>
+<<<<<<< HEAD
         <h1 className="text-xl font-bold text-slate-900">
           Manajemen Mahasiswa
         </h1>
         <p className="text-sm text-slate-500 mt-0.5">
+=======
+        <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">
+          Manajemen Mahasiswa
+        </h1>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
           {totalAktif} aktif · {totalNonaktif} nonaktif
         </p>
       </div>
@@ -101,8 +108,13 @@ export default async function AdminMahasiswaPage({
             >
               <div className="flex items-start justify-between">
                 <div>
+<<<<<<< HEAD
                   <p className="text-sm text-slate-500 group-hover:text-slate-600 transition-colors">{s.label}</p>
                   <p className="text-3xl font-bold text-slate-900 mt-1">{s.value}</p>
+=======
+                  <p className="text-sm text-slate-500 dark:text-slate-400 group-hover:text-slate-600 dark:text-slate-400 transition-colors">{s.label}</p>
+                  <p className="text-3xl font-bold text-slate-900 dark:text-slate-100 mt-1">{s.value}</p>
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                 </div>
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 ${s.color}`}>
                   <Icon className="w-5 h-5" />
@@ -121,6 +133,7 @@ export default async function AdminMahasiswaPage({
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
+<<<<<<< HEAD
               <tr className="border-b border-slate-200 bg-slate-50/80">
                 <th className="text-left font-semibold text-slate-600 px-5 py-3.5 text-xs uppercase tracking-wider rounded-tl-xl">
                   Mahasiswa
@@ -138,6 +151,25 @@ export default async function AdminMahasiswaPage({
                   Status
                 </th>
                 <th className="text-left font-semibold text-slate-600 px-5 py-3.5 text-xs uppercase tracking-wider">
+=======
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50/80">
+                <th className="text-left font-semibold text-slate-600 dark:text-slate-400 px-5 py-3.5 text-xs uppercase tracking-wider rounded-tl-xl">
+                  Mahasiswa
+                </th>
+                <th className="text-left font-semibold text-slate-600 dark:text-slate-400 px-5 py-3.5 text-xs uppercase tracking-wider">
+                  NIM / Prodi
+                </th>
+                <th className="text-left font-semibold text-slate-600 dark:text-slate-400 px-5 py-3.5 text-xs uppercase tracking-wider">
+                  Beasiswa
+                </th>
+                <th className="text-center font-semibold text-slate-600 dark:text-slate-400 px-5 py-3.5 text-xs uppercase tracking-wider">
+                  Laporan
+                </th>
+                <th className="text-left font-semibold text-slate-600 dark:text-slate-400 px-5 py-3.5 text-xs uppercase tracking-wider">
+                  Status
+                </th>
+                <th className="text-left font-semibold text-slate-600 dark:text-slate-400 px-5 py-3.5 text-xs uppercase tracking-wider">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                   Terdaftar
                 </th>
                 <th className="px-5 py-3.5 rounded-tr-xl"></th>
@@ -148,12 +180,21 @@ export default async function AdminMahasiswaPage({
                 <tr>
                   <td colSpan={7} className="py-20 text-center">
                     <div className="flex flex-col items-center justify-center space-y-3">
+<<<<<<< HEAD
                       <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center">
                         <SearchX className="w-8 h-8 text-slate-400" />
                       </div>
                       <div>
                         <p className="text-slate-900 font-medium text-lg">Tidak ada mahasiswa ditemukan</p>
                         <p className="text-slate-500 text-sm mt-1">Coba sesuaikan kata kunci pencarian atau filter status.</p>
+=======
+                      <div className="w-16 h-16 bg-slate-50 dark:bg-slate-950/50 rounded-full flex items-center justify-center">
+                        <SearchX className="w-8 h-8 text-slate-400" />
+                      </div>
+                      <div>
+                        <p className="text-slate-900 dark:text-slate-100 font-medium text-lg">Tidak ada mahasiswa ditemukan</p>
+                        <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Coba sesuaikan kata kunci pencarian atau filter status.</p>
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                       </div>
                     </div>
                   </td>
@@ -169,6 +210,7 @@ export default async function AdminMahasiswaPage({
                       <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary-600 rounded-r-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-y-50 group-hover:scale-y-100 origin-center ease-out"></div>
                       
                       <div className="flex items-center gap-3">
+<<<<<<< HEAD
                         <div className={`w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-md ring-2 ring-white ${user.isActive ? "bg-primary-100 text-primary-700 shadow-sm" : "bg-slate-200 text-slate-500"}`}>
                           {getInitials(user.name)}
                         </div>
@@ -177,16 +219,33 @@ export default async function AdminMahasiswaPage({
                             {user.name}
                           </p>
                           <p className="text-xs text-slate-500 mt-0.5 font-medium">
+=======
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-md ring-2 ring-white ${user.isActive ? "bg-primary-100 text-primary-700 shadow-sm" : "bg-slate-200 text-slate-500 dark:text-slate-400"}`}>
+                          {getInitials(user.name)}
+                        </div>
+                        <div>
+                          <p className="font-semibold text-slate-900 dark:text-slate-100 group-hover:text-primary-700 transition-colors">
+                            {user.name}
+                          </p>
+                          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                             {user.email}
                           </p>
                         </div>
                       </div>
                     </td>
                     <td className="px-5 py-4">
+<<<<<<< HEAD
                       <p className="font-mono text-sm text-slate-700 group-hover:text-slate-900 transition-colors">
                         {user.mahasiswa?.nim ?? "—"}
                       </p>
                       <p className="text-xs text-slate-500 mt-0.5 font-medium">
+=======
+                      <p className="font-mono text-sm text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:text-slate-100 transition-colors">
+                        {user.mahasiswa?.nim ?? "—"}
+                      </p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                         {user.mahasiswa?.prodi ?? "—"}
                       </p>
                     </td>
@@ -196,7 +255,11 @@ export default async function AdminMahasiswaPage({
                       </span>
                     </td>
                     <td className="px-5 py-4 text-center">
+<<<<<<< HEAD
                       <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white font-semibold text-slate-700 text-sm shadow-sm ring-1 ring-slate-200 group-hover:bg-primary-50 group-hover:text-primary-700 group-hover:ring-primary-200 group-hover:shadow transition-all duration-300 transform group-hover:-translate-y-0.5">
+=======
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white dark:bg-slate-900 font-semibold text-slate-700 dark:text-slate-300 text-sm shadow-sm ring-1 ring-slate-200 group-hover:bg-primary-50 group-hover:text-primary-700 group-hover:ring-primary-200 group-hover:shadow transition-all duration-300 transform group-hover:-translate-y-0.5">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                         {user.mahasiswa?._count.laporan ?? 0}
                       </span>
                     </td>
@@ -211,7 +274,11 @@ export default async function AdminMahasiswaPage({
                         </span>
                       )}
                     </td>
+<<<<<<< HEAD
                     <td className="px-5 py-4 text-xs text-slate-500 font-medium">
+=======
+                    <td className="px-5 py-4 text-xs text-slate-500 dark:text-slate-400 font-medium">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                       {formatDate(user.createdAt)}
                     </td>
                     <td className="px-5 py-4 text-right">

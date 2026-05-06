@@ -52,8 +52,13 @@ export default async function PelaporAduanPage() {
     <div className="space-y-5">
       <div className="flex items-start justify-between animate-fade-in-up" style={{ animationFillMode: "both" }}>
         <div>
+<<<<<<< HEAD
           <h1 className="text-xl font-bold text-slate-900">Aduan Saya</h1>
           <p className="text-sm text-slate-500 mt-0.5">
+=======
+          <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">Aduan Saya</h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             Riwayat semua aduan yang telah Anda kirimkan
           </p>
         </div>
@@ -65,7 +70,11 @@ export default async function PelaporAduanPage() {
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         {[
+<<<<<<< HEAD
           { label: "Total",    value: counts.total,    color: "bg-slate-50  text-slate-700  border-slate-200"  },
+=======
+          { label: "Total",    value: counts.total,    color: "bg-slate-50 dark:bg-slate-950/50  text-slate-700 dark:text-slate-300  border-slate-200 dark:border-slate-800"  },
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
           { label: "Menunggu", value: counts.menunggu, color: "bg-yellow-50 text-yellow-700 border-yellow-200" },
           { label: "Diproses", value: counts.diproses, color: "bg-blue-50   text-blue-700   border-blue-200"   },
           { label: "Selesai",  value: counts.selesai,  color: "bg-green-50  text-green-700  border-green-200"  },
@@ -91,7 +100,11 @@ export default async function PelaporAduanPage() {
       {aduan.length === 0 ? (
         <div className="card text-center py-14 animate-fade-in-up" style={{ animationDelay: "400ms", animationFillMode: "both" }}>
           <AlertTriangle className="w-12 h-12 text-slate-200 mx-auto mb-3" />
+<<<<<<< HEAD
           <p className="font-medium text-slate-600">Belum ada aduan</p>
+=======
+          <p className="font-medium text-slate-600 dark:text-slate-400">Belum ada aduan</p>
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
           <p className="text-sm text-slate-400 mt-1">
             Jika Anda mengetahui indikasi penyalahgunaan dana beasiswa,
             segera laporkan.
@@ -122,7 +135,11 @@ export default async function PelaporAduanPage() {
                       <Icon className="w-4 h-4" />
                     </div>
                     <div className="flex-1 min-w-0">
+<<<<<<< HEAD
                       <p className="font-semibold text-slate-900 leading-snug">
+=======
+                      <p className="font-semibold text-slate-900 dark:text-slate-100 leading-snug">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                         {a.judul}
                       </p>
                       <p className="text-xs text-slate-400 mt-0.5">
@@ -135,7 +152,11 @@ export default async function PelaporAduanPage() {
                   </span>
                 </div>
 
+<<<<<<< HEAD
                 <p className="text-sm text-slate-600 leading-relaxed line-clamp-3 ml-12">
+=======
+                <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-3 ml-12">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                   {a.deskripsi}
                 </p>
 
@@ -152,10 +173,17 @@ export default async function PelaporAduanPage() {
                     </a>
                   )}
                   {a.laporan && (
+<<<<<<< HEAD
                     <div className="flex items-center gap-1.5 text-xs text-slate-500">
                       <span className="w-1 h-1 rounded-full bg-slate-300" />
                       Terkait:{" "}
                       <span className="font-medium text-slate-700">
+=======
+                    <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+                      <span className="w-1 h-1 rounded-full bg-slate-300" />
+                      Terkait:{" "}
+                      <span className="font-medium text-slate-700 dark:text-slate-300">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                         {a.laporan.mahasiswa.user.name}
                       </span>
                       &nbsp;·&nbsp;{a.laporan.semester}
@@ -165,11 +193,19 @@ export default async function PelaporAduanPage() {
                 </div>
 
                 {a.catatanAdmin && (
+<<<<<<< HEAD
                   <div className="ml-12 p-3 rounded-lg bg-slate-50 border border-slate-200">
                     <p className="text-xs font-semibold text-slate-500 mb-1">
                       Tanggapan Admin
                     </p>
                     <p className="text-sm text-slate-700 leading-relaxed">
+=======
+                  <div className="ml-12 p-3 rounded-lg bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800">
+                    <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">
+                      Tanggapan Admin
+                    </p>
+                    <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                       {a.catatanAdmin}
                     </p>
                   </div>

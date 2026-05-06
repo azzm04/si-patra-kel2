@@ -82,7 +82,11 @@ export default function TrashActions({ laporanId, semester }: Props) {
           onClick={() => setShowHardDelete(false)}
         >
           <div
+<<<<<<< HEAD
             className="bg-white rounded-xl shadow-xl max-w-sm w-full p-6"
+=======
+            className="bg-white dark:bg-slate-900 rounded-xl shadow-xl max-w-sm w-full p-6"
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-start gap-3 mb-4">
@@ -90,9 +94,15 @@ export default function TrashActions({ laporanId, semester }: Props) {
                 <Trash2 className="w-5 h-5 text-red-600" />
               </div>
               <div>
+<<<<<<< HEAD
                 <h3 className="font-semibold text-slate-900">Hapus Permanen?</h3>
                 <p className="text-sm text-slate-500 mt-1">
                   Laporan <span className="font-medium text-slate-700">"{semester}"</span> akan
+=======
+                <h3 className="font-semibold text-slate-900 dark:text-slate-100">Hapus Permanen?</h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                  Laporan <span className="font-medium text-slate-700 dark:text-slate-300">"{semester}"</span> akan
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                   dihapus <strong>permanen dari database</strong>.
                 </p>
               </div>

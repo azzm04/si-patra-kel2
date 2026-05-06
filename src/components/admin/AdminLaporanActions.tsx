@@ -65,11 +65,19 @@ export default function AdminLaporanActions({ laporanId, currentStatus }: Props)
 
       {showModal && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+<<<<<<< HEAD
           <div className="bg-white rounded-xl shadow-xl max-w-sm w-full p-6">
             <h3 className="font-semibold text-slate-900 mb-1">
               {showModal === "validasi" ? "Validasi Laporan" : "Tolak Laporan"}
             </h3>
             <p className="text-sm text-slate-500 mb-4">
+=======
+          <div className="bg-white dark:bg-slate-900 rounded-xl shadow-xl max-w-sm w-full p-6">
+            <h3 className="font-semibold text-slate-900 dark:text-slate-100 mb-1">
+              {showModal === "validasi" ? "Validasi Laporan" : "Tolak Laporan"}
+            </h3>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
               {showModal === "validasi"
                 ? "Laporan ini akan ditandai sebagai tervalidasi."
                 : "Laporan ini akan ditolak dan mahasiswa perlu merevisi."}

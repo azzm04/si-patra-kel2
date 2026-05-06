@@ -24,7 +24,11 @@ export default async function MahasiswaDashboard() {
   if (!mahasiswa) {
     return (
       <div className="card text-center py-12">
+<<<<<<< HEAD
         <p className="text-slate-500">Data mahasiswa tidak ditemukan. Hubungi admin.</p>
+=======
+        <p className="text-slate-500 dark:text-slate-400">Data mahasiswa tidak ditemukan. Hubungi admin.</p>
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
       </div>
     );
   }
@@ -40,8 +44,13 @@ export default async function MahasiswaDashboard() {
     <div className="space-y-6">
       <div className="flex items-start justify-between animate-fade-in-up" style={{ animationFillMode: "both" }}>
         <div>
+<<<<<<< HEAD
           <h1 className="text-xl font-bold text-slate-900">Dashboard Mahasiswa</h1>
           <p className="text-sm text-slate-500 mt-0.5">Pantau laporan penggunaan dana beasiswa Anda</p>
+=======
+          <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">Dashboard Mahasiswa</h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">Pantau laporan penggunaan dana beasiswa Anda</p>
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
         </div>
         <Link href="/dashboard/mahasiswa/laporan/baru" className="btn-primary">
           <PlusCircle className="w-4 h-4" />
@@ -72,7 +81,11 @@ export default async function MahasiswaDashboard() {
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
+<<<<<<< HEAD
           { label: "Total Laporan",   value: totalLaporan,    icon: FileText,     color: "bg-slate-50 text-slate-600" },
+=======
+          { label: "Total Laporan",   value: totalLaporan,    icon: FileText,     color: "bg-slate-50 dark:bg-slate-950/50 text-slate-600 dark:text-slate-400" },
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
           { label: "Tervalidasi",     value: laporanValidasi, icon: CheckCircle,  color: "bg-green-50 text-green-600" },
           { label: "Menunggu",        value: laporanPending,  icon: Clock,        color: "bg-amber-50 text-amber-600" },
           { label: "Total Dicairkan", value: formatRupiah(totalDicairkan), icon: AlertCircle, color: "bg-blue-50 text-blue-600", isRupiah: true },
@@ -83,8 +96,13 @@ export default async function MahasiswaDashboard() {
               <div className={`w-8 h-8 rounded-lg flex items-center justify-center mb-2 ${s.color}`}>
                 <Icon className="w-4 h-4" />
               </div>
+<<<<<<< HEAD
               <p className="text-2xl font-bold text-slate-900">{s.value}</p>
               <p className="text-xs text-slate-500 mt-0.5">{s.label}</p>
+=======
+              <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">{s.value}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{s.label}</p>
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             </div>
           );
         })}
@@ -92,7 +110,11 @@ export default async function MahasiswaDashboard() {
 
       <div className="card animate-fade-in-up" style={{ animationDelay: "400ms", animationFillMode: "both" }}>
         <div className="flex items-center justify-between mb-4">
+<<<<<<< HEAD
           <h2 className="font-semibold text-slate-900">Laporan Saya</h2>
+=======
+          <h2 className="font-semibold text-slate-900 dark:text-slate-100">Laporan Saya</h2>
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
           <Link href="/dashboard/mahasiswa/laporan" className="text-xs text-primary-600 hover:underline">
             Lihat semua
           </Link>
@@ -114,6 +136,7 @@ export default async function MahasiswaDashboard() {
                 <Link
                   key={lap.id}
                   href={`/dashboard/mahasiswa/laporan/${lap.id}`}
+<<<<<<< HEAD
                   className="flex items-center gap-4 p-3 rounded-lg hover:bg-slate-50 transition-colors group"
                 >
                   <div className="flex-1 min-w-0">
@@ -121,6 +144,15 @@ export default async function MahasiswaDashboard() {
                     <p className="text-xs text-slate-400 mt-0.5">{lap.items.length} item · {formatDate(lap.createdAt)}</p>
                   </div>
                   <p className="text-sm font-semibold text-slate-800 flex-shrink-0">
+=======
+                  className="flex items-center gap-4 p-3 rounded-lg hover:bg-slate-50 dark:bg-slate-950/50 transition-colors group"
+                >
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-slate-900 dark:text-slate-100">{lap.semester}</p>
+                    <p className="text-xs text-slate-400 mt-0.5">{lap.items.length} item · {formatDate(lap.createdAt)}</p>
+                  </div>
+                  <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 flex-shrink-0">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                     {formatRupiah(lap.totalDana.toString())}
                   </p>
                   <span className={`badge flex-shrink-0 ${cfg.color}`}>{cfg.label}</span>

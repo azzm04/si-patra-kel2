@@ -75,8 +75,13 @@ export default async function AdminLaporanPage({
   return (
     <div className="space-y-5">
       <div className="animate-fade-in-up" style={{ animationFillMode: "both" }}>
+<<<<<<< HEAD
         <h1 className="text-xl font-bold text-slate-900">Manajemen Laporan</h1>
         <p className="text-sm text-slate-500 mt-0.5">
+=======
+        <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">Manajemen Laporan</h1>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
           Validasi laporan penggunaan dana beasiswa ({laporan.length} laporan)
         </p>
       </div>
@@ -114,6 +119,7 @@ export default async function AdminLaporanPage({
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
+<<<<<<< HEAD
               <tr className="border-b border-slate-100 bg-slate-50">
                 <th className="text-left font-medium text-slate-500 px-4 py-3">
                   Mahasiswa
@@ -134,6 +140,28 @@ export default async function AdminLaporanPage({
                   Status
                 </th>
                 <th className="text-left font-medium text-slate-500 px-4 py-3">
+=======
+              <tr className="border-b border-slate-100 dark:border-slate-800/50 bg-slate-50 dark:bg-slate-950/50">
+                <th className="text-left font-medium text-slate-500 dark:text-slate-400 px-4 py-3">
+                  Mahasiswa
+                </th>
+                <th className="text-left font-medium text-slate-500 dark:text-slate-400 px-4 py-3">
+                  Beasiswa
+                </th>
+                <th className="text-left font-medium text-slate-500 dark:text-slate-400 px-4 py-3">
+                  Semester
+                </th>
+                <th className="text-right font-medium text-slate-500 dark:text-slate-400 px-4 py-3">
+                  Total Dana
+                </th>
+                <th className="text-left font-medium text-slate-500 dark:text-slate-400 px-4 py-3">
+                  Item
+                </th>
+                <th className="text-left font-medium text-slate-500 dark:text-slate-400 px-4 py-3">
+                  Status
+                </th>
+                <th className="text-left font-medium text-slate-500 dark:text-slate-400 px-4 py-3">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                   Aduan
                 </th>
                 <th className="px-4 py-3 w-28">Aksi</th>

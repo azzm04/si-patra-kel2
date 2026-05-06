@@ -49,7 +49,11 @@ export default function LoginPage() {
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-navy-950 via-primary-900 to-primary-800 flex-col justify-between p-12 animate-fade-in-up" style={{ animationFillMode: "both" }}>
         <div>
           <div className="flex items-center gap-3 mb-16">
+<<<<<<< HEAD
             <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
+=======
+            <div className="w-10 h-10 rounded-xl bg-white dark:bg-slate-900/10 flex items-center justify-center">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
               <ShieldCheck className="w-5 h-5 text-white" />
             </div>
             <span className="text-white font-semibold text-lg tracking-tight">SI-PATRA</span>
@@ -70,7 +74,11 @@ export default function LoginPage() {
             { label: "Laporan Tervalidasi", value: "3.800+" },
             { label: "Aduan Terproses", value: "98%" },
           ].map((stat) => (
+<<<<<<< HEAD
             <div key={stat.label} className="bg-white/10 rounded-xl p-4 backdrop-blur-sm">
+=======
+            <div key={stat.label} className="bg-white dark:bg-slate-900/10 rounded-xl p-4 backdrop-blur-sm">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
               <div className="text-2xl font-bold text-white">{stat.value}</div>
               <div className="text-primary-200 text-xs mt-1">{stat.label}</div>
             </div>
@@ -86,8 +94,13 @@ export default function LoginPage() {
           </div>
 
           <div className="mb-8">
+<<<<<<< HEAD
             <h2 className="text-2xl font-bold text-slate-900">Selamat Datang</h2>
             <p className="text-slate-500 mt-1 text-sm">Masuk ke akun Anda untuk melanjutkan</p>
+=======
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Selamat Datang</h2>
+            <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm">Masuk ke akun Anda untuk melanjutkan</p>
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
           </div>
 
           {error && (
@@ -98,7 +111,11 @@ export default function LoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
+<<<<<<< HEAD
               <label className="block text-sm font-medium text-slate-700 mb-1.5">
+=======
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                 Email
               </label>
               <div className="relative">
@@ -115,7 +132,11 @@ export default function LoginPage() {
             </div>
 
             <div>
+<<<<<<< HEAD
               <label className="block text-sm font-medium text-slate-700 mb-1.5">
+=======
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                 Password
               </label>
               <div className="relative">
@@ -131,8 +152,12 @@ export default function LoginPage() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
+<<<<<<< HEAD
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
                   title="tombol lihat password"
+=======
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:text-slate-400"
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
@@ -158,8 +183,13 @@ export default function LoginPage() {
             </button>
           </form>
 
+<<<<<<< HEAD
           <div className="mt-8 p-4 rounded-xl bg-slate-50 border border-slate-200">
             <p className="text-xs font-medium text-slate-500 mb-3">Akun Demo (klik untuk mengisi)</p>
+=======
+          <div className="mt-8 p-4 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800">
+            <p className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-3">Akun Demo (klik untuk mengisi)</p>
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             <div className="flex flex-wrap gap-2">
               <button onClick={() => fillDemo("admin")} className="btn-secondary btn-sm">
                 Admin

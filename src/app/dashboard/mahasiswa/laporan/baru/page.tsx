@@ -146,10 +146,17 @@ export default function BuatLaporanPage() {
           <ArrowLeft className="w-4 h-4" />
         </Link>
         <div>
+<<<<<<< HEAD
           <h1 className="text-xl font-bold text-slate-900">
             Buat Laporan Baru
           </h1>
           <p className="text-sm text-slate-500">
+=======
+          <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">
+            Buat Laporan Baru
+          </h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             Isi rincian penggunaan dana beasiswa Anda
           </p>
         </div>
@@ -162,10 +169,17 @@ export default function BuatLaporanPage() {
       )}
 
       <div className="card space-y-4 animate-fade-in-up" style={{ animationDelay: "100ms", animationFillMode: "both" }}>
+<<<<<<< HEAD
         <h2 className="font-semibold text-slate-800">Informasi Laporan</h2>
 
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1.5">
+=======
+        <h2 className="font-semibold text-slate-800 dark:text-slate-200">Informasi Laporan</h2>
+
+        <div>
+          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             Semester <span className="text-red-500">*</span>
           </label>
           <div className="grid grid-cols-2 gap-3">
@@ -199,7 +213,11 @@ export default function BuatLaporanPage() {
         </div>
 
         <div>
+<<<<<<< HEAD
           <label className="block text-sm font-medium text-slate-700 mb-1.5">
+=======
+          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             Catatan (opsional)
           </label>
           <textarea
@@ -213,7 +231,11 @@ export default function BuatLaporanPage() {
 
       <div className="card space-y-4 animate-fade-in-up" style={{ animationDelay: "200ms", animationFillMode: "both" }}>
         <div className="flex items-center justify-between">
+<<<<<<< HEAD
           <h2 className="font-semibold text-slate-800">
+=======
+          <h2 className="font-semibold text-slate-800 dark:text-slate-200">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             Rincian Penggunaan Dana
           </h2>
           <button onClick={addItem} className="btn-secondary btn-sm">
@@ -226,10 +248,17 @@ export default function BuatLaporanPage() {
           {items.map((item, idx) => (
             <div
               key={item.id}
+<<<<<<< HEAD
               className="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-3"
             >
               <div className="flex items-center justify-between mb-1">
                 <span className="text-xs font-medium text-slate-500">
+=======
+              className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50 space-y-3"
+            >
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                   Item #{idx + 1}
                 </span>
                 <button
@@ -244,7 +273,11 @@ export default function BuatLaporanPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="col-span-2">
+<<<<<<< HEAD
                   <label className="block text-xs font-medium text-slate-600 mb-1">
+=======
+                  <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                     Deskripsi *
                   </label>
                   <input
@@ -260,7 +293,11 @@ export default function BuatLaporanPage() {
                 <div
                   className={item.kategori === "LAINNYA" ? "col-span-2" : ""}
                 >
+<<<<<<< HEAD
                   <label className="block text-xs font-medium text-slate-600 mb-1">
+=======
+                  <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                     Kategori
                   </label>
                   <div className="flex flex-col gap-2">
@@ -295,7 +332,11 @@ export default function BuatLaporanPage() {
                   </div>
                 </div>
                 <div>
+<<<<<<< HEAD
                   <label className="block text-xs font-medium text-slate-600 mb-1">
+=======
+                  <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                     Nominal (Rp) *
                   </label>
                   <input
@@ -314,8 +355,13 @@ export default function BuatLaporanPage() {
           ))}
         </div>
 
+<<<<<<< HEAD
         <div className="flex items-center justify-between pt-3 border-t border-slate-200">
           <span className="text-sm font-semibold text-slate-700">
+=======
+        <div className="flex items-center justify-between pt-3 border-t border-slate-200 dark:border-slate-800">
+          <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             Total Dana
           </span>
           <span className="text-lg font-bold text-primary-700">

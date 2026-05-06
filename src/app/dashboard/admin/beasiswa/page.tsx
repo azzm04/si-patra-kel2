@@ -35,8 +35,13 @@ export default async function AdminBeasiswaPage() {
     <div className="space-y-5">
       <div className="flex items-center justify-between animate-fade-in-up" style={{ animationFillMode: "both" }}>
         <div>
+<<<<<<< HEAD
           <h1 className="text-xl font-bold text-slate-900">Manajemen Beasiswa</h1>
           <p className="text-sm text-slate-500 mt-0.5">
+=======
+          <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">Manajemen Beasiswa</h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
             {beasiswa.length} program beasiswa terdaftar
           </p>
         </div>
@@ -59,12 +64,20 @@ export default async function AdminBeasiswaPage() {
               <div className="flex items-start justify-between">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
+<<<<<<< HEAD
                     <h3 className="font-semibold text-slate-900">{b.nama}</h3>
+=======
+                    <h3 className="font-semibold text-slate-900 dark:text-slate-100">{b.nama}</h3>
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                     <span
                       className={`badge text-[10px] ${
                         b.status === "AKTIF"
                           ? "bg-green-100 text-green-700"
+<<<<<<< HEAD
                           : "bg-slate-100 text-slate-500"
+=======
+                          : "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400"
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                       }`}
                     >
                       {b.status}
@@ -103,10 +116,17 @@ export default async function AdminBeasiswaPage() {
                   return (
                     <div
                       key={s.label}
+<<<<<<< HEAD
                       className="p-2 rounded-lg bg-slate-50 border border-slate-100 transition-colors group-hover:bg-white group-hover:border-slate-200"
                     >
                       <Icon className="w-3.5 h-3.5 text-slate-400 mx-auto mb-1" />
                       <p className="text-lg font-bold text-slate-800">{s.value}</p>
+=======
+                      className="p-2 rounded-lg bg-slate-50 dark:bg-slate-950/50 border border-slate-100 dark:border-slate-800/50 transition-colors group-hover:bg-white dark:bg-slate-900 group-hover:border-slate-200 dark:border-slate-800"
+                    >
+                      <Icon className="w-3.5 h-3.5 text-slate-400 mx-auto mb-1" />
+                      <p className="text-lg font-bold text-slate-800 dark:text-slate-200">{s.value}</p>
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                       <p className="text-[10px] text-slate-400">{s.label}</p>
                     </div>
                   );
@@ -115,7 +135,11 @@ export default async function AdminBeasiswaPage() {
 
 
               {b.deskripsi && (
+<<<<<<< HEAD
                 <p className="text-xs text-slate-500 leading-relaxed line-clamp-2">
+=======
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-2">
+>>>>>>> b1c4d863d546705064dadbc28b0e9d9f4f85128d
                   {b.deskripsi}
                 </p>
               )}
